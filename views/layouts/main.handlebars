@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+	<script src="https://code.jquery.com/jquery-2.2.4.min.js"
+      integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+      crossorigin="anonymous"></script>
+
+</head>
+<body>
+	<div class="container">
+		<div id="leaderboard">
+
+			{{{ body }}}
+		</div>
+		<div id="add">
+			<form id="newScore">
+        			<input type="text" id="name" placeholder="Your name"><br>
+        			<input type="text" id="score" placeholder="Your score"><br><br><br>
+          			<button id="test" type="submit"><span class="glyphicon glyphicon-pushpin"></span> test button</button>
+          	</form>
+		</div>
+		<div class="test">
+		</div>
+	</div>
+<script src="../assets/javascript/game.js"></script>
+<script src="../socket.io/socket.io.js"></script>
+<script>
+$(document).ready(function() {
+		var socket = io.connect('http://localhost:3000');
+	socket.on('score', function (data) {
+		if ($('.test').children().length === 10) {
+			$('.test').html('');
+		}
+		$('.test').append('<div>' + data.name + '</div><br>')
+
+	})
+	$('#newScore').on('submit', function() {
+		
+		var name = $('#name').val();
+		var addScore = {
+			name: $('#name').val(),
+			score: parseInt($('#score').val())
+		}
+
+		console.log(addScore)
+		$.post('/game/score', addScore).done(function (response) {
+			
+			console.log(response);
+
+		})
+		socket.emit('score', {score: addScore})
+	})
+})
+
+</script>
+</body>
+</html>
