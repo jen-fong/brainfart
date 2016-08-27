@@ -95,6 +95,25 @@ button.btn.btn-primary-topNav {
     font-size: smaller;
 }
 
+.modal-footer {
+    padding: 15px;
+    text-align: right;
+    background-color: #ACF0F2;
+    border-top: 1px solid #e5e5e5;
+}
+
+a.btn.btn-default {
+    font-family: 'Press Start 2P', cursive;
+    font-size: inherit;
+}
+.btn-default:hover {
+    color: #333;
+    background-color: #e6e6e6;
+    border-color: #adadad;
+    font-family: 'Press Start 2P', cursive;
+    font-size: inherit;
+}
+
 #game_window{
 	min-height:1000px;
 	background: #283048; /* fallback for old browsers */
