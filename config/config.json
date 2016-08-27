@@ -1,8 +1,8 @@
 {
   "development": {
     "username": "root",
-    "password": "j9191015",
-    "database": "brainfart_db",
+    "password": "",
+    "database": "trivia_db",
     "host": "127.0.0.1",
     "dialect": "mysql"
   },
