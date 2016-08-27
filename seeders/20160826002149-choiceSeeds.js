@@ -10,330 +10,764 @@ module.exports = {
       Example:
     */
       return queryInterface.bulkInsert('triviaChoices', [{
-        choice: "Elegant Tickles"
+        choice: "Elegant Tickles",
+        triviaQuestionId: 1,
+        createdAt: new Date(),
+        updatedAt: new Date()
       },{
-        choice: "Eternity Trash" 
+        choice: "Eternity Trash" ,
+        triviaQuestionId: 1,
+        createdAt: new Date(),
+        updatedAt: new Date()
       },{
         choice: "Extra Terrestrial", 
-        status: true
+        status: true,
+        triviaQuestionId: 1,
+        createdAt: new Date(),
+        updatedAt: new Date()
       },{
-        choice: "Extra Territorial"
+        choice: "Extra Territorial",
+        triviaQuestionId: 1,
+        createdAt: new Date(),
+        updatedAt: new Date()
       },{
         choice: "Make it Big",
-        staus: true
+        status: true,
+        triviaQuestionId: 2,
+        createdAt: new Date(),
+        updatedAt: new Date()
       },{
-        choice: "Make it Small"
+        choice: "Make it Small",
+        triviaQuestionId: 2,
+        createdAt: new Date(),
+        updatedAt: new Date()
       },{
-        choice: "Make it Together"
+        choice: "Make it Together",
+        triviaQuestionId: 2,
+        createdAt: new Date(),
+        updatedAt: new Date()
       },{
-        choice: "Make it Later"
+        choice: "Make it Later",
+        triviaQuestionId: 2,
+        createdAt: new Date(),
+        updatedAt: new Date()
       },{
-        choice: "1982"
+        choice: "1982",
+        triviaQuestionId: 3,
+        createdAt: new Date(),
+        updatedAt: new Date()
       },{
         choice: "1955",
-        staus: true
+        status: true,
+        triviaQuestionId: 3,
+        createdAt: new Date(),
+        updatedAt: new Date()
       },{
-        choice: "2015"
-      },{
-        choice: "1985"
-      },{
-        choice: "January 22nd, 1974"
-      },{
-        choice: "April 19th, 1981"
-      },{
-        choice: "November 30th, 1982",
-        status: true
-      },{
-        choice: "June 20th, 1982"
-      },{
-        choice: "Dull boy",
-        status: true
-      },{
-        choice: "Funny boy"
-      },{
-        choice: "Interesting person"
-      },{
-        choice: "Boring individual"
-      },{
-        choice: "Marcia, Jan, Cindy, Greg, Peter, Bobby"
-      },{
-        choice: "D.J, Stephanie, Michelle"
-      },{
-        choice: "Sandra, Denise, Theo, Vanessa, Rudy",
-        status: true
-      },{
-        choice: "Theo, Jenny, Melanie, Rudy, Sandy"
-      },{
-        choice: "Peekabo"
-      },{
-        choice: "Trick or treat"
-      },{
-        choice: "Here's Johnny",
-        status: true
-      },{
-        choice: "Here's Freddy"
-      },{
-        choice: "1990"
-      },{
-        choice: "1986"
+        choice: "2015",
+        triviaQuestionId: 3,
+        createdAt: new Date(),
+        updatedAt: new Date()
       },{
         choice: "1985",
-        status: true
+        triviaQuestionId: 3,
+        createdAt: new Date(),
+        updatedAt: new Date()
       },{
-        choice: "1979"
+        choice: "January 22nd, 1974",
+        triviaQuestionId: 4,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },{
+        choice: "April 19th, 1981",
+        triviaQuestionId: 4,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },{
+        choice: "November 30th, 1982",
+        status: true,
+        triviaQuestionId: 4,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },{
+        choice: "June 20th, 1982",
+        triviaQuestionId: 4,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },{
+        choice: "Dull boy",
+        status: true,
+        triviaQuestionId: 5,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },{
+        choice: "Funny boy",
+        triviaQuestionId: 5,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },{
+        choice: "Interesting person",
+        triviaQuestionId: 5,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },{
+        choice: "Boring individual",
+        triviaQuestionId: 5,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },{
+        choice: "Marcia, Jan, Cindy, Greg, Peter, Bobby",
+        triviaQuestionId: 6,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },{
+        choice: "D.J, Stephanie, Michelle",
+        triviaQuestionId: 6,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },{
+        choice: "Sandra, Denise, Theo, Vanessa, Rudy",
+        status: true,
+        triviaQuestionId: 6,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },{
+        choice: "Theo, Jenny, Melanie, Rudy, Sandy",
+        triviaQuestionId: 6,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },{
+        choice: "Peekabo",
+        triviaQuestionId: 7,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },{
+        choice: "Trick or treat",
+        triviaQuestionId: 7,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },{
+        choice: "Here's Johnny",
+        status: true,
+        triviaQuestionId: 7,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },{
+        choice: "Here's Freddy",
+        triviaQuestionId: 7,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },{
+        choice: "1990",
+        triviaQuestionId: 8,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },{
+        choice: "1986",
+        triviaQuestionId: 8,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },{
+        choice: "1985",
+        status: true,
+        triviaQuestionId: 8,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },{
+        choice: "1979",
+        triviaQuestionId: 8,
+        createdAt: new Date(),
+        updatedAt: new Date()
       },{
         choice: "The Beatles",
-        status: true
+        status: true,
+        triviaQuestionId: 9,
+        createdAt: new Date(),
+        updatedAt: new Date()
       },{
-        choice: "The Red Hot Chili Peppers"
+        choice: "The Red Hot Chili Peppers",
+        triviaQuestionId: 9,
+        createdAt: new Date(),
+        updatedAt: new Date()
       },{
-        choice: "The Smiths"
+        choice: "The Smiths",
+        triviaQuestionId: 9,
+        createdAt: new Date(),
+        updatedAt: new Date()
       },{
-        choice: "General Public"
+        choice: "General Public",
+        triviaQuestionId: 9,
+        createdAt: new Date(),
+        updatedAt: new Date()
       },{
-        choice: "Basketball shorts"
+        choice: "Basketball shorts",
+        triviaQuestionId: 10,
+        createdAt: new Date(),
+        updatedAt: new Date()
       },{
-        choice: "Underwear"
+        choice: "Underwear",
+        triviaQuestionId: 10,
+        createdAt: new Date(),
+        updatedAt: new Date()
       },{
         choice: "Nothing",
-        status: true
+        status: true,
+        triviaQuestionId: 10,
+        createdAt: new Date(),
+        updatedAt: new Date()
       },{
-        choice: "Another pair of Calvins"
+        choice: "Another pair of Calvins",
+        triviaQuestionId: 10,
+        createdAt: new Date(),
+        updatedAt: new Date()
       },{
         choice: "Buttercup",
-        status: true
+        status: true,
+        triviaQuestionId: 11,
+        createdAt: new Date(),
+        updatedAt: new Date()
       },{
-        choice: "Cinnamon"
+        choice: "Cinnamon",
+        triviaQuestionId: 11,
+        createdAt: new Date(),
+        updatedAt: new Date()
       },{
-        choice: "Dorothy"
+        choice: "Dorothy",
+        triviaQuestionId: 11,
+        createdAt: new Date(),
+        updatedAt: new Date()
       },{
-        choice: "Lettuce Head"
+        choice: "Lettuce Head",
+        triviaQuestionId: 11,
+        createdAt: new Date(),
+        updatedAt: new Date()
       },{
-        choice: "Ronald McDonald"
+        choice: "Ronald McDonald",
+        triviaQuestionId: 12,
+        createdAt: new Date(),
+        updatedAt: new Date()
       },{
         choice: "Pennywise",
-        status: true
+        status: true,
+        triviaQuestionId: 12,
+        createdAt: new Date(),
+        updatedAt: new Date()
       },{
-        choice: "Beetlejuice"
+        choice: "Beetlejuice",
+        triviaQuestionId: 12,
+        createdAt: new Date(),
+        updatedAt: new Date()
       },{
-        choice: "Chucky"
+        choice: "Chucky",
+        triviaQuestionId: 12,
+        createdAt: new Date(),
+        updatedAt: new Date()
       },{
-        choice: "Reese Witherspoon"
+        choice: "Reese Witherspoon",
+        triviaQuestionId: 13,
+        createdAt: new Date(),
+        updatedAt: new Date()
       },{
         choice: "Alicia Silverstone",
-        status: true
+        status: true,
+        triviaQuestionId: 13,
+        createdAt: new Date(),
+        updatedAt: new Date()
       },{
-        choice: "Reese Withouterspoon"
+        choice: "Reese Withouterspoon",
+        triviaQuestionId: 13,
+        createdAt: new Date(),
+        updatedAt: new Date()
       },{
-        choice: "Brittany Murphy"
+        choice: "Brittany Murphy",
+        triviaQuestionId: 13,
+        createdAt: new Date(),
+        updatedAt: new Date()
       },{
         choice: "Topanga",
-        status: true
+        status: true,
+        triviaQuestionId: 14,
+        createdAt: new Date(),
+        updatedAt: new Date()
       },{
-        choice: "Angela"
+        choice: "Angela",
+        triviaQuestionId: 14,
+        createdAt: new Date(),
+        updatedAt: new Date()
       },{
-        choice: "Calabasas"
+        choice: "Calabasas",
+        triviaQuestionId: 14,
+        createdAt: new Date(),
+        updatedAt: new Date()
       },{
-        choice: "Stacey"
+        choice: "Stacey",
+        triviaQuestionId: 14,
+        createdAt: new Date(),
+        updatedAt: new Date()
       },{
-        choice: "South Boston"
+        choice: "South Boston",
+        triviaQuestionId: 15,
+        createdAt: new Date(),
+        updatedAt: new Date()
       },{
         choice: "West Philadelphia",
-        status: true
+        status: true,
+        triviaQuestionId: 15,
+        createdAt: new Date(),
+        updatedAt: new Date()
       },{
-        choice: "North Philadelphia"
+        choice: "North Philadelphia",
+        triviaQuestionId: 15,
+        createdAt: new Date(),
+        updatedAt: new Date()
       },{
-        choice: "Bangladesh"
+        choice: "Bangladesh",
+        triviaQuestionId: 15,
+        createdAt: new Date(),
+        updatedAt: new Date()
       },{
-        choice: "Lucy"
+        choice: "Lucy",
+        triviaQuestionId: 16,
+        createdAt: new Date(),
+        updatedAt: new Date()
       },{
         choice: "Dawson",
-        status: true
+        status: true,
+        triviaQuestionId: 16,
+        createdAt: new Date(),
+        updatedAt: new Date()
       },{
-        choice: "Bethany"
+        choice: "Bethany",
+        triviaQuestionId: 16,
+        createdAt: new Date(),
+        updatedAt: new Date()
       },{
-        choice: "Pacey"
+        choice: "Pacey",
+        triviaQuestionId: 16,
+        createdAt: new Date(),
+        updatedAt: new Date()
       },{
         choice: "A sketch comedy show",
-        status: true
+        status: true,
+        triviaQuestionId: 17,
+        createdAt: new Date(),
+        updatedAt: new Date()
       },{
-        choice: "Drama"
+        choice: "Drama",
+        triviaQuestionId: 17,
+        createdAt: new Date(),
+        updatedAt: new Date()
       },{
-        choice: "Action packed detective thriller"
+        choice: "Action packed detective thriller",
+        triviaQuestionId: 17,
+        createdAt: new Date(),
+        updatedAt: new Date()
       },{
-        choice: "An after school special about racism"
+        choice: "An after school special about racism",
+        triviaQuestionId: 17,
+        createdAt: new Date(),
+        updatedAt: new Date()
       },{
-        choice: "Doug Brown"
+        choice: "Doug Brown",
+        triviaQuestionId: 18,
+        createdAt: new Date(),
+        updatedAt: new Date()
       },{
         choice: "Doug Funnie",
-        status: true
+        status: true,
+        triviaQuestionId: 18,
+        createdAt: new Date(),
+        updatedAt: new Date()
       },{
-        choice: "Doug Depression"
+        choice: "Doug Depression",
+        triviaQuestionId: 18,
+        createdAt: new Date(),
+        updatedAt: new Date()
       },{
-        choice: "Doug McDonald"
+        choice: "Doug McDonald",
+        triviaQuestionId: 18,
+        createdAt: new Date(),
+        updatedAt: new Date()
       },{
         choice: "Blood, Sugar, Sex, Magik",
-        status: true
+        status: true,
+        triviaQuestionId: 19,
+        createdAt: new Date(),
+        updatedAt: new Date()
       },{
-        choice: "De la Soul is Dead"
+        choice: "De la Soul is Dead",
+        triviaQuestionId: 19,
+        createdAt: new Date(),
+        updatedAt: new Date()
       },{
-        choice: "Californiacation"
+        choice: "Californiacation",
+        triviaQuestionId: 19,
+        createdAt: new Date(),
+        updatedAt: new Date()
       },{
-        choice: "Winner Winner Chicken Dinner"
+        choice: "Winner Winner Chicken Dinner",
+        triviaQuestionId: 19,
+        createdAt: new Date(),
+        updatedAt: new Date()
       },{
-        choice: "Creep"
+        choice: "Creep",
+        triviaQuestionId: 20,
+        createdAt: new Date(),
+        updatedAt: new Date()
       },{
-        choice: "Red Light Special"
+        choice: "Red Light Special",
+        triviaQuestionId: 20,
+        createdAt: new Date(),
+        updatedAt: new Date()
       },{
         choice: "I Wanna Dance with Somebody",
-        status: true
+        status: true,
+        triviaQuestionId: 20,
+        createdAt: new Date(),
+        updatedAt: new Date()
       },{
-        choice: "Diggin' on You"
+        choice: "Diggin' on You",
+        triviaQuestionId: 20,
+        createdAt: new Date(),
+        updatedAt: new Date()
       },{
-        choice: "Roger"
+        choice: "Roger",
+        triviaQuestionId: 21,
+        createdAt: new Date(),
+        updatedAt: new Date()
       },{
-        choice: "Steve"
+        choice: "Steve",
+        triviaQuestionId: 21,
+        createdAt: new Date(),
+        updatedAt: new Date()
       },{
         choice: "Pete",
-        status: true
+        status: true,
+        triviaQuestionId: 21,
+        createdAt: new Date(),
+        updatedAt: new Date()
       },{
-        choice: "Frank"
+        choice: "Frank",
+        triviaQuestionId: 21,
+        createdAt: new Date(),
+        updatedAt: new Date()
       },{
-        choice: "Resevoir Dogs"
+        choice: "Resevoir Dogs",
+        triviaQuestionId: 22,
+        createdAt: new Date(),
+        updatedAt: new Date()
       },{
         choice: "Pulp Fiction",
-        status: true
+        status: true,
+        triviaQuestionId: 22,
+        createdAt: new Date(),
+        updatedAt: new Date()
       },{
-        choice: "Titanic"
+        choice: "Titanic",
+        triviaQuestionId: 22,
+        createdAt: new Date(),
+        updatedAt: new Date()
       },{
-        choice: "Kill Bill"
+        choice: "Kill Bill",
+        triviaQuestionId: 22,
+        createdAt: new Date(),
+        updatedAt: new Date()
       },{
         choice: "Dookie",
-        status: true
+        status: true,
+        triviaQuestionId: 23,
+        createdAt: new Date(),
+        updatedAt: new Date()
       },{
-        choice: "Lemondade"
+        choice: "Lemondade",
+        triviaQuestionId: 23,
+        createdAt: new Date(),
+        updatedAt: new Date()
       },{
-        choice: "The Cheetah Girls"
+        choice: "The Cheetah Girls",
+        triviaQuestionId: 23,
+        createdAt: new Date(),
+        updatedAt: new Date()
       },{
-        choice: "Christmas Carols"
+        choice: "Christmas Carols",
+        triviaQuestionId: 23,
+        createdAt: new Date(),
+        updatedAt: new Date()
       },{
-        choice: "Degrassi"
+        choice: "Degrassi",
+        triviaQuestionId: 24,
+        createdAt: new Date(),
+        updatedAt: new Date()
       },{
-        choice: "Pete and Pete"
+        choice: "Pete and Pete",
+        triviaQuestionId: 24,
+        createdAt: new Date(),
+        updatedAt: new Date()
       },{
         choice: "Daria",
-        status: true
+        status: true,
+        triviaQuestionId: 24,
+        createdAt: new Date(),
+        updatedAt: new Date()
       },{
-        choice: "Beavis and Butthead"
+        choice: "Beavis and Butthead",
+        triviaQuestionId: 24,
+        createdAt: new Date(),
+        updatedAt: new Date()
       },{
         choice: "Downtown",
-        status: true
+        status: true,
+        triviaQuestionId: 24,
+        createdAt: new Date(),
+        updatedAt: new Date()
       },{
-        choice: "Up the street"
+        choice: "Up the street",
+        triviaQuestionId: 24,
+        createdAt: new Date(),
+        updatedAt: new Date()
       },{
-        choice: "Into your heart"
+        choice: "Into your heart",
+        triviaQuestionId: 24,
+        createdAt: new Date(),
+        updatedAt: new Date()
       },{
-        choice: "Down the river"
+        choice: "Down the river",
+        triviaQuestionId: 24,
+        createdAt: new Date(),
+        updatedAt: new Date()
       },{
-        choice: "Mean Girls"
+        choice: "Mean Girls",
+        triviaQuestionId: 25,
+        createdAt: new Date(),
+        updatedAt: new Date()
       },{
         choice: "Napoleon Dynamite",
-        status: true
+        status: true,
+        triviaQuestionId: 25,
+        createdAt: new Date(),
+        updatedAt: new Date()
       },{
-        choice: "Pan's Labyrinth"
+        choice: "Pan's Labyrinth",
+        triviaQuestionId: 25,
+        createdAt: new Date(),
+        updatedAt: new Date()
       },{
-        choice: "Blades of Glory"
+        choice: "Blades of Glory",
+        triviaQuestionId: 25,
+        createdAt: new Date(),
+        updatedAt: new Date()
       },{
         choice: "Shrek",
-        status: true
+        status: true,
+        triviaQuestionId: 26,
+        createdAt: new Date(),
+        updatedAt: new Date()
       },{
-        choice: "The Iron Giant"
+        choice: "The Iron Giant",
+        triviaQuestionId: 26,
+        createdAt: new Date(),
+        updatedAt: new Date()
       },{
-        choice: "Coraline"
+        choice: "Coraline",
+        triviaQuestionId: 26,
+        createdAt: new Date(),
+        updatedAt: new Date()
       },{
-        choice: "Toy Story"
+        choice: "Toy Story",
+        triviaQuestionId: 26,
+        createdAt: new Date(),
+        updatedAt: new Date()
       },{
-        choice: "Kate and Spencer"
+        choice: "Kate and Spencer",
+        triviaQuestionId: 27,
+        createdAt: new Date(),
+        updatedAt: new Date()
       },{
         choice: "Miranda and Gordo",
-        status: true
+        status: true,
+        triviaQuestionId: 27,
+        createdAt: new Date(),
+        updatedAt: new Date()
       },{
-        choice: "Miranda and Travis"
+        choice: "Miranda and Travis",
+        triviaQuestionId: 27,
+        createdAt: new Date(),
+        updatedAt: new Date()
       },{
-        choice: "Matt and Lanny"
+        choice: "Matt and Lanny",
+        triviaQuestionId: 27,
+        createdAt: new Date(),
+        updatedAt: new Date()
       },{
-        choice: "September 22nd"
+        choice: "September 22nd",
+        triviaQuestionId: 28,
+        createdAt: new Date(),
+        updatedAt: new Date()
       },{
-        choice: "January 1st"
+        choice: "January 1st",
+        triviaQuestionId: 28,
+        createdAt: new Date(),
+        updatedAt: new Date()
       },{
         choice: "October 3rd",
-        status: true
+        status: true,
+        triviaQuestionId: 28,
+        createdAt: new Date(),
+        updatedAt: new Date()
       },{
-        choice: "June 9th"
+        choice: "June 9th",
+        triviaQuestionId: 28,
+        createdAt: new Date(),
+        updatedAt: new Date()
       },{
         choice: "Monster's Ball",
-        status: true
+        status: true,
+        triviaQuestionId: 29,
+        createdAt: new Date(),
+        updatedAt: new Date()
       },{
-        choice: "Gothika"
+        choice: "Gothika",
+        triviaQuestionId: 29,
+        createdAt: new Date(),
+        updatedAt: new Date()
       },{
-        choice: "X-Men"
+        choice: "X-Men",
+        triviaQuestionId: 29,
+        createdAt: new Date(),
+        updatedAt: new Date()
       },{
-        choice: "Cloud Atlas"
+        choice: "Cloud Atlas",
+        triviaQuestionId: 29,
+        createdAt: new Date(),
+        updatedAt: new Date()
       },{
-        choice: "Doug"
+        choice: "Doug",
+        triviaQuestionId: 30,
+        createdAt: new Date(),
+        updatedAt: new Date()
       },{
         choice: "The Wild Thornberries",
-        status: true
+        status: true,
+        triviaQuestionId: 30,
+        createdAt: new Date(),
+        updatedAt: new Date()
       },{
-        choice: "Avatar the Last Airbender"
+        choice: "Avatar the Last Airbender",
+        triviaQuestionId: 30,
+        createdAt: new Date(),
+        updatedAt: new Date()
       },{
-        choice: "Kablam!"
+        choice: "Kablam!",
+        triviaQuestionId: 30,
+        createdAt: new Date(),
+        updatedAt: new Date()
       },{
-        choice: "Twilight Saga"
+        choice: "Twilight Saga",
+        triviaQuestionId: 31,
+        createdAt: new Date(),
+        updatedAt: new Date()
       },{
-        choice: "Willy Wonka and the Chocolate Factory"
+        choice: "Willy Wonka and the Chocolate Factory",
+        triviaQuestionId: 31,
+        createdAt: new Date(),
+        updatedAt: new Date()
       },{
-        choice: "The Babysitter's Club"
+        choice: "The Babysitter's Club",
+        triviaQuestionId: 31,
+        createdAt: new Date(),
+        updatedAt: new Date()
       },{
         choice: "Harry Potter",
-        status: true
+        status: true,
+        triviaQuestionId: 31,
+        createdAt: new Date(),
+        updatedAt: new Date()
       },{
         choice: "Enthusiasm",
-        status: true
+        status: true,
+        triviaQuestionId: 32,
+        createdAt: new Date(),
+        updatedAt: new Date()
       },{
-        choice: "Attitude"
+        choice: "Attitude",
+        triviaQuestionId: 32,
+        createdAt: new Date(),
+        updatedAt: new Date()
       },{
-        choice: "Energy"
+        choice: "Energy",
+        triviaQuestionId: 32,
+        createdAt: new Date(),
+        updatedAt: new Date()
       },{
-        choice: "Apetite"
+        choice: "Apetite",
+        triviaQuestionId: 32,
+        createdAt: new Date(),
+        updatedAt: new Date()
       },{
-        choice: "College Dropout"
+        choice: "College Dropout",
+        triviaQuestionId: 33,
+        createdAt: new Date(),
+        updatedAt: new Date()
       },{
-        choice: "Hit Me Baby One More Time"
+        choice: "Hit Me Baby One More Time",
+        triviaQuestionId: 33,
+        createdAt: new Date(),
+        updatedAt: new Date()
       },{
         choice: "Graduation",
-        status: true
+        status: true,
+        triviaQuestionId: 33,
+        createdAt: new Date(),
+        updatedAt: new Date()
       },{
-        choice: "Survivor"
+        choice: "Survivor",
+        triviaQuestionId: 33,
+        createdAt: new Date(),
+        updatedAt: new Date()
       },{
-        choice: "Science"
+        choice: "She has rippling debt",
+        triviaQuestionId: 34,
+        createdAt: new Date(),
+        updatedAt: new Date()
       },{
-        choice: "A pencil"
+        choice: "She has anice ballpoint pen",
+        triviaQuestionId: 34,
+        createdAt: new Date(),
+        updatedAt: new Date()
       },{
-        choice: "Bad",
-        status: true
+        choice: "She has got it going on",
+        status: true,
+        triviaQuestionId: 34,
+        createdAt: new Date(),
+        updatedAt: new Date()
       },{
-        choice: "His leg"
+        choice: "She has too many children",
+        triviaQuestionId: 34,
+        createdAt: new Date(),
+        updatedAt: new Date()
       },{
-        choice: "Black Hole"
+        choice: "Black Hole",
+        triviaQuestionId: 35,
+        createdAt: new Date(),
+        updatedAt: new Date()
       },{
         choice: "Persepolis",
-        status: true
+        status: true,
+        triviaQuestionId: 35,
+        createdAt: new Date(),
+        updatedAt: new Date()
       },{
-        choice: "Akira"
+        choice: "Akira",
+        triviaQuestionId: 35,
+        createdAt: new Date(),
+        updatedAt: new Date()
       },{
-        choice: "Paper Girls"
+        choice: "Paper Girls",
+        triviaQuestionId: 35,
+        createdAt: new Date(),
+        updatedAt: new Date()
       }
+
+      ])
   },
 
   down: function (queryInterface, Sequelize) {

@@ -23,7 +23,7 @@ module.exports = {
           createdAt: new Date(),
           updatedAt: new Date()
         },{
-          question: "What year did Michael Jackson's 'Thriller' come out?"
+          question: "What year did Michael Jackson's 'Thriller' come out?",
           createdAt: new Date(),
           updatedAt: new Date()
         },{
@@ -31,15 +31,15 @@ module.exports = {
           createdAt: new Date(),
           updatedAt: new Date()
         },{
-          question: "What are the names of all the Huxtable children?"
+          question: "What are the names of all the Huxtable children?",
           createdAt: new Date(),
           updatedAt: new Date()
         },{
-          question: "what famous line does Jack Nicholson improvise in The Shining?"
+          question: "What famous line does Jack Nicholson improvise in The Shining?",
           createdAt: new Date(),
           updatedAt: new Date()
         },{
-          question: "What year was 'The Breakfast Club' released?"
+          question: "What year was 'The Breakfast Club' released?",
           createdAt: new Date(),
           updatedAt: new Date()
         },{
@@ -47,7 +47,7 @@ module.exports = {
           createdAt: new Date(),
           updatedAt: new Date()
         },{
-          question: "What comes between Brooke Sheilds and her Calvins?"
+          question: "What comes between Brooke Sheilds and her Calvins?",
           createdAt: new Date(),
           updatedAt: new Date()
         },{
@@ -55,7 +55,7 @@ module.exports = {
           createdAt: new Date(),
           updatedAt: new Date()
         },{
-          question: "what is the name of the clown in Stephen King's 1986 novel 'It'?"
+          question: "what is the name of the clown in Stephen King's 1986 novel 'It'?",
           createdAt: new Date(),
           updatedAt: new Date()
         },{
@@ -87,76 +87,76 @@ module.exports = {
           createdAt: new Date(),
           updatedAt: new Date()
         },{
-          question: "What song was NOT on TLC's 1994 album 'CrazySexyCool'?"
+          question: "What song was NOT on TLC's 1994 album 'CrazySexyCool'?",
           createdAt: new Date(),
           updatedAt: new Date()
         },{
-          question: "On the television show 'Pete and Pete', what is Pete's brother's name?"
-          createdAt: new Date(),
-          updatedAt: new Date()
-      },{
-          question: "What Quentin Tarantino film came out in 1994?"
-          createdAt: new Date(),
-          updatedAt: new Date()
-      },{
-          question: "Which Green Day studio album featured the single 'When I Come Around'?"
+          question: "On the television show 'Pete and Pete', what is Pete's brother's name?",
           createdAt: new Date(),
           updatedAt: new Date()
         },{
-          question: "What animated tv spinoff of 'Beavis and Butthead' featured an apathetic teenage girl?"
+          question: "What Quentin Tarantino film came out in 1994?",
           createdAt: new Date(),
           updatedAt: new Date()
-      },{
-        question: "Finish the sentence: 'Making my way______'"
-        createdAt: new Date(),
-        updatedAt: new Date()
-      },{
-        question: "What movie starring Jon Heder relased in June 2004?"
-        createdAt: new Date(),
-        updatedAt: new Date()
-      },{
-        question: "Which computer animated feature recieved best animated feature at the 2002 Academy Awards?"
-        createdAt: new Date(),
-        updatedAt: new Date()
-      },{
-        question: "Who were Lizzie McGuire's best friends?"
-        createdAt: new Date(),
-        updatedAt: new Date()
-      },{
-        question: "On what day does Aaron Samules ask Cady Heron the date in 'Mean Girls'?"
-        createdAt: new Date(),
-        updatedAt: new Date()
-      },{
-        question: "Halle Berry was the first African American woman to win an Academy Award in a leading role for what movie?"
-        createdAt: new Date(),
-        updatedAt: new Date()
-      },{
-        question: "What Nickelodeon television show involved a little girl who could speak to animals?"
-        createdAt: new Date(),
-        updatedAt: new Date()
-      },{
-        question: "2003 is the year the 5th installment of which literary phenomenon was published?"
-        createdAt: new Date(),
-        updatedAt: new Date()
-      },{
-        question: "Curb your what?"
-        createdAt: new Date(),
-        updatedAt: new Date()
-      },{
-        question: "What Kanye West Album released on September 11th, 2007 which featured the songs: 'Stronger', 'Can't Tell Me Nothing' and 'Homecoming'?"
-        createdAt: new Date(),
-        updatedAt: new Date()
-      },{
-        question: "In the AMC original series, what is Mr. White breaking?"
-        createdAt: new Date(),
-        updatedAt: new Date()
-      },{
-        question: "What graphic novel by Marjane Satrapi was adapted into an animated film in 2007?"
-        createdAt: new Date(),
-        updatedAt: new Date()
-      }
-    
-  },
+        },{
+          question: "Which Green Day studio album featured the single 'When I Come Around'?",
+          createdAt: new Date(),
+          updatedAt: new Date()
+        },{
+          question: "What animated tv spinoff of 'Beavis and Butthead' featured an apathetic teenage girl?",
+          createdAt: new Date(),
+          updatedAt: new Date()
+        },{
+          question: "Finish the sentence: 'Making my way______'",
+          createdAt: new Date(),
+          updatedAt: new Date()
+        },{
+          question: "What movie starring Jon Heder relased in June 2004?",
+          createdAt: new Date(),
+          updatedAt: new Date()
+        },{
+          question: "Which computer animated feature recieved best animated feature at the 2002 Academy Awards?",
+          createdAt: new Date(),
+          updatedAt: new Date()
+        },{
+          question: "Who were Lizzie McGuire's best friends?",
+          createdAt: new Date(),
+          updatedAt: new Date()
+        },{
+          question: "On what day does Aaron Samules ask Cady Heron the date in 'Mean Girls'?",
+          createdAt: new Date(),
+          updatedAt: new Date()
+        },{
+          question: "Halle Berry was the first African American woman to win an Academy Award in a leading role for what movie?",
+          createdAt: new Date(),
+          updatedAt: new Date()
+        },{
+          question: "What Nickelodeon television show involved a little girl who could speak to animals?",
+          createdAt: new Date(),
+          updatedAt: new Date()
+        },{
+          question: "2003 is the year the 5th installment of which literary phenomenon was published?",
+          createdAt: new Date(),
+          updatedAt: new Date()
+        },{
+          question: "Curb your what?",
+          createdAt: new Date(),
+          updatedAt: new Date()
+        },{
+          question: "What Kanye West Album released on September 11th, 2007 which featured the songs: 'Stronger', 'Can't Tell Me Nothing' and 'Homecoming'?",
+          createdAt: new Date(),
+          updatedAt: new Date()
+        },{
+          question: "What does Stacey's mom have?",
+          createdAt: new Date(),
+          updatedAt: new Date()
+        },{
+          question: "What graphic novel by Marjane Satrapi was adapted into an animated film in 2007?",
+          createdAt: new Date(),
+          updatedAt: new Date()
+        }]);
+},
+      
 
   down: function (queryInterface, Sequelize) {
     /*
