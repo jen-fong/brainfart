@@ -47,7 +47,7 @@ module.exports = {
           createdAt: new Date(),
           updatedAt: new Date()
         },{
-          question: "Who was apart of the 'Brat Pack'?"
+          question: "What comes between Brooke Sheilds and her Calvins?"
           createdAt: new Date(),
           updatedAt: new Date()
         },{
