@@ -91,14 +91,14 @@ module.exports = {
       },{
         choice: "General Public"
       },{
-        choice: "Jesus Christ, Mary Queen of Scotts"
+        choice: "Basketball shorts"
       },{
-        choice: "Alfalfa, Spanky, Darla, Butch"
+        choice: "Underwear"
       },{
-        choice: "Emilio Estevez, Molly Ringwald, Rob Lowe, Ally Sheedy, Anthony Michael Hall",
+        choice: "Nothing",
         status: true
       },{
-        choice: "Emilio Estevez, Molly Ringwald, Butch Cassidy, Ally Sheedy"
+        choice: "Another pair of Calvins"
       },{
         choice: "Buttercup",
         status: true
@@ -199,7 +199,140 @@ module.exports = {
       },{
         choice: "Frank"
       },{
-
+        choice: "Resevoir Dogs"
+      },{
+        choice: "Pulp Fiction",
+        status: true
+      },{
+        choice: "Titanic"
+      },{
+        choice: "Kill Bill"
+      },{
+        choice: "Dookie",
+        status: true
+      },{
+        choice: "Lemondade"
+      },{
+        choice: "The Cheetah Girls"
+      },{
+        choice: "Christmas Carols"
+      },{
+        choice: "Degrassi"
+      },{
+        choice: "Pete and Pete"
+      },{
+        choice: "Daria",
+        status: true
+      },{
+        choice: "Beavis and Butthead"
+      },{
+        choice: "Downtown",
+        status: true
+      },{
+        choice: "Up the street"
+      },{
+        choice: "Into your heart"
+      },{
+        choice: "Down the river"
+      },{
+        choice: "Mean Girls"
+      },{
+        choice: "Napoleon Dynamite",
+        status: true
+      },{
+        choice: "Pan's Labyrinth"
+      },{
+        choice: "Blades of Glory"
+      },{
+        choice: "Shrek",
+        status: true
+      },{
+        choice: "The Iron Giant"
+      },{
+        choice: "Coraline"
+      },{
+        choice: "Toy Story"
+      },{
+        choice: "Kate and Spencer"
+      },{
+        choice: "Miranda and Gordo",
+        status: true
+      },{
+        choice: "Miranda and Travis"
+      },{
+        choice: "Matt and Lanny"
+      },{
+        choice: "September 22nd"
+      },{
+        choice: "January 1st"
+      },{
+        choice: "October 3rd",
+        status: true
+      },{
+        choice: "June 9th"
+      },{
+        choice: "Monster's Ball",
+        status: true
+      },{
+        choice: "Gothika"
+      },{
+        choice: "X-Men"
+      },{
+        choice: "Cloud Atlas"
+      },{
+        choice: "Doug"
+      },{
+        choice: "The Wild Thornberries",
+        status: true
+      },{
+        choice: "Avatar the Last Airbender"
+      },{
+        choice: "Kablam!"
+      },{
+        choice: "Twilight Saga"
+      },{
+        choice: "Willy Wonka and the Chocolate Factory"
+      },{
+        choice: "The Babysitter's Club"
+      },{
+        choice: "Harry Potter",
+        status: true
+      },{
+        choice: "Enthusiasm",
+        status: true
+      },{
+        choice: "Attitude"
+      },{
+        choice: "Energy"
+      },{
+        choice: "Apetite"
+      },{
+        choice: "College Dropout"
+      },{
+        choice: "Hit Me Baby One More Time"
+      },{
+        choice: "Graduation",
+        status: true
+      },{
+        choice: "Survivor"
+      },{
+        choice: "Science"
+      },{
+        choice: "A pencil"
+      },{
+        choice: "Bad",
+        status: true
+      },{
+        choice: "His leg"
+      },{
+        choice: "Black Hole"
+      },{
+        choice: "Persepolis",
+        status: true
+      },{
+        choice: "Akira"
+      },{
+        choice: "Paper Girls"
       }
   },
 

@@ -103,7 +103,7 @@ module.exports = {
           createdAt: new Date(),
           updatedAt: new Date()
         },{
-          question: "The song 'Just a Girl' came from what album?"
+          question: "What animated tv spinoff of 'Beavis and Butthead' featured an apathetic teenage girl?"
           createdAt: new Date(),
           updatedAt: new Date()
       },{
@@ -115,7 +115,7 @@ module.exports = {
         createdAt: new Date(),
         updatedAt: new Date()
       },{
-        question: "Which Outkast album featured the single: 'Hey Ya' and 'Roses'?"
+        question: "Which computer animated feature recieved best animated feature at the 2002 Academy Awards?"
         createdAt: new Date(),
         updatedAt: new Date()
       },{
@@ -123,7 +123,37 @@ module.exports = {
         createdAt: new Date(),
         updatedAt: new Date()
       },{
-        question: ""
+        question: "On what day does Aaron Samules ask Cady Heron the date in 'Mean Girls'?"
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },{
+        question: "Halle Berry was the first African American woman to win an Academy Award in a leading role for what movie?"
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },{
+        question: "What Nickelodeon television show involved a little girl who could speak to animals?"
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },{
+        question: "2003 is the year the 5th installment of which literary phenomenon was published?"
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },{
+        question: "Curb your what?"
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },{
+        question: "What Kanye West Album released on September 11th, 2007 which featured the songs: 'Stronger', 'Can't Tell Me Nothing' and 'Homecoming'?"
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },{
+        question: "In the AMC original series, what is Mr. White breaking?"
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },{
+        question: "What graphic novel by Marjane Satrapi was adapted into an animated film in 2007?"
+        createdAt: new Date(),
+        updatedAt: new Date()
       }
     
   },
