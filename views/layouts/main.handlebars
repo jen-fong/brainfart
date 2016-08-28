@@ -6,6 +6,31 @@
 	<script src="https://code.jquery.com/jquery-2.2.4.min.js"
       integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
       crossorigin="anonymous"></script>
+    <style type="text/css">
+	body{
+		background: black;
+	}
+
+	#jumbotron {
+		background: grey;
+		height: auto;
+		width: 1200px;
+	}
+
+	.trivBox
+	{
+		width: 167px;
+		height: 165px;
+		background: black;
+		color: red;
+		text-align: center;
+		font-size: 50px;
+	}
+
+	.space {
+		height: 30px;
+	}
+</style>
 
 </head>
 <body>
@@ -16,44 +41,397 @@
 		</div>
 		<div id="add">
 			<form id="newScore">
-        			<input type="text" id="name" placeholder="Your name"><br>
-        			<input type="text" id="score" placeholder="Your score"><br><br><br>
-          			<button id="test" type="submit"><span class="glyphicon glyphicon-pushpin"></span> test button</button>
+    			<input type="text" id="name" placeholder="Your name"><br>
+    			<input type="text" id="score" placeholder="Your score"><br><br><br>
+      			<button id="test" type="submit"><span class="glyphicon glyphicon-pushpin"></span> test button</button>
+          	</form>
+          	<form id="roomtest">
+          		<input type="text" id="room">
+          		<button id="testroom" type="submit"><span class="glyphicon glyphicon-pushpin"></span> test button</button>
           	</form>
 		</div>
-		<div class="test">
+		<div id="gameRooms">
+			
+
+		</div>
+		<div class="space">
+		</div>
+		<div id="game">
+			<div class="row">
+				<div class="col-md-1">
+				</div>
+				<div class="col-md-2">
+					<div id="testbuttonA1" data-box="#testbuttonA1" data-x="0" data-y="0" class="trivBox hvr-buzz">
+						A1
+					</div>
+				</div>
+				<div class="col-md-2">
+					<div id="testbuttonA2" data-box="#testbuttonA2" data-x="1" data-y="0" class="trivBox hvr-wobble-skew">
+						A2
+					</div>
+				</div>
+				<div class="col-md-2">
+					<div id="testbuttonA3" data-box="#testbuttonA3" data-x="2" data-y="0" class="trivBox hvr-pulse-grow">
+						A3
+					</div>
+				</div>
+				<div class="col-md-2">
+					<div id="testbuttonA4" data-box="#testbuttonA4" data-x="3" data-y="0" class="trivBox hvr-pop">
+						A4
+					</div>
+				</div>
+				<div class="col-md-2">
+					<div id="testbuttonA5" data-box="#testbuttonA5" data-x="4" data-y="0" class="trivBox hvr-push">
+						A5
+					</div>
+				</div>
+			</div>
+
+			<div class="space">
+			</div>
+
+			<div class="row">
+				<div class="col-md-1">
+				</div>
+				<div class="col-md-2">
+					<div id="testbuttonB1" data-box="#testbuttonB1" data-x="0" data-y="1" class="trivBox hvr-buzz">
+						B1
+					</div>
+				</div>
+				<div class="col-md-2">
+					<div id="testbuttonB2" data-box="#testbuttonB2" data-x="1" data-y="1" class="trivBox hvr-wobble-skew">
+						B2
+					</div>
+				</div>
+				<div class="col-md-2">
+					<div id="testbuttonB3" data-box="#testbuttonB3" data-x="2" data-y="1" class="trivBox hvr-pulse-grow">
+						B3
+					</div>
+				</div>
+				<div class="col-md-2">
+					<div id="testbuttonB4" data-box="#testbuttonB4" data-x="3" data-y="1" class="trivBox hvr-pop">
+						B4
+					</div>
+				</div>
+				<div class="col-md-2">
+					<div id="testbuttonB5" data-box="#testbuttonB5" data-x="4" data-y="1" class="trivBox hvr-push">
+						B5
+					</div>
+				</div>
+			</div>
+
+			<div class="space">
+			</div>
+
+			<div class="row">
+				<div class="col-md-1">
+				</div>
+				<div class="col-md-2">
+					<div id="testbuttonC1" data-box="#testbuttonC1" data-x="0" data-y="2" class="trivBox hvr-buzz">
+						C1
+					</div>
+				</div>
+				<div class="col-md-2">
+					<div id="testbuttonC2" data-box="#testbuttonC2" data-x="1" data-y="2" class="trivBox hvr-wobble-skew">
+						C2
+					</div>
+				</div>
+				<div class="col-md-2">
+					<div id="testbuttonC3" data-box="#testbuttonC3" data-x="2" data-y="2" class="trivBox hvr-pulse-grow">
+						C3
+					</div>
+				</div>
+				<div class="col-md-2">
+					<div id="testbuttonC4" data-box="#testbuttonC4" data-x="3" data-y="2" class="trivBox hvr-pop">
+						C4
+					</div>
+				</div>
+				<div class="col-md-2">
+					<div id="testbuttonC5" data-box="#testbuttonC5" data-x="4" data-y="2" class="trivBox hvr-push">
+						C5
+					</div>
+				</div>
+			</div>
+
+			<div class="space">
+			</div>
+
+			<div class="row">
+				<div class="col-md-1">
+				</div>
+				<div class="col-md-2">
+					<div id="testbuttonD1" data-box="#testbuttonD1" data-x="0" data-y="3" class="trivBox hvr-buzz">
+						D1
+					</div>
+				</div>
+				<div class="col-md-2">
+					<div id="testbuttonD2" data-box="#testbuttonD2" data-x="1" data-y="3" class="trivBox hvr-wobble-skew">
+						D2
+					</div>
+				</div>
+				<div class="col-md-2">
+					<div id="testbuttonD3" data-box="#testbuttonD3" data-x="2" data-y="3" class="trivBox hvr-pulse-grow">
+						D3
+					</div>
+				</div>
+				<div class="col-md-2">
+					<div id="testbuttonD4" data-box="#testbuttonD4" data-x="3" data-y="3" class="trivBox hvr-pop">
+						D4
+					</div>
+				</div>
+				<div class="col-md-2">
+					<div id="testbuttonD5" data-box="#testbuttonD5" data-x="4" data-y="3" class="trivBox hvr-push">
+						D5
+					</div>
+				</div>
+			</div>
+
+			<div class="space">
+			</div>
+
+			<div class="row">
+				<div class="col-md-1">
+				</div>
+				<div class="col-md-2">
+					<div id="testbuttonE1" data-box="#testbuttonE1" data-x="0" data-y="4" class="trivBox hvr-buzz">
+						E1
+					</div>
+				</div>
+				<div class="col-md-2">
+					<div id="testbuttonE2" data-box="#testbuttonE2" data-x="1" data-y="4" class="trivBox hvr-wobble-skew">
+						E2
+					</div>
+				</div>
+				<div class="col-md-2">
+					<div id="testbuttonE3" data-box="#testbuttonE3" data-x="2" data-y="4" class="trivBox hvr-pulse-grow">
+						E3
+					</div>
+				</div>
+				<div class="col-md-2">
+					<div id="testbuttonE4" data-box="#testbuttonE4" data-x="3" data-y="4" class="trivBox hvr-pop">
+						E4
+					</div>
+				</div>
+				<div class="col-md-2">
+					<div id="testbuttonE5" data-box="#testbuttonE5" data-x="4" data-y="4" class="trivBox hvr-push">
+						E5
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 <script src="../assets/javascript/game.js"></script>
 <script src="../socket.io/socket.io.js"></script>
 <script>
 $(document).ready(function() {
-		var socket = io.connect('http://localhost:3000');
-	socket.on('score', function (data) {
-		if ($('.test').children().length === 10) {
-			$('.test').html('');
-		}
-		$('.test').append('<div>' + data.name + '</div><br>')
-
+	var role;
+	var mySocketId;
+	var time = 10;
+	var theQuestion ="";
+	var allBoxes = [
+			'#testbuttonA1', '#testbuttonA2', '#testbuttonA3', '#testbuttonA4', '#testbuttonA5', 
+			'#testbuttonB1', '#testbuttonB2', '#testbuttonB3', '#testbuttonB4', '#testbuttonB5',
+			'#testbuttonC1', '#testbuttonC2', '#testbuttonC3', '#testbuttonC4', '#testbuttonC5',
+			'#testbuttonD1', '#testbuttonD2', '#testbuttonD3', '#testbuttonD4', '#testbuttonD5',
+			'#testbuttonE1', '#testbuttonE2', '#testbuttonE3', '#testbuttonE4', '#testbuttonE5'
+		];
+	$('#game').hide();
+	var socket = io.connect('http://localhost:3000');
+	// socket.emit('displayRooms', {data: 'test'})
+	// socket.on('showAllRooms', function (data) {
+	// 	showRooms(data);
+	// })
+	socket.on('waitingForPlayer', function (data) {
+		$('#gameRooms').html('<h2>' + data.message + '</h2>');
 	})
-	$('#newScore').on('submit', function() {
+	socket.on('newGameCreated', function(data) {
+		gameInit(data)
+	});
+	socket.on('alertPlayers', function(data) {
+		// alert(data.message)
+		onStartCountdownTimer(data);
+	});
+	socket.on('sendQuestions', function(data) {
+		initQuestions(data);
+	});
+	socket.on('roomDoesNotExist', function (data) {
+		console.log(data)
+		$('#gameRooms').html('<h2>' + data.message + '</h2>');
+	});
+	function gameInit(data) {
+		gameId = data.gameId;
+		mySocketId = data.mySocketId;
+		role = 'player 1';
+		numOfPlayers = 1;
+		console.log(gameId, role)
+	}
+	// function showRooms (data) {
+	// 	console.log(data.allRooms);
+	// 	for (var i = 0; i < data; i++) {
+	// 		console.log(data)
+	// 		// $('#gameRooms').append(data[i]);
+	// 	}
 		
+	// }
+
+	// socket.on('newGameCreated', function (data) {
+	// 	console.log(data)
+	// })
+	// socket.on('score', function (data) {
+	// 	if ($('.test').children().length === 10) {
+	// 		$('.test').html('');
+	// 	}
+	// 	$('.test').append('<div>' + data.name + '</div><br>')
+	// })
+	$('#test').on('click', function(e) {
+		e.preventDefault()
 		var name = $('#name').val();
 		var addScore = {
 			name: $('#name').val(),
 			score: parseInt($('#score').val())
 		}
+		console.log(addScore);
+		socket.emit('createRoom', addScore);
 
-		console.log(addScore)
-		$.post('/game/score', addScore).done(function (response) {
+		// $.post('/game/score', addScore).done(function (response) {
 			
-			console.log(response);
+		// 	console.log(response);
 
-		})
-		socket.emit('score', {score: addScore})
+		// })
 	})
-})
+	$('#testroom').on('click', function(e) {
+		e.preventDefault();
+		var room = $('#room').val();
+		role = 'player 2'
+		numOfPlayers = 2;
+		console.log(role)
+		updateNumOfPlayers(room);
+		$('#room').val('');
+	})
 
+	function updateNumOfPlayers (room) {
+		if (numOfPlayers === 2) {
+			socket.emit('player2Connected', {playerRoom: room});
+			$('#testroom').hide();
+		}
+	}
+	$('.question').on('click', function () {
+		alert('test')
+	})
+	function initQuestions(data) {
+		$('#game').show();
+		console.log(data.question)
+		theQuestion = data.question;
+		console.log(theQuestion);
+		// send questions to the boxes
+	}
+	function runTimer(data){
+		timer = setInterval(function () {
+			decreaseTime(data);
+		}, 1000);
+    };
+    function decreaseTime(data){
+    	time--;
+    	$('#gameRooms').html('<h2>Get Ready! Time to begin: ' + time + '</h2>'); 
+    	if (time === 0) {
+    		clearInterval(timer);
+    		$('#gameRooms').html('');
+    		socket.emit('countdownFinished', data)
+    	}
+    };
+
+	function onStartCountdownTimer (data) {
+		console.log(data)
+		runTimer(data);
+	}
+
+
+var bombs = [];
+
+		// Fisher-Yates Shuffle Algorithm:
+		Array.prototype.shuffle = function() {
+			var i = this.length, j, temp;
+			while(--i > 0) {
+				j = Math.floor(Math.random() * (i+1));
+				temp = this[j];
+				this[j] = this[i];
+				this[i] = temp;
+			}
+			return this;
+		}
+		var shuffledBoxes = allBoxes.shuffle();
+
+
+		// Chooses which boxes will be bombs:
+		for (var i = 0; i < 5; i++) {
+			bombs[i] = shuffledBoxes[i];
+		}
+		console.log("The bombs are: " + bombs);
+
+
+		var surroundingBoxes = [
+			[-1,-1],
+			[0,-1],
+			[1,-1],
+			[-1,0],
+			[1,0],
+			[-1,1],
+			[0,1],
+			[1,1]
+		];
+
+
+$('.trivBox').on('click', function() {
+	var clicked_X = $(this).data('x');
+	var clicked_Y = $(this).data('y');
+	var clickedBomb = false;
+	var surroundingBombs = 0;
+
+	for (var i = 0; i < bombs.length; i++) {
+		if (clicked_X === $(bombs[i]).data('x') && clicked_Y === $(bombs[i]).data('y')) {
+			clickedBomb = true;
+			$(this).empty().removeClass('trivBox').append('<img src="skull.gif">');
+			laugh.play();
+			bombBox();
+		}
+	}
+	if (clickedBomb == false) {
+		console.log(theQuestion, 'test');
+		triviaBox();
+		$(this).off('click')
+
+		for (var i = 0; i < surroundingBoxes.length; i++) {
+			// var surroundingBox_X = ;
+			// var surroundingBox_Y = ;
+			if ((clicked_X + surroundingBoxes[i][0]) >= 0 && (clicked_X + surroundingBoxes[i][0]) <= 4 && 
+				(clicked_Y + surroundingBoxes[i][1]) >= 0 && (clicked_Y + surroundingBoxes[i][1]) <= 4) {
+				for (var j = 0; j < bombs.length; j++) {
+					if ((clicked_X + surroundingBoxes[i][0]) === $(bombs[j]).data('x') && 
+						(clicked_Y + surroundingBoxes[i][1]) === $(bombs[j]).data('y')) {
+						surroundingBombs++;
+					}
+				}
+			}
+		}
+		// bombCheck();
+		$(this).empty().append(surroundingBombs); // need to find better way instead of "empty().append()"
+	}
+
+
+});
+
+
+
+function triviaBox() {
+	alert(theQuestion)
+		}
+})
 </script>
 </body>
 </html>
+
+{{!-- need to pull everything from db and then use handlebars to add to 25 modals
+also need to create the divs after making call from sql and then add the modal content inside
+will be very annoying
+pull from doug
+ --}}

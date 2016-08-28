@@ -29,8 +29,9 @@ app.use(express.static(__dirname + '/public'));
 gameRoute(app);
 
 io.on('connection', function (socket) {
-	socketController(socket)	
+	socketController(io, socket)	
 });
+
 
 server.listen(PORT, function() {
 	console.log('connected on port ' + PORT);

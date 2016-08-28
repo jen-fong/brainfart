@@ -1,18 +1,18 @@
 'use strict';
 module.exports = function(sequelize, DataTypes) {
-  var triviaChoice = sequelize.define('triviaChoice', {
+  var triviaResponse = sequelize.define('triviaResponse', {
     choice: DataTypes.TEXT,
     status: {
       type: DataTypes.BOOLEAN,
       defaultValue: true
-    },
+    }
   }, {
     classMethods: {
       associate: function(models) {
-         triviaChoice.belongsTo(models.triviaQuestion)
+        triviaResponse.belongsTo(models.triviaQuestion)
         // associations can be defined here
       }
     }
   });
-  return triviaChoice;
+  return triviaResponse;
 };
