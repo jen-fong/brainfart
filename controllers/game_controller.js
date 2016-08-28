@@ -12,11 +12,6 @@ app.use(bodyParser.json({ type: 'application/vnd.api+json' }));
 
 var gameRoute = function (app) {
 
-	app.post('/game/score', function (req, res) {
-		Score.create(req.body).then(function (data) {
-				
-			})
-		});
 
 	app.get('/', function (request, response) {
 		

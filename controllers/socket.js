@@ -64,7 +64,6 @@ module.exports = testSocket;
 // 	this.emit('showAllRooms', {allRooms: rooms });
 // }
 function createRoom () {
-	getQuestionFromDb();
 	console.log('client connected');
 	var gameRoomId = ( Math.random() * 100000 ) | 0;
 	numOfPlayers = 1;
@@ -93,6 +92,7 @@ function playerJoin(data) {
 	data.playerSocketId = playerSocket.id;
 	player2SocketId = this.id;
 	if(room != undefined) {
+		getQuestionFromDb();
 		console.log('room exists', playerSocket.id, data.playerRoom);
 		playerSocket.join(data.playerRoom);
 		io.sockets.in(data.playerRoom).emit('alertPlayers', data);

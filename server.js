@@ -33,7 +33,6 @@ io.on('connection', function (socket) {
 	socketController(io, socket)	
 });
 
-=======
 app.use('/', gameRoute);
 
 

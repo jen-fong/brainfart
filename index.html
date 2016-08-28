@@ -309,7 +309,7 @@ when choice is selected, text will display whether or not the user got the answe
 
 -->
 </body>
-    <script src="js/jquery-1.10.2.minjs"></script>
+    <script src="js/jquery-1.10.2.min.js"></script>
     <script>
     //This function makes modals appear in trivia boxes    
     $(".trivBox").on("click", function(){
@@ -322,22 +322,20 @@ when choice is selected, text will display whether or not the user got the answe
 
 
             //This is for the parralax scroll effect
-                $(document).ready(function(){
-          $('a[href*=#]').click(function() {
-            if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'')
+$(document).ready(function(){
+    $('a[href*=#]').click(function() {
+        if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'')
             && location.hostname == this.hostname) {
-              var $target = $(this.hash);
-              $target = $target.length && $target
-              || $('[name=' + this.hash.slice(1) +']');
-              if ($target.length) {
+                var $target = $(this.hash);
+                $target = $target.length && $target || $('[name=' + this.hash.slice(1) +']');
+            if ($target.length) {
                 var targetOffset = $target.offset().top;
-                $('html,body')
-                .animate({scrollTop: targetOffset}, 1000);
-               return false;
-              }
+                $('html,body').animate({scrollTop: targetOffset}, 1000);
+                return false;
             }
-          });
-        });
+        }
+    });
+});
     </script>
 
 </html>
