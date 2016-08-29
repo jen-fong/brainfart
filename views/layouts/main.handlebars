@@ -608,6 +608,7 @@ function showQuestion(data, trivBoxThis) {
 			lives--;
 			socket.emit('answeredWrong', data)
 		}
+		$(choiceThis).off('click');
 	}
 
 })
