@@ -45,12 +45,19 @@ function createRoom () {
 	this.join(gameRoomId.toString());
 	models.Room.create({
 		room_num: gameRoomId,
-		player1: player1SocketId,
-		player1Score: 0
+		status: true
 	}).then(function(room) {
 		console.log('created room');
 		// will need to insert this onto the page on connection
-	})
+		var roomNumber = room;
+		roomNumber.createPlayer({
+			player_num: 'player1',
+			socketId: player1SocketId,
+			lives: 3,
+			score: 0
+		})
+
+	}).then(function (player) { console.log(player)})
 }
 
 function getQuestionFromDb () {
@@ -101,14 +108,24 @@ function playerJoin(data) {
 		getQuestionFromDb();
 		console.log('room exists', playerSocket.id, data.playerRoom);
 		playerSocket.join(data.playerRoom);
-		io.sockets.in(data.playerRoom).emit('alertPlayers', data);
-		models.Room.update({
-			player2: player2SocketId,
-			player2Score: 0
-		}, {
+		
+		models.Room.findAll({
 			where:{
 				room_num: data.playerRoom
 			}
+		}).then(function (room) {
+			console.log(room[0], 'testing 2nd room');
+			addPlayer2 = room[0];
+			addPlayer2.createPlayer({
+				player_num: 'player2',
+				socketId: player2SocketId,
+				lives: 3,
+				score: 0
+			}).then(function (player) {
+				console.log('successfully added player 2');
+				io.sockets.in(data.playerRoom).emit('alertPlayers', data);
+			})
+			
 		})
 
 	} else {
@@ -159,29 +176,27 @@ function nextQuestion (nextQuestionThis, data) {
 			})
 		}
 	}
-	
-	
 }
 
 function increaseScore (data) {
 	var passThis = this;
-	if (data.player === 'player1') {
-		models.Room.update({
-			player1Score: data.score
-		}, {
+	console.log('testing room and player score update', data.room.playerRoom);
+		models.Room.findAll({
 			where: {
 				room_num: data.room.playerRoom
 			}
+		}).then(function (room) {
+			models.Player.update({
+				score: data.score
+			}, {
+				where: {
+					roomId: room[0].id,
+					player_num: data.player
+				}
+			}).then(function (player) {
+				console.log('updated ' + data.player + ' score')
+			})
 		})
-	} else if (data.player === 'player2') {
-		models.Room.update({
-			player2Score: data.score
-		}, {
-			where: {
-				room_num: data.room.playerRoom
-			}
-		})
-	}
 	nextQuestion(passThis, data);
 	// var nextQuestionData = {
 	// 	question: sendQuestion,

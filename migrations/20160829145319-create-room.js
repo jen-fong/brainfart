@@ -11,17 +11,8 @@ module.exports = {
       room_num: {
         type: Sequelize.INTEGER
       },
-      player1: {
-        type: Sequelize.STRING
-      },
-      player1Score: {
-        type: Sequelize.INTEGER
-      },
-      player2: {
-        type: Sequelize.STRING
-      },
-      player2Score: {
-        type: Sequelize.INTEGER
+      status: {
+        type: Sequelize.BOOLEAN
       },
       createdAt: {
         allowNull: false,

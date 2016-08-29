@@ -1,36 +1,24 @@
 'use strict';
 module.exports = {
   up: function(queryInterface, Sequelize) {
-    return queryInterface.createTable('gameQuestions', {
+    return queryInterface.createTable('Players', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      question: {
-        type: Sequelize.TEXT
-      },
-      category: {
+      player_num: {
         type: Sequelize.STRING
       },
-      difficulty: {
+      socketId: {
         type: Sequelize.STRING
       },
-      choice1: {
-        type: Sequelize.STRING
+      lives: {
+        type: Sequelize.INTEGER
       },
-      choice2: {
-        type: Sequelize.STRING
-      },
-      choice3: {
-        type: Sequelize.STRING
-      },
-      choice4: {
-        type: Sequelize.STRING
-      },
-      correct: {
-        type: Sequelize.STRING
+      score: {
+        type: Sequelize.INTEGER
       },
       createdAt: {
         allowNull: false,
@@ -43,6 +31,6 @@ module.exports = {
     });
   },
   down: function(queryInterface, Sequelize) {
-    return queryInterface.dropTable('gameQuestions');
+    return queryInterface.dropTable('Players');
   }
 };

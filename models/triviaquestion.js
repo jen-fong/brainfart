@@ -5,7 +5,7 @@ module.exports = function(sequelize, DataTypes) {
   }, {
     classMethods: {
       associate: function(models) {
-        triviaQuestion.hasMany(models.triviaChoice)
+        triviaQuestion.hasMany(models.triviaResponse)
         // associations can be defined here
       }
     }
