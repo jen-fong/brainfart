@@ -10,38 +10,8 @@ function randomQuestion (array) {
 	var theRandomQuestion = array[Math.floor(Math.random() * array.length)];
 	return theRandomQuestion;
 }
-var firstQuestion;
-function getQuestionFromDb () {
-	models.triviaQuestion.findAll({
-		limit: 25
-	}).then(function (questions) {
-		questions.forEach(function (questions) {
-			questionsArray.push({
-				question: questions.question,
-				id: questions.id
-			});
-			console.log(questions.id)
-		})
-		console.log(questionsArray);
-		firstQuestion = randomQuestion(questionsArray);
-		console.log(firstQuestion.question);
-		models.triviaResponse.findAll({
-			where: {
-				triviaQuestionId: firstQuestion.id
-			}
-		}).then(function (choices) {
-			var questionChoices = [];
-			for (var i = 0; i < choices.length; i++) {
-				questionChoices.push(choices[i].choice);
-				if (choices[i].status) {
-					firstQuestion.answer = choices[i].choice;
-				}
-			}
-			firstQuestion.choices = questionChoices;
-			console.log(firstQuestion)
-		})
-	})
-}
+var sendQuestion;
+
 
 var testSocket = function (sio, client) {
 	gameSocket = client;
@@ -50,6 +20,8 @@ var testSocket = function (sio, client) {
 	gameSocket.on('createRoom', createRoom);
 	gameSocket.on('player2Connected', playerJoin);
 	gameSocket.on('countdownFinished', startGame);
+	gameSocket.on('answeredCorrectly', increaseScore);
+	gameSocket.on('answeredWrong', moveToNextQuestion);
 	gameSocket.on('disconnect', removeRoom);
 }
 
@@ -65,7 +37,7 @@ module.exports = testSocket;
 // }
 function createRoom () {
 	console.log('client connected');
-	var gameRoomId = ( Math.random() * 100000 ) | 0;
+	gameRoomId = ( Math.random() * 100000 ) | 0;
 	numOfPlayers = 1;
 	player1SocketId = this.id;
 	this.emit('newGameCreated', { gameId: gameRoomId, socketId: this.id})
@@ -78,6 +50,40 @@ function createRoom () {
 	}).then(function(room) {
 		console.log('created room');
 		// will need to insert this onto the page on connection
+	})
+}
+
+function getQuestionFromDb () {
+	models.triviaQuestion.findAll({
+		limit: 25
+	}).then(function (questions) {
+		questions.forEach(function (questions) {
+			questionsArray.push({
+				question: questions.question,
+				id: questions.id
+			});
+		})
+		console.log(questionsArray);
+		firstQuestion();
+	})
+}
+
+function firstQuestion () {
+	sendQuestion = randomQuestion(questionsArray);
+	console.log(sendQuestion);
+	models.triviaResponse.findAll({
+		where: {
+			triviaQuestionId: sendQuestion.id
+		}
+	}).then(function (choices) {
+		var questionChoices = [];
+		for (var i = 0; i < choices.length; i++) {
+			questionChoices.push(choices[i].choice);
+			if (choices[i].status) {
+				sendQuestion.answer = choices[i].choice;
+			}
+		}
+		sendQuestion.choices = questionChoices;
 	})
 }
 
@@ -115,8 +121,80 @@ function playerJoin(data) {
 function startGame(data) {
 	console.log('success', data);
 	var socketThis = this;
-	socketThis.emit('sendQuestions', { question: firstQuestion, room: data});
+	socketThis.emit('sendQuestions', { question: sendQuestion, room: data});
 }
+
+function nextQuestion (nextQuestionThis, data) {
+	var player1Questions = [];
+	var player2Questions = [];
+	console.log(data.question.id)
+	if (data.player === 'player1') {
+		player1Questions.push({id: nextQuestionThis.id, questionId: data.question.id});
+		// console.log(player1Questions);
+	} else if (data.player === 'player2') {
+		player2Questions.push({id: nextQuestionThis.id, questionId: data.question.id});
+		console.log(player2Questions);
+	}
+	sendQuestion = randomQuestion(questionsArray);
+	for (var i = 0; i < player1Questions.length; i++) {
+		if (sendQuestion.id === player1Questions[i].id) {
+			sendQuestion = randomQuestion(questionsArray);
+		} else {
+			console.log(sendQuestion);
+			models.triviaResponse.findAll({
+				where: {
+					triviaQuestionId: sendQuestion.id
+				}
+			}).then(function (choices) {
+				var questionChoices = [];
+				for (var i = 0; i < choices.length; i++) {
+					questionChoices.push(choices[i].choice);
+					if (choices[i].status) {
+						sendQuestion.answer = choices[i].choice;
+					}
+				}
+				sendQuestion.choices = questionChoices;
+				nextQuestionThis.emit('sendQuestions', { question:sendQuestion, room: data.room});
+				console.log(sendQuestion);
+			})
+		}
+	}
+	
+	
+}
+
+function increaseScore (data) {
+	var passThis = this;
+	if (data.player === 'player1') {
+		models.Room.update({
+			player1Score: data.score
+		}, {
+			where: {
+				room_num: data.room.playerRoom
+			}
+		})
+	} else if (data.player === 'player2') {
+		models.Room.update({
+			player2Score: data.score
+		}, {
+			where: {
+				room_num: data.room.playerRoom
+			}
+		})
+	}
+	nextQuestion(passThis, data);
+	// var nextQuestionData = {
+	// 	question: sendQuestion,
+	// 	room: data.room
+	// };
+}
+
+function moveToNextQuestion(data) {
+	// console.log(data);
+	var passThis = this;
+	nextQuestion(passThis, data);
+}
+
 function removeRoom(data) {
 	numOfPlayers--;
 	console.log('client disconnected', this.id);

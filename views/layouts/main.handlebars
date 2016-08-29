@@ -325,12 +325,14 @@ when choice is selected, text will display whether or not the user got the answe
 			<div class="section">
                   <div class="section-header">
                     <h3 class="section-title">SCORE </h3>
+                    <h3 id="displayScore"></h3>
                   </div>
                   <div class="section-body"> </div>
                   <div class="section-footer"> </div>
 
                   <div class="section-header"> 
                     <h3 class="section-title"> DECADES</h3>
+                    {{!-- should remove this --}}
                   </div>
                 <div class="section-body"> </div>
                 <div class="section-footer"> </div>
@@ -358,6 +360,8 @@ $(document).ready(function() {
 	var mySocketId;
 	var time = 10;
 	var theQuestion ="";
+	var score =0;
+	var lives = 3;
 	var allBoxes = [
 			'#testbuttonA1', '#testbuttonA2', '#testbuttonA3', '#testbuttonA4', '#testbuttonA5', 
 			'#testbuttonB1', '#testbuttonB2', '#testbuttonB3', '#testbuttonB4', '#testbuttonB5',
@@ -384,7 +388,8 @@ $(document).ready(function() {
 	// 	showRooms(data);
 	// })
 	socket.on('waitingForPlayer', function (data) {
-		$('#gameRooms').html('<h2>' + data.message + '</h2>');
+		console.log(data);
+		$('#gameRooms').append('<h2>' + data.message + '</h2>');
 	})
 	socket.on('newGameCreated', function(data) {
 		gameInit(data)
@@ -396,6 +401,7 @@ $(document).ready(function() {
 	socket.on('sendQuestions', function(data) {
 		initQuestions(data);
 	});
+	socket.on('')
 	socket.on('roomDoesNotExist', function (data) {
 		console.log(data)
 		$('#gameRooms').html('<h2>' + data.message + '</h2>');
@@ -403,7 +409,7 @@ $(document).ready(function() {
 	function gameInit(data) {
 		gameId = data.gameId;
 		mySocketId = data.mySocketId;
-		role = 'player 1';
+		role = 'player1';
 		numOfPlayers = 1;
 		console.log(gameId, role)
 	}
@@ -444,7 +450,7 @@ $(document).ready(function() {
 	$('#testroom').on('click', function(e) {
 		e.preventDefault();
 		var room = $('#room').val();
-		role = 'player 2'
+		role = 'player2'
 		numOfPlayers = 2;
 		console.log(role)
 		updateNumOfPlayers(room);
@@ -461,7 +467,8 @@ $(document).ready(function() {
 		alert('test')
 	})
 	function initQuestions(data) {
-		console.log(data.question, data.question.answer)
+		$('#choices').html('');
+		console.log(data)
 		theQuestion = data.question;
 		// console.log(theQuestion);
 		// send questions to the boxes
@@ -477,11 +484,13 @@ $(document).ready(function() {
 			var buttonChoice = '<button type="button" name="choice" class="submitChoice btn btn-default" value="' + data.question.choices[i] + '" data-dismiss="modal">' + data.question.choices[i] + '</button>';
 			$('#choices').append(buttonChoice);
 		}
-		$('.trivBox').on('click', function (data) {
-			showQuestion(data);
+		$('.trivBox').on('click', function () {
+			var trivBoxThis = this;
+			showQuestion(data, trivBoxThis);
 		});
-		$('#choices').on('click', 'button', function (data) {
-			checkAnswer(data);
+		$('#choices').on('click', 'button', function () {
+			var choiceThis = this;
+			checkAnswer(data, choiceThis, clicked_X, clicked_Y);
 		});
 	}
 	function runTimer(data){
@@ -539,17 +548,19 @@ var bombs = [];
 			[1,1]
 		];
 
+var clicked_X;
+var clicked_Y;
 
-function showQuestion(data) {
-	var clicked_X = $(this).data('x');
-	var clicked_Y = $(this).data('y');
+function showQuestion(data, trivBoxThis) {
+	clicked_X = $(trivBoxThis).data('x');
+	clicked_Y = $(trivBoxThis).data('y');
 	var clickedBomb = false;
 	var surroundingBombs = 0;
 
 	for (var i = 0; i < bombs.length; i++) {
 		if (clicked_X === $(bombs[i]).data('x') && clicked_Y === $(bombs[i]).data('y')) {
 			clickedBomb = true;
-			$(this).empty().removeClass().append('<img src="assets/images/skull.gif">');
+			$(trivBoxThis).empty().removeClass().append('<img src="assets/images/skull.gif">');
 			laugh.play();
 			bombBox();
 		}
@@ -572,31 +583,37 @@ function showQuestion(data) {
 			}
 		}
 		// bombCheck();
-		console.log(this)
-		$(this).empty().removeClass().append(surroundingBombs); // need to find better way instead of "empty().append()"
+		console.log(trivBoxThis)
+		$(trivBoxThis).empty().removeClass().append(surroundingBombs); // need to find better way instead of "empty().append()"
 	}
 };
 
-	function triviaBox(data) {
+	function triviaBox() {
 		$("#questionModal").modal('show');
 	}
-	function checkAnswer() {
-		var userAnswer = $(this).val();
+
+	function checkAnswer(data, choiceThis, x, y) {
+		var userAnswer = $(choiceThis).val();
 		console.log(userAnswer);
+		data.player = role;
+		data.x = x;
+		data.y = y;
 		if (userAnswer === data.question.answer) {
-			console.log('correct!')
+			score++;
+			console.log('correct!');
+			data.score = score;
+			socket.emit('answeredCorrectly', data);
 		} else {
-			console.log('wrong')
+			console.log('wrong');
+			lives--;
+			socket.emit('answeredWrong', data)
 		}
 	}
 
 })
+// need to pull score from db and display on score h3
+// set the clicked box to be the bomb box to send over to opponent
 </script>
 </body>
 </html>
 
-{{!-- need to pull everything from db and then use handlebars to add to 25 modals
-also need to create the divs after making call from sql and then add the modal content inside
-will be very annoying
-pull from doug
- --}}
