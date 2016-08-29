@@ -112,22 +112,44 @@ when choice is selected, text will display whether or not the user got the answe
 
          <center>
           <p>
-            <button type="button" class="btn btn-primary btn-lg"><a href="#game_window">Play Now</a></button>
+            <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#modal-3">Play Now</button>
+           <div class="modal fade" id="modal-3">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            {{!-- <h3 class="modal-title">
+                            <button type="button" id="test" class="btn btn-default">Create Room</button>
+                            <button type="button" id="testroom" class="btn btn-default">Join Room</button></h3> --}}
+                            <div id="add">
+								<form id="newScore">
+					    			{{!-- <input type="text" id="name" placeholder="Your name"><br>
+					    			<input type="text" id="score" placeholder="Your score"><br><br><br> --}}
+					      			<button id="test" type="submit"><span class="glyphicon glyphicon-pushpin"></span> Create Room</button>
+					          	</form>
+					          	<form id="roomtest">
+					          		<input type="text" id="room">
+					          		<button id="testroom" type="submit"><span class="glyphicon glyphicon-pushpin"></span> Join Room</button>
+					          	</form>
+							</div> 
+
+                        </div>
+                        <div class="modal-body">
+                           <h3>Available rooms</h3>
+
+                        </div>
+                        <div class="modal-footer">
+                            <a href="" class="btn btn-default" data-dismiss="modal">Close</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div id="bodyarea">
 
 			{{{ body }}}
 			</div>
-            <div id="add">
-			<form id="newScore">
-    			<input type="text" id="name" placeholder="Your name"><br>
-    			<input type="text" id="score" placeholder="Your score"><br><br><br>
-      			<button id="test" type="submit"><span class="glyphicon glyphicon-pushpin"></span> Create Room</button>
-          	</form>
-          	<form id="roomtest">
-          		<input type="text" id="room">
-          		<button id="testroom" type="submit"><span class="glyphicon glyphicon-pushpin"></span> Join Room</button>
-          	</form>
-		</div>
+            
+
 		<div id="gameRooms">
 			
 
@@ -161,197 +183,147 @@ when choice is selected, text will display whether or not the user got the answe
 
     <div id="game_window">
         <div class="game_screen">
-			<div class="row">
-				<div class="col-md-1">
-				</div>
-				<div class="col-md-2">
-					<div id="testbuttonA1" data-box="#testbuttonA1" data-x="0" data-y="0" class="trivBox hvr-buzz">
-						A1
-					</div>
-				</div>
-				<div class="col-md-2">
-					<div id="testbuttonA2" data-box="#testbuttonA2" data-x="1" data-y="0" class="trivBox hvr-wobble-skew">
-						A2
-					</div>
-				</div>
-				<div class="col-md-2">
-					<div id="testbuttonA3" data-box="#testbuttonA3" data-x="2" data-y="0" class="trivBox hvr-pulse-grow">
-						A3
-					</div>
-				</div>
-				<div class="col-md-2">
-					<div id="testbuttonA4" data-box="#testbuttonA4" data-x="3" data-y="0" class="trivBox hvr-pop">
-						A4
-					</div>
-				</div>
-				<div class="col-md-2">
-					<div id="testbuttonA5" data-box="#testbuttonA5" data-x="4" data-y="0" class="trivBox hvr-push">
-						A5
-					</div>
-				</div>
-			</div>
-
-			<div class="space">
-			</div>
-
-			<div class="row">
-				<div class="col-md-1">
-				</div>
-				<div class="col-md-2">
-					<div id="testbuttonB1" data-box="#testbuttonB1" data-x="0" data-y="1" class="trivBox hvr-buzz">
-						B1
-					</div>
-				</div>
-				<div class="col-md-2">
-					<div id="testbuttonB2" data-box="#testbuttonB2" data-x="1" data-y="1" class="trivBox hvr-wobble-skew">
-						B2
-					</div>
-				</div>
-				<div class="col-md-2">
-					<div id="testbuttonB3" data-box="#testbuttonB3" data-x="2" data-y="1" class="trivBox hvr-pulse-grow">
-						B3
-					</div>
-				</div>
-				<div class="col-md-2">
-					<div id="testbuttonB4" data-box="#testbuttonB4" data-x="3" data-y="1" class="trivBox hvr-pop">
-						B4
-					</div>
-				</div>
-				<div class="col-md-2">
-					<div id="testbuttonB5" data-box="#testbuttonB5" data-x="4" data-y="1" class="trivBox hvr-push">
-						B5
-					</div>
-				</div>
-			</div>
-
-			<div class="space">
-			</div>
-
-			<div class="row">
-				<div class="col-md-1">
-				</div>
-				<div class="col-md-2">
-					<div id="testbuttonC1" data-box="#testbuttonC1" data-x="0" data-y="2" class="trivBox hvr-buzz">
-						C1
-					</div>
-				</div>
-				<div class="col-md-2">
-					<div id="testbuttonC2" data-box="#testbuttonC2" data-x="1" data-y="2" class="trivBox hvr-wobble-skew">
-						C2
-					</div>
-				</div>
-				<div class="col-md-2">
-					<div id="testbuttonC3" data-box="#testbuttonC3" data-x="2" data-y="2" class="trivBox hvr-pulse-grow">
-						C3
-					</div>
-				</div>
-				<div class="col-md-2">
-					<div id="testbuttonC4" data-box="#testbuttonC4" data-x="3" data-y="2" class="trivBox hvr-pop">
-						C4
-					</div>
-				</div>
-				<div class="col-md-2">
-					<div id="testbuttonC5" data-box="#testbuttonC5" data-x="4" data-y="2" class="trivBox hvr-push">
-						C5
-					</div>
-				</div>
-			</div>
-
-			<div class="space">
-			</div>
-
-			<div class="row">
-				<div class="col-md-1">
-				</div>
-				<div class="col-md-2">
-					<div id="testbuttonD1" data-box="#testbuttonD1" data-x="0" data-y="3" class="trivBox hvr-buzz">
-						D1
-					</div>
-				</div>
-				<div class="col-md-2">
-					<div id="testbuttonD2" data-box="#testbuttonD2" data-x="1" data-y="3" class="trivBox hvr-wobble-skew">
-						D2
-					</div>
-				</div>
-				<div class="col-md-2">
-					<div id="testbuttonD3" data-box="#testbuttonD3" data-x="2" data-y="3" class="trivBox hvr-pulse-grow">
-						D3
-					</div>
-				</div>
-				<div class="col-md-2">
-					<div id="testbuttonD4" data-box="#testbuttonD4" data-x="3" data-y="3" class="trivBox hvr-pop">
-						D4
-					</div>
-				</div>
-				<div class="col-md-2">
-					<div id="testbuttonD5" data-box="#testbuttonD5" data-x="4" data-y="3" class="trivBox hvr-push">
-						D5
-					</div>
-				</div>
-			</div>
-
-			<div class="space">
-			</div>
-
-			<div class="row">
-				<div class="col-md-1">
-				</div>
-				<div class="col-md-2">
-					<div id="testbuttonE1" data-box="#testbuttonE1" data-x="0" data-y="4" class="trivBox hvr-buzz">
-						E1
-					</div>
-				</div>
-				<div class="col-md-2">
-					<div id="testbuttonE2" data-box="#testbuttonE2" data-x="1" data-y="4" class="trivBox hvr-wobble-skew">
-						E2
-					</div>
-				</div>
-				<div class="col-md-2">
-					<div id="testbuttonE3" data-box="#testbuttonE3" data-x="2" data-y="4" class="trivBox hvr-pulse-grow">
-						E3
-					</div>
-				</div>
-				<div class="col-md-2">
-					<div id="testbuttonE4" data-box="#testbuttonE4" data-x="3" data-y="4" class="trivBox hvr-pop">
-						E4
-					</div>
-				</div>
-				<div class="col-md-2">
-					<div id="testbuttonE5" data-box="#testbuttonE5" data-x="4" data-y="4" class="trivBox hvr-push">
-						E5
-					</div>
-				</div>
-			</div>
-			<div class="section">
-                  <div class="section-header">
-                    <h3 class="section-title">SCORE </h3>
-                    <h3 id="displayScore"></h3>
-                  </div>
-                  <div class="section-body"> </div>
-                  <div class="section-footer"> </div>
-
-                  <div class="section-header"> 
-                    <h3 class="section-title"> DECADES</h3>
-                    {{!-- should remove this --}}
-                  </div>
-                <div class="section-body"> </div>
-                <div class="section-footer"> </div>
-
-                <div class="section-header">
-                  <h3 class="section-title"> BOMBS REMAINING </h3>
+            <div class="row">
+                <div class="col-md-1">
                 </div>
-                <div class="section-header">
-                  <h3 class="section-title"> SHARE </h3>
+                <div class="col-md-2">
+                    <div id="testbuttonA1" data-box="#testbuttonA1" data-x="0" data-y="0" class="trivBox hvr-bob">
+                    </div>
                 </div>
-
-                <div class="section-body"></div>
-                <div class="section-body"></div>
-
-                <div class="section-footer"></div>
-                <div class="section-footer"></div>
+                <div class="col-md-2">
+                    <div id="testbuttonA2" data-box="#testbuttonA2" data-x="1" data-y="0" class="trivBox hvr-bob">
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div id="testbuttonA3" data-box="#testbuttonA3" data-x="2" data-y="0" class="trivBox hvr-bob">
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div id="testbuttonA4" data-box="#testbuttonA4" data-x="3" data-y="0" class="trivBox hvr-bob">
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div id="testbuttonA5" data-box="#testbuttonA5" data-x="4" data-y="0" class="trivBox hvr-bob">
+                    </div>
+                </div>
             </div>
-        </div>
-    </div>
+
+            <div class="space">
+            </div>
+
+            <div class="row">
+                <div class="col-md-1">
+                </div>
+                <div class="col-md-2">
+                    <div id="testbuttonB1" data-box="#testbuttonB1" data-x="0" data-y="1" class="trivBox hvr-bob">
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div id="testbuttonB2" data-box="#testbuttonB2" data-x="1" data-y="1" class="trivBox hvr-bob">
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div id="testbuttonB3" data-box="#testbuttonB3" data-x="2" data-y="1" class="trivBox hvr-bob">
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div id="testbuttonB4" data-box="#testbuttonB4" data-x="3" data-y="1" class="trivBox hvr-bob">
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div id="testbuttonB5" data-box="#testbuttonB5" data-x="4" data-y="1" class="trivBox hvr-bob">
+                    </div>
+                </div>
+            </div>
+
+            <div class="space">
+            </div>
+
+            <div class="row">
+                <div class="col-md-1">
+                </div>
+                <div class="col-md-2">
+                    <div id="testbuttonC1" data-box="#testbuttonC1" data-x="0" data-y="2" class="trivBox hvr-bob">
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div id="testbuttonC2" data-box="#testbuttonC2" data-x="1" data-y="2" class="trivBox hvr-bob">
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div id="testbuttonC3" data-box="#testbuttonC3" data-x="2" data-y="2" class="trivBox hvr-bob">
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div id="testbuttonC4" data-box="#testbuttonC4" data-x="3" data-y="2" class="trivBox hvr-bob">
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div id="testbuttonC5" data-box="#testbuttonC5" data-x="4" data-y="2" class="trivBox hvr-bob">
+                    </div>
+                </div>
+            </div>
+
+            <div class="space">
+            </div>
+
+            <div class="row">
+                <div class="col-md-1">
+                </div>
+                <div class="col-md-2">
+                    <div id="testbuttonD1" data-box="#testbuttonD1" data-x="0" data-y="3" class="trivBox hvr-bob">
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div id="testbuttonD2" data-box="#testbuttonD2" data-x="1" data-y="3" class="trivBox hvr-bob">
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div id="testbuttonD3" data-box="#testbuttonD3" data-x="2" data-y="3" class="trivBox hvr-bob">
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div id="testbuttonD4" data-box="#testbuttonD4" data-x="3" data-y="3" class="trivBox hvr-bob">
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div id="testbuttonD5" data-box="#testbuttonD5" data-x="4" data-y="3" class="trivBox hvr-bob">
+                    </div>
+                </div>
+            </div>
+
+            <div class="space">
+            </div>
+
+            <div class="section">
+            	<div class="section-header">
+            		<h3 class="section-title">SCORE </h3>
+            	</div>
+            	<div class="section-body"> </div>
+            	<div class="section-footer"> </div>
+
+				<div class="section-header"> 
+					<h3 class="section-title"> DECADES</h3>
+				</div>
+				<div class="section-body"> </div>
+                <div class="section-footer"> </div>
+				
+				<div class="section-header">
+					<h3 class="section-title"> BOMBS REMAINING </h3>
+				</div>
+				<div class="section-header">
+					<h3 class="section-title"> SHARE </h3>
+				</div>
+
+				<div class="section-body"></div>
+				<div class="section-body"></div>
+
+				<div class="section-footer"></div>
+				<div class="section-footer"></div>
+			</div>
+		</div>
+	</div>
+
 <script src="../assets/javascript/game.js"></script>
 <script src="../socket.io/socket.io.js"></script>
 <script>
@@ -366,8 +338,7 @@ $(document).ready(function() {
 			'#testbuttonA1', '#testbuttonA2', '#testbuttonA3', '#testbuttonA4', '#testbuttonA5', 
 			'#testbuttonB1', '#testbuttonB2', '#testbuttonB3', '#testbuttonB4', '#testbuttonB5',
 			'#testbuttonC1', '#testbuttonC2', '#testbuttonC3', '#testbuttonC4', '#testbuttonC5',
-			'#testbuttonD1', '#testbuttonD2', '#testbuttonD3', '#testbuttonD4', '#testbuttonD5',
-			'#testbuttonE1', '#testbuttonE2', '#testbuttonE3', '#testbuttonE4', '#testbuttonE5'
+			'#testbuttonD1', '#testbuttonD2', '#testbuttonD3', '#testbuttonD4', '#testbuttonD5'
 		];
 	$('a[href*=#]').click(function() {
         if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'')
@@ -573,7 +544,7 @@ function showQuestion(data, trivBoxThis) {
 			// var surroundingBox_X = ;
 			// var surroundingBox_Y = ;
 			if ((clicked_X + surroundingBoxes[i][0]) >= 0 && (clicked_X + surroundingBoxes[i][0]) <= 4 && 
-				(clicked_Y + surroundingBoxes[i][1]) >= 0 && (clicked_Y + surroundingBoxes[i][1]) <= 4) {
+				(clicked_Y + surroundingBoxes[i][1]) >= 0 && (clicked_Y + surroundingBoxes[i][1]) <= 3) {
 				for (var j = 0; j < bombs.length; j++) {
 					if ((clicked_X + surroundingBoxes[i][0]) === $(bombs[j]).data('x') && 
 						(clicked_Y + surroundingBoxes[i][1]) === $(bombs[j]).data('y')) {
@@ -617,4 +588,3 @@ function showQuestion(data, trivBoxThis) {
 </script>
 </body>
 </html>
-
