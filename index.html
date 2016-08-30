@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE-edge">
+    <title>BrainFart</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width-device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+	<script src="https://code.jquery.com/jquery.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+	<link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="public/assets/css/style.css">
+    <link href="public/assets/css/hover.css" rel="stylesheet" media="all">
+</head>
+<!-- paralax scroll idea
+first user sees home page with with start button and small nav bar on the top left for leader board and "how to play" tab.
+-when clicked on Leaderboard, a window appears displaying the top 10 players scores and on the bottom a "back button". which when clicked on makes the window disappear. 
+--when "how to play" button is clicked, a modal appears with rules for the user to read.
+
+When the start button is clicked on the homePage, by using parallax scroll the users screen will slide down a panel.
+--if possible as panel is sliding add dramatic music and lighting changes in background.
+
+the game panel
+*whether or not to leave nav bar with screen.
+the user will see 10 boxes to choose from.
+*if possible----try to have barrels do some sort of lively animation css effect.
+when user clicks on box, noise is made and trivia window appears
+
+the trivia window
+user is displayed multiple choice question, with the question wrapped in a border,the timer starting at 30 seconds on the top right corner on the outside of the question border and the 4 (A,B,C,D) buttons underneath and outside of the border. 
+*Should user be able to click on choice and then hit submit? or once the choice is clicked on, it is charged as final 
+
+when choice is selected, text will display whether or not the user got the answer correct. 
+* try and make bomb boxes make small explosion sound-->
+<body>
+    <div class="homepage">
+        <button type="button" class="btn btn-primary-topNav hvr-float-shadow" data-toggle="modal" data-target="#modal-1">How to Play</button>
+        <div class="modal fade" id="modal-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h3 class="modal-title">This is the heading</h3>
+                    </div>
+                    <div class="modal-body">
+                        User starts with 3 lives
+                        Game window displays 25 boxes 
+                        All but 5 boxes will have trivia, the rest will have "bombs"
+                        When the user chooses a bomb:
+                            - questions around the bomb get more difficult
+                            - no life lost
+                            - ...what happens to the rest of the boxes?
+                            - ...what happens to the bomb box that was just selected?
+                        When the user chooses a box with a trivia question, the game window displays a multiple choice question with a timer set to 20 seconds:
+                            - if the user gets the question right:
+                                - ...what is the reward? (coin, points, etc..)
+                                - ...should a bomb be revealed?
+                                - ...will other boxes be affected? (any other boxes become easier?)
+                                - ...what happens to the box that was just selected?
+                            - if the user gets the question wrong or if time runs out:
+                                - ...what will be a fair punishment? (lose life, add difficult trivia box, remove easiest trivia box, etc..?)
+
+                    </div>
+                    <div class="modal-footer">
+                        <a href="" class="btn btn-default" data-dismiss="modal">Close</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <button type="button" class="btn btn-primary-topNav hvr-float-shadow" data-toggle="modal" data-target="#modal-2">LeaderBoard</button>
+        <div class="modal fade" id="modal-2">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h3 class="modal-title">High Scores</h3>
+                    </div>
+                    <div class="modal-body">
+                       player 1---------------10,329
+                       <br>
+                       player 2---------------10,239
+                       <br>
+                       player 3---------------8093
+                       <br>
+                       player 4---------------7439
+                       <br>
+                       player 5---------------7432
+                       <br>
+                       player 6---------------6539
+                       <br>
+                       player 7---------------6492
+                       <br>
+                       player 8---------------6432
+                       <br>
+                       player 9---------------5039
+                       <br>
+                       player 10--------------4995
+
+                    </div>
+                    <div class="modal-footer">
+                        <a href="" class="btn btn-default" data-dismiss="modal">Close</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+                
+        <center><img src="public/assets/images/project_logo2.png" alt="what image shows" height="500" width="500">
+        </center>
+
+         <center>
+          <p>
+            <button type="button" class="btn btn-primary btn-lg"><a href="#game_window">Play Now</a></button>
+          </p>
+        </center>
+    </div>
+    <!-- Test Div -->
+    <div id="test" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+         <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;  </button>
+                <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+              </div>
+              <div class="modal-body">
+                ...
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                
+              </div>
+            </div>
+          </div>
+    </div>
+
+    <div id="game_window">
+        <div class="game_screen">
+            <div class="row">
+                <div class="col-md-1">
+                </div>
+                <div class="col-md-2">
+                    <div id="testbuttonA1" data-box="#testbuttonA1" class="trivBox hvr-bob">
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div id="testbuttonA2" data-box="#testbuttonA2" class="trivBox hvr-bob">
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div id="testbuttonA3" data-box="#testbuttonA3" class="trivBox hvr-bob">
+                     
+                        
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div id="testbuttonA4" data-box="#testbuttonA4" class="trivBox hvr-bob">
+                        
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div id="testbuttonA5" data-box="#testbuttonA5" class="trivBox hvr-bob">
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="space">
+            </div>
+            <div class="row">
+                <div class="col-md-1">
+                </div>
+                <div class="col-md-2">
+                    <div id="testbuttonB1" data-box="#testbuttonB1" class="trivBox hvr-bob">
+                       
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div id="testbuttonB2" data-box="#testbuttonB2" class="trivBox hvr-bob">
+                        
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div id="testbuttonB3" data-box="#testbuttonB3" class="trivBox hvr-bob">
+                        
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div id="testbuttonB4" data-box="#testbuttonB4" class="trivBox hvr-bob">
+                        
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div id="testbuttonB5" data-box="#testbuttonB5" class="trivBox hvr-bob">
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="space">
+            </div>
+            <div class="row">
+                <div class="col-md-1">
+                </div>
+                <div class="col-md-2">
+                    <div id="testbuttonC1" data-box="#testbuttonC1" class="trivBox hvr-bob">
+                        
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div id="testbuttonC2" data-box="#testbuttonC2" class="trivBox hvr-bob">
+                        
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div id="testbuttonC3" data-box="#testbuttonC3" class="trivBox hvr-bob">
+                        
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div id="testbuttonC4" data-box="#testbuttonC4" class="trivBox hvr-bob">
+                        
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div id="testbuttonC5" data-box="#testbuttonC5" class="trivBox hvr-bob">
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="space">
+            </div>
+            <div class="row">
+                <div class="col-md-1">
+                </div>
+                <div class="col-md-2">
+                    <div id="testbuttonD1" data-box="#testbuttonD1" class="trivBox hvr-bob">
+                        
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div id="testbuttonD2" data-box="#testbuttonD2" class="trivBox hvr-bob">
+                        
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div id="testbuttonD3" data-box="#testbuttonD3" class="trivBox hvr-bob">
+                        
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div id="testbuttonD4" data-box="#testbuttonD4" class="trivBox hvr-bob">
+                        
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div id="testbuttonD5" data-y="4" data-x="1" data-box="#testbuttonD5" class="trivBox hvr-bob">
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="space">
+            </div>
+            <div class="section">
+                  <div class="section-header">
+                    <h3 class="section-title">SCORE </h3>
+                  </div>
+                  <div class="section-body"> </div>
+                  <div class="section-footer"> </div>
+
+                  <div class="section-header"> 
+                    <h3 class="section-title"> DECADES</h3>
+                  </div>
+                <div class="section-body"> </div>
+                <div class="section-footer"> </div>
+
+                <div class="section-header">
+                  <h3 class="section-title"> BOMBS REMAINING </h3>
+                </div>
+                <div class="section-header">
+                  <h3 class="section-title"> SHARE </h3>
+                </div>
+
+                <div class="section-body"></div>
+                <div class="section-body"></div>
+
+                <div class="section-footer"></div>
+                <div class="section-footer"></div>
+            </div>
+        </div>
+    </deiv>
+        
+            
+                
+
+    
+                
+        
+
+                
+     
+        
+<!-- UPDATE 8/21/16 7:27PM
+    -random section break between homepage and game window
+    -scroll effect does work now but need to come up with way that I can freeze the player from scrolling down manually
+    -also need to think of way to make sure the website knows when the user hits play that it will stary the game as the window scrolls? might not be hard probably over thinking it. 
+    NEXT TO DO
+    -come up with modals for leaderboard and how to play.
+    -create game window
+
+-->
+</body>
+    <script src="js/jquery-1.10.2.min.js"></script>
+    <script>
+    //This function makes modals appear in trivia boxes    
+    $(".trivBox").on("click", function(){
+        $("#test").modal('show');
+
+    });
+
+            //AUDIO PART
+            
+
+
+            //This is for the parralax scroll effect
+$(document).ready(function(){
+    $('a[href*=#]').click(function() {
+        if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'')
+            && location.hostname == this.hostname) {
+                var $target = $(this.hash);
+                $target = $target.length && $target || $('[name=' + this.hash.slice(1) +']');
+            if ($target.length) {
+                var targetOffset = $target.offset().top;
+                $('html,body').animate({scrollTop: targetOffset}, 1000);
+                return false;
+            }
+        }
+    });
+});
+    </script>
+
+</html>

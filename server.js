@@ -26,11 +26,15 @@ app.use(bodyParser.json({ type: 'application/vnd.api+json' }));
 
 app.use(express.static(__dirname + '/public'));
 
+
 gameRoute(app);
 
 io.on('connection', function (socket) {
-	socketController(socket)	
+	socketController(io, socket)	
 });
+
+app.use('/', gameRoute);
+
 
 server.listen(PORT, function() {
 	console.log('connected on port ' + PORT);

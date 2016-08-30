@@ -114,7 +114,7 @@ when choice is selected, text will display whether or not the user got the answe
 
          <center>
           <p>
-            <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#modal-3" id="showTheRooms">Play Now</button>
+            <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#modal-3">Play Now</button>
            <div class="modal fade" id="modal-3">
                 <div class="modal-dialog">
                     <div class="modal-content">
@@ -127,7 +127,7 @@ when choice is selected, text will display whether or not the user got the answe
 								<form id="newScore">
 					    			{{!-- <input type="text" id="name" placeholder="Your name"><br>
 					    			<input type="text" id="score" placeholder="Your score"><br><br><br> --}}
-					      			<button id="test" type="submit">Create Room</button>
+					      			<button id="test" type="submit"><span class="glyphicon glyphicon-pushpin"></span> Create Room</button>
 					          	</form>
 					          	
 							</div> 
@@ -135,12 +135,11 @@ when choice is selected, text will display whether or not the user got the answe
                         </div>
                         <div class="modal-body">
                            <h3>Available rooms</h3>
-{{!--                            <form id="roomtest">
-				          		<input type="text" id="room">
-				          		<button id="testroom" type="submit">Join Room</button>
-				          	</form> --}}
-				          	<div id="displayRoom">
-				          	</div>
+                           <form id="roomtest">
+					          		<input type="text" id="room">
+					          		<button id="testroom" type="submit"><span class="glyphicon glyphicon-pushpin"></span> Join Room</button>
+					          	</form>
+
                         </div>
                         <div class="modal-footer">
                             <a href="" class="btn btn-default" data-dismiss="modal">Close</a>
@@ -149,12 +148,15 @@ when choice is selected, text will display whether or not the user got the answe
                 </div>
             </div>
             <div id="bodyarea">
-            	<div id="welcome">
-            	</div>
 
 			{{{ body }}}
 			</div>
             
+
+		<div id="gameRooms">
+			
+
+		</div>
           </p>
         </center>
     </div>
@@ -181,29 +183,8 @@ when choice is selected, text will display whether or not the user got the answe
             </div>
           </div>
     </div>
-    <div id="scoreModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-         <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h4 class="modal-title" id="myModalLabel">Final</h4>
-              </div>
-              <div class="modal-body" id="winner">
-                ...
-              </div>
-              <div>
-              		<div id="score">
 
-					</div>
-              </div>
-              <div class="modal-footer">
-                {{!-- <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> --}}
-                {{!-- dont need this, we want users to answer the question  --}}
-              </div>
-            </div>
-          </div>
-    </div>
     <div id="game_window">
-
         <div class="game_screen">
 	        <div class="col-md-9">
 	            <div class="row">
@@ -323,7 +304,7 @@ when choice is selected, text will display whether or not the user got the answe
                 <div class="section">
                       <div class="section-header">
                         <h3 class="section-title-score">SCORE </h3>
-                        <h2 class="score_number"></h2>
+                        <h2 class="score_number">0</h2>
                       </div>
                       <div class="section-body"> </div>
                       <div class="section-footer"> </div>
@@ -340,7 +321,7 @@ when choice is selected, text will display whether or not the user got the answe
                     </div>
                     <div class="section-header">
                       <h3 class="section-title-playerLives"> LIVES </h3>
-                      <h2 id="game_lives"></h2>
+                      <h2 id="game_lives">3</h2>
                     </div>
 
                     <div class="section-body"></div>
@@ -352,53 +333,296 @@ when choice is selected, text will display whether or not the user got the answe
             </div>    
 
 		</div>
-		<div id="gameRooms">
-			
-
-		</div>
 	</div>
 
-<script src="assets/javascript/game.js"></script>
-<script src="socket.io/socket.io.js"></script>
+<script src="../assets/javascript/game.js"></script>
+<script src="../socket.io/socket.io.js"></script>
 <script>
+$(document).ready(function() {
+   var role;
+   var mySocketId;
+   var time = 10;
+   var theQuestion ="";
+   var score =0;
+   var lives = 3;
+   var laugh = new Audio('assets/sounds/skullkid.mp3');
+   var allBoxes = [
+         '#testbuttonA1', '#testbuttonA2', '#testbuttonA3', '#testbuttonA4', '#testbuttonA5', 
+         '#testbuttonB1', '#testbuttonB2', '#testbuttonB3', '#testbuttonB4', '#testbuttonB5',
+         '#testbuttonC1', '#testbuttonC2', '#testbuttonC3', '#testbuttonC4', '#testbuttonC5',
+         '#testbuttonD1', '#testbuttonD2', '#testbuttonD3', '#testbuttonD4', '#testbuttonD5'
+      ];
+   $('a[href*=#]').click(function() {
+        if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'')
+            && location.hostname == this.hostname) {
+                var $target = $(this.hash);
+                $target = $target.length && $target || $('[name=' + this.hash.slice(1) +']');
+            if ($target.length) {
+                var targetOffset = $target.offset().top;
+                $('html,body').animate({scrollTop: targetOffset} , 1000);
+                return false;
+            }
+        }
+    });
+   $('#game').hide();
+   var socket = io.connect('http://localhost:3000');
+   // socket.emit('displayRooms', {data: 'test'})
+   // socket.on('showAllRooms', function (data) {
+   //    showRooms(data);
+   // })
+   socket.on('waitingForPlayer', function (data) {
+      console.log(data);
+      $('#gameRooms').append('<h2>' + data.message + '</h2>');
+   })
+   socket.on('newGameCreated', function(data) {
+      gameInit(data)
+   });
+   socket.on('alertPlayers', function(data) {
+      // alert(data.message)
+      onStartCountdownTimer(data);
+   });
+   socket.on('sendQuestions', function(data) {
+      initQuestions(data);
+   });
+   socket.on('')
+   socket.on('roomDoesNotExist', function (data) {
+      console.log(data)
+      $('#gameRooms').html('<h2>' + data.message + '</h2>');
+   });
+   function gameInit(data) {
+      gameId = data.gameId;
+      mySocketId = data.mySocketId;
+      role = 'player1';
+      numOfPlayers = 1;
+      console.log(gameId, role)
+   }
+   // function showRooms (data) {
+   //    console.log(data.allRooms);
+   //    for (var i = 0; i < data; i++) {
+   //       console.log(data)
+   //       // $('#gameRooms').append(data[i]);
+   //    }
+      
+   // }
+
+   // socket.on('newGameCreated', function (data) {
+   //    console.log(data)
+   // })
+   // socket.on('score', function (data) {
+   //    if ($('.test').children().length === 10) {
+   //       $('.test').html('');
+   //    }
+   //    $('.test').append('<div>' + data.name + '</div><br>')
+   // })
+   $('#test').on('click', function(e) {
+      e.preventDefault()
+      var name = $('#name').val();
+      var addScore = {
+         name: $('#name').val(),
+         score: parseInt($('#score').val())
+      }
+      console.log(addScore);
+      socket.emit('createRoom', addScore);
+
+      // $.post('/game/score', addScore).done(function (response) {
+         
+      //    console.log(response);
+
+      // })
+   })
+   $('#testroom').on('click', function(e) {
+      e.preventDefault();
+      var room = $('#room').val();
+      role = 'player2'
+      numOfPlayers = 2;
+      console.log(role)
+      updateNumOfPlayers(room);
+      $('#room').val('');
+   })
+
+   function updateNumOfPlayers (room) {
+      if (numOfPlayers === 2) {
+         socket.emit('player2Connected', {playerRoom: room});
+         $('#testroom').hide();
+      }
+   }
+   $('.question').on('click', function () {
+      alert('test')
+   })
+   function initQuestions(data) {
+      $('#choices').html('');
+      console.log(data)
+      theQuestion = data.question;
+      // console.log(theQuestion);
+      // send questions to the boxes
+      $('#questionDisplay').text(theQuestion.question);
+      for (var i = 0; i < data.question.choices.length; i++) {
+         // var buttonChoice = $('<button>', {
+         //    type: 'button',
+         //    name: 'choice',
+         //    class: 'submitChoice btn btn-default',
+         //    value: data.question.choices[i]
+         // });
+         // buttonChoice.text(data.question.choices[i]);
+         var buttonChoice = '<button type="button" name="choice" class="submitChoice btn btn-default" value="' + data.question.choices[i] + '" data-dismiss="modal">' + data.question.choices[i] + '</button>';
+         $('#choices').append(buttonChoice);
+      }
+      $('.trivBox').on('click', function () {
+         var trivBoxThis = this;
+         showQuestion(data, trivBoxThis);
+      });
+      $('#choices').on('click', 'button', function () {
+         var choiceThis = this;
+         checkAnswer(data, choiceThis, clicked_X, clicked_Y);
+      });
+            //doug added this timer
+             function countdown( elementName, minutes, seconds )
+              {
+                  var element, endTime, hours, mins, msLeft, time;
+                  function twoDigits( n )
+                  {
+                      return (n <= 9 ? "0" + n : n);
+                  }
+
+                  function updateTimer()
+                  {
+                      msLeft = endTime - (+new Date);
+                      if ( msLeft < 1000 ) {
+                          element.innerHTML = "Times Up!";
+                      } else {
+                          time = new Date( msLeft );
+                          hours = time.getUTCHours();
+                          mins = time.getUTCMinutes();
+                          element.innerHTML = (hours ? hours + ':' + twoDigits( mins ) : mins) + ':' + twoDigits( time.getUTCSeconds() );
+                          setTimeout( updateTimer, time.getUTCMilliseconds() + 500 );
+                      }
+                  }
+                  element = document.getElementById( elementName );
+                  endTime = (+new Date) + 1000 * (60*minutes + seconds) + 500;
+                  updateTimer();
+              }
+
+              countdown( "countdown", 0,10);
+              countdown( "countdown2", 0, 30 );
+   }
+   function runTimer(data){
+      timer = setInterval(function () {
+         decreaseTime(data);
+      }, 1000);
+    };
+    function decreaseTime(data){
+      time--;
+      $('#gameRooms').html('<h2>Get Ready! Time to begin: ' + time + '</h2>'); 
+      if (time === 0) {
+         clearInterval(timer);
+         $('#gameRooms').html('');
+         socket.emit('countdownFinished', data)
+      }
+    };
+
+   function onStartCountdownTimer (data) {
+      console.log(data)
+      runTimer(data);
+   }
 
 
+var bombs = [];
+
+      // Fisher-Yates Shuffle Algorithm:
+      Array.prototype.shuffle = function() {
+         var i = this.length, j, temp;
+         while(--i > 0) {
+            j = Math.floor(Math.random() * (i+1));
+            temp = this[j];
+            this[j] = this[i];
+            this[i] = temp;
+         }
+         return this;
+      }
+      var shuffledBoxes = allBoxes.shuffle();
+
+
+      // Chooses which boxes will be bombs:
+      for (var i = 0; i < 5; i++) {
+         bombs[i] = shuffledBoxes[i];
+      }
+      console.log("The bombs are: " + bombs);
+
+
+      var surroundingBoxes = [
+         [-1,-1],
+         [0,-1],
+         [1,-1],
+         [-1,0],
+         [1,0],
+         [-1,1],
+         [0,1],
+         [1,1]
+      ];
+
+var clicked_X;
+var clicked_Y;
+
+function showQuestion(data, trivBoxThis) {
+   clicked_X = $(trivBoxThis).data('x');
+   clicked_Y = $(trivBoxThis).data('y');
+   var clickedBomb = false;
+   var surroundingBombs = 0;
+
+   for (var i = 0; i < bombs.length; i++) {
+      if (clicked_X === $(bombs[i]).data('x') && clicked_Y === $(bombs[i]).data('y')) {
+         clickedBomb = true;
+         $(trivBoxThis).empty().removeClass().append('<img src="assets/images/skull.gif">');
+         laugh.play();
+         bombBox();
+      }
+   }
+   if (!clickedBomb) {
+      console.log(theQuestion, 'test');
+      triviaBox();
+
+      for (var i = 0; i < surroundingBoxes.length; i++) {
+         if ((clicked_X + surroundingBoxes[i][0]) >= 0 && (clicked_X + surroundingBoxes[i][0]) <= 4 && 
+            (clicked_Y + surroundingBoxes[i][1]) >= 0 && (clicked_Y + surroundingBoxes[i][1]) <= 3) {
+            for (var j = 0; j < bombs.length; j++) {
+               if ((clicked_X + surroundingBoxes[i][0]) === $(bombs[j]).data('x') && 
+                  (clicked_Y + surroundingBoxes[i][1]) === $(bombs[j]).data('y')) {
+                  surroundingBombs++;
+               }
+            }
+         }
+      }
+      console.log(trivBoxThis)
+      $(trivBoxThis).empty().removeClass().addClass('numberBox').append(surroundingBombs);
+   }
+};
+
+   function triviaBox() {
+      $("#questionModal").modal({backdrop: 'static', keyboard: false});
+   }
+
+   function checkAnswer(data, choiceThis, x, y) {
+      var userAnswer = $(choiceThis).val();
+      console.log(userAnswer);
+      data.player = role;
+      data.x = x;
+      data.y = y;
+      if (userAnswer === data.question.answer) {
+         score++;
+         console.log('correct!');
+         data.score = score;
+         socket.emit('answeredCorrectly', data);
+      } else {
+         console.log('wrong');
+         lives--;
+         socket.emit('answeredWrong', data)
+      }
+      $(choiceThis).off('click');
+   }
+
+})
+// need to pull score from db and display on score h3
+// set the clicked box to be the bomb box to send over to opponent
 </script>
 </body>
 </html>
-
-{{!-- need to pull everything from db and then use handlebars to add to 25 modals
-also need to create the divs after making call from sql and then add the modal content inside
-will be very annoying
-pull from doug
- --}}
-
-{{!-- //doug added this timer
-				 function countdown( elementName, minutes, seconds )
-		        {
-		            var element, endTime, hours, mins, msLeft, time;
-		            function twoDigits( n )
-		            {
-		                return (n <= 9 ? "0" + n : n);
-		            }
-
-		            function updateTimer()
-		            {
-		                msLeft = endTime - (+new Date);
-		                if ( msLeft < 1000 ) {
-		                    element.innerHTML = "Times Up!";
-		                } else {
-		                    time = new Date( msLeft );
-		                    hours = time.getUTCHours();
-		                    mins = time.getUTCMinutes();
-		                    element.innerHTML = (hours ? hours + ':' + twoDigits( mins ) : mins) + ':' + twoDigits( time.getUTCSeconds() );
-		                    setTimeout( updateTimer, time.getUTCMilliseconds() + 500 );
-		                }
-		            }
-		            element = document.getElementById( elementName );
-		            endTime = (+new Date) + 1000 * (60*minutes + seconds) + 500;
-		            updateTimer();
-		        }
-
-		        countdown( "countdown", 0,10);
-		        countdown( "countdown2", 0, 30 ); --}}

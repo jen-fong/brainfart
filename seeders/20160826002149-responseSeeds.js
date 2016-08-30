@@ -9,7 +9,7 @@ module.exports = {
 
       Example:
     */
-      return queryInterface.bulkInsert('triviaChoices', [{
+      return queryInterface.bulkInsert('triviaResponses', [{
         choice: "Elegant Tickles",
         triviaQuestionId: 1,
         createdAt: new Date(),
@@ -516,253 +516,253 @@ module.exports = {
       },{
         choice: "Downtown",
         status: true,
-        triviaQuestionId: 24,
+        triviaQuestionId: 25,
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         choice: "Up the street",
-        triviaQuestionId: 24,
+        triviaQuestionId: 25,
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         choice: "Into your heart",
-        triviaQuestionId: 24,
+        triviaQuestionId: 25,
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         choice: "Down the river",
-        triviaQuestionId: 24,
+        triviaQuestionId: 25,
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         choice: "Mean Girls",
-        triviaQuestionId: 25,
+        triviaQuestionId: 26,
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         choice: "Napoleon Dynamite",
         status: true,
-        triviaQuestionId: 25,
+        triviaQuestionId: 26,
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         choice: "Pan's Labyrinth",
-        triviaQuestionId: 25,
+        triviaQuestionId: 26,
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         choice: "Blades of Glory",
-        triviaQuestionId: 25,
+        triviaQuestionId: 26,
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         choice: "Shrek",
         status: true,
-        triviaQuestionId: 26,
+        triviaQuestionId: 27,
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         choice: "The Iron Giant",
-        triviaQuestionId: 26,
+        triviaQuestionId: 27,
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         choice: "Coraline",
-        triviaQuestionId: 26,
+        triviaQuestionId: 27,
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         choice: "Toy Story",
-        triviaQuestionId: 26,
+        triviaQuestionId: 27,
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         choice: "Kate and Spencer",
-        triviaQuestionId: 27,
+        triviaQuestionId: 28,
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         choice: "Miranda and Gordo",
         status: true,
-        triviaQuestionId: 27,
+        triviaQuestionId: 28,
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         choice: "Miranda and Travis",
-        triviaQuestionId: 27,
+        triviaQuestionId: 28,
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         choice: "Matt and Lanny",
-        triviaQuestionId: 27,
+        triviaQuestionId: 28,
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         choice: "September 22nd",
-        triviaQuestionId: 28,
+        triviaQuestionId: 29,
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         choice: "January 1st",
-        triviaQuestionId: 28,
+        triviaQuestionId: 29,
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         choice: "October 3rd",
         status: true,
-        triviaQuestionId: 28,
+        triviaQuestionId: 29,
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         choice: "June 9th",
-        triviaQuestionId: 28,
+        triviaQuestionId: 29,
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         choice: "Monster's Ball",
         status: true,
-        triviaQuestionId: 29,
+        triviaQuestionId: 30,
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         choice: "Gothika",
-        triviaQuestionId: 29,
+        triviaQuestionId: 30,
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         choice: "X-Men",
-        triviaQuestionId: 29,
+        triviaQuestionId: 30,
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         choice: "Cloud Atlas",
-        triviaQuestionId: 29,
+        triviaQuestionId: 30,
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         choice: "Doug",
-        triviaQuestionId: 30,
+        triviaQuestionId: 31,
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         choice: "The Wild Thornberries",
         status: true,
-        triviaQuestionId: 30,
+        triviaQuestionId: 31,
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         choice: "Avatar the Last Airbender",
-        triviaQuestionId: 30,
+        triviaQuestionId: 31,
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         choice: "Kablam!",
-        triviaQuestionId: 30,
+        triviaQuestionId: 31,
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         choice: "Twilight Saga",
-        triviaQuestionId: 31,
+        triviaQuestionId: 32,
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         choice: "Willy Wonka and the Chocolate Factory",
-        triviaQuestionId: 31,
+        triviaQuestionId: 32,
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         choice: "The Babysitter's Club",
-        triviaQuestionId: 31,
+        triviaQuestionId: 32,
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         choice: "Harry Potter",
         status: true,
-        triviaQuestionId: 31,
+        triviaQuestionId: 32,
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         choice: "Enthusiasm",
         status: true,
-        triviaQuestionId: 32,
+        triviaQuestionId: 33,
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         choice: "Attitude",
-        triviaQuestionId: 32,
+        triviaQuestionId: 33,
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         choice: "Energy",
-        triviaQuestionId: 32,
+        triviaQuestionId: 33,
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         choice: "Apetite",
-        triviaQuestionId: 32,
+        triviaQuestionId: 33,
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         choice: "College Dropout",
-        triviaQuestionId: 33,
+        triviaQuestionId: 34,
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         choice: "Hit Me Baby One More Time",
-        triviaQuestionId: 33,
+        triviaQuestionId: 34,
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         choice: "Graduation",
         status: true,
-        triviaQuestionId: 33,
+        triviaQuestionId: 34,
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         choice: "Survivor",
-        triviaQuestionId: 33,
+        triviaQuestionId: 34,
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         choice: "She has rippling debt",
-        triviaQuestionId: 34,
+        triviaQuestionId: 35,
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         choice: "She has anice ballpoint pen",
-        triviaQuestionId: 34,
+        triviaQuestionId: 35,
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         choice: "She has got it going on",
         status: true,
-        triviaQuestionId: 34,
+        triviaQuestionId: 35,
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         choice: "She has too many children",
-        triviaQuestionId: 34,
+        triviaQuestionId: 35,
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         choice: "Black Hole",
-        triviaQuestionId: 35,
+        triviaQuestionId: 36,
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         choice: "Persepolis",
         status: true,
-        triviaQuestionId: 35,
+        triviaQuestionId: 36,
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         choice: "Akira",
-        triviaQuestionId: 35,
+        triviaQuestionId: 36,
         createdAt: new Date(),
         updatedAt: new Date()
       },{
         choice: "Paper Girls",
-        triviaQuestionId: 35,
+        triviaQuestionId: 36,
         createdAt: new Date(),
         updatedAt: new Date()
       }
@@ -780,3 +780,4 @@ module.exports = {
     */
   }
 };
+

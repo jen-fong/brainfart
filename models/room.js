@@ -1,14 +1,15 @@
 'use strict';
 module.exports = function(sequelize, DataTypes) {
-  var triviaQuestion = sequelize.define('triviaQuestion', {
-    question: DataTypes.TEXT
+  var Room = sequelize.define('Room', {
+    room_num: DataTypes.INTEGER,
+    status: DataTypes.BOOLEAN
   }, {
     classMethods: {
       associate: function(models) {
-        triviaQuestion.hasMany(models.triviaResponse)
         // associations can be defined here
+        Room.hasMany(models.Player);
       }
     }
   });
-  return triviaQuestion;
+  return Room;
 };
