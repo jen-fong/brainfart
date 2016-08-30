@@ -5,7 +5,7 @@ module.exports = function(sequelize, DataTypes) {
     status: {
       type: DataTypes.BOOLEAN,
       defaultValue: false
-    },
+    }
   }, {
     classMethods: {
       associate: function(models) {
