@@ -1,0 +1,393 @@
+*/* Put body element in CSS because there is random line break inbetween home page and game window,
+user color to cover up the white space. */*
+body {
+    font-family: 'Press Start 2P';
+    font-size: 14px;
+    line-height: 1.42857143;
+    background: black;
+a {
+    text-decoration: none;
+}
+
+.logo{
+    background-image: url(public/assets/images/triviatitle.png);
+}
+
+a:focus, a:hover {
+    color: white;
+
+}
+
+
+.homepage{	min-height:1000px;
+            background: url(https://66.media.tumblr.com/38690e8a3ef10fdd48f3149aea965570/tumblr_nuw21qx9HJ1tqou9go1_500.gif); /* fallback for old browsers */ /* fallback for old browsers */
+          /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+            
+}
+
+button.btn.btn-primary-topNav {
+    margin-top: 15px;
+    margin-left: 15px;
+    color: #ff9900;
+    background-color: black;
+    font-family: 'Press Start 2P', cursive;
+    font-size: medium;
+    line-height: 50px;
+
+}
+
+.btn {
+    display: inline-block;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    font-size: 30px;
+    font-weight: 400;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none;
+}
+
+.btn-group-lg>.btn, .btn-lg {
+    padding: 10px 16px;
+    font-size: 35px;
+    line-height: 1.3333333;
+   
+}
+.btn-primary {
+    color: #ff9900;
+    background: black;
+    opacity: 0.5;
+}
+
+.btn-primary:hover {
+    color: #990000;
+    background-color: #ff9900;
+}
+
+.btn-primary.focus, .btn-primary:focus {
+    color: #fff;
+    /* background-color: #286090; */
+    /* border-color: #122b40; */
+
+}
+
+.modal-header {
+    padding: 15px;
+    border-bottom: 1px solid #ff9900;
+    background-color: #ff9900;
+    text-align: center;
+    font-family: 'Press Start 2P', cursive;
+}
+
+.modal-body {
+    position: relative;
+    padding: 15px;
+    background-color: #ff9900;
+    font-family: 'Press Start 2P', cursive;
+    font-size: smaller;
+}
+
+.modal-footer {
+    padding: 15px;
+    text-align: right;
+    background-color: #ff9900;
+    border-top: 1px solid #ff9900;
+}
+
+a.btn.btn-default {
+    font-family: 'Press Start 2P', cursive;
+    font-size: inherit;
+}
+.btn-default:hover {
+    color: #333;
+    background-color: #e6e6e6;
+    border-color: #adadad;
+    font-family: 'Press Start 2P', cursive;
+    font-size: inherit;
+}
+
+#game_window{
+	min-height:1000px;
+	background-image: url(https://66.media.tumblr.com/38690e8a3ef10fdd48f3149aea965570/tumblr_nuw21qx9HJ1tqou9go1_500.gif); /* fallback for old browsers */
+
+}
+.game_screen {
+    height: 640px;
+    width: 1180px;
+    border-color: black;
+    border-width: 10px;
+    border-style: solid;
+    background-image: url(https://66.media.tumblr.com/38690e8a3ef10fdd48f3149aea965570/tumblr_nuw21qx9HJ1tqou9go1_500.gif);
+    position: absolute;
+    top: 1050px;
+    left: 40px;
+}
+
+.box{
+	 height: 300px;
+    width: 300px;
+    border-color: black;
+    border-width: 10px;
+    border-style: solid;
+    background-color: blue;
+    position: absolute;
+    top: 1050px;
+    left: 40px;
+}
+
+.row {
+    margin-right: -15px;
+    margin-left: -80px;
+    padding-top: 20px;
+}
+
+.col-md-2 {
+    width: 151px;
+}
+
+@media (min-width: 992px)
+.col-md-2 {
+    width: 151px;
+}
+
+
+div#testbuttonA1 {
+    height: 150px;
+    width: 150px;
+    background-color: gold;
+    /* border: goldenrod; */
+    /* border-width: 5px; */
+    /* border-style: solid; */
+    background-image: url(http://www.themoderndaypirates.com/pirates/wp-content/uploads/2010/10/questblock.gif);
+}
+
+div#testbuttonA2 {
+    height: 150px;
+    width: 150px;
+    background-color: gold;
+    /* border: yellow; */
+    /* border-width: 5px; */
+    /* border-style: solid; */
+    background-image: url(http://www.themoderndaypirates.com/pirates/wp-content/uploads/2010/10/questblock.gif);
+}
+
+div#testbuttonA3 {
+    height: 150px;
+    width: 150px;
+    background-color: gold;
+    /* border: goldenrod; */
+    /* border-width: 5px; */
+    /* border-style: solid; */
+    background-image: url(http://www.themoderndaypirates.com/pirates/wp-content/uploads/2010/10/questblock.gif);
+}
+
+div#testbuttonA4 {
+    height: 150px;
+    width: 150px;
+    background-color: red;
+    /* border: black; */
+    /* border-width: 5px; */
+    background-image: url(http://www.themoderndaypirates.com/pirates/wp-content/uploads/2010/10/questblock.gif);
+    /* border-style: solid; */
+}
+
+div#testbuttonA5 {
+    height: 150px;
+    width: 150px;
+    background-color: red;
+    /* border: black; */
+    /* border-width: 5px; */
+    /* border-style: solid; */
+    background-image: url(http://www.themoderndaypirates.com/pirates/wp-content/uploads/2010/10/questblock.gif);
+}
+
+div#testbuttonB1 {
+    height: 150px;
+    width: 150px;
+    background-color: gold;
+    /* border: goldenrod; */
+    /* border-width: 5px; */
+    /* border-style: solid; */
+    background-image: url(http://www.themoderndaypirates.com/pirates/wp-content/uploads/2010/10/questblock.gif);
+}
+
+div#testbuttonB2 {
+    height: 150px;
+    width: 150px;
+    background-color: gold;
+    /* border: yellow; */
+    /* border-width: 5px; */
+    /* border-style: solid; */
+    background-image: url(http://www.themoderndaypirates.com/pirates/wp-content/uploads/2010/10/questblock.gif);
+}
+
+div#testbuttonB3 {
+    height: 150px;
+    width: 150px;
+    background-color: gold;
+    /* border: yellow; */
+    \: 5px;
+    /* border-style: solid; */
+    background-image: url(http://www.themoderndaypirates.com/pirates/wp-content/uploads/2010/10/questblock.gif);
+}
+
+div#testbuttonB4 {
+    height: 150px;
+    width: 150px;
+    background-color: red;
+    /* border: black; */
+    /* border-width: 5px; */
+    /* border-style: solid; */
+    background-image: url(http://www.themoderndaypirates.com/pirates/wp-content/uploads/2010/10/questblock.gif);
+}
+
+div#testbuttonC1 {
+    height: 150px;
+    width: 150px;
+    background-color: gold;
+    border: goldenrod;
+    /* border-width: 5px; */
+    /* border-style: solid; */
+    background-image: url(http://www.themoderndaypirates.com/pirates/wp-content/uploads/2010/10/questblock.gif);
+}
+
+div#testbuttonC2 {
+    height: 100px;
+    width: 100px;
+    background-color: red;
+}
+
+div#testbuttonC2 {
+    height: 150px;
+    width: 150px;
+    background-color: gold;
+    /* border: yellow; */
+    /* border-width: 5px; */
+    /* border-style: solid; */
+    background-image: url(http://www.themoderndaypirates.com/pirates/wp-content/uploads/2010/10/questblock.gif);
+}
+
+div#testbuttonC3 {
+    height: 150px;
+    width: 150px;
+    background-color: gold;
+    /* border: goldenrod; */
+    /* border-width: 5px; */
+    background-image: url(http://www.themoderndaypirates.com/pirates/wp-content/uploads/2010/10/questblock.gif);
+    /* border-style: solid; */
+}
+
+div#testbuttonC4 {
+    height: 150px;
+    width: 150px;
+    background-color: red;
+    /* border: black; */
+    /* border-width: 5px; */
+    /* border-style: solid; */
+    background-image: url(http://www.themoderndaypirates.com/pirates/wp-content/uploads/2010/10/questblock.gif);
+}
+
+div#testbuttonC5 {
+    height: 150px;
+    width: 150px;
+    background-color: red;
+    border: black;
+    background-image: url(http://www.themoderndaypirates.com/pirates/wp-content/uploads/2010/10/questblock.gif);
+}
+
+div#testbuttonD1 {
+    height: 150px;
+    width: 150px;
+    background-color: gold;
+    /* border: goldenrod; */
+    /* border-width: 5px; */
+    /* border-style: solid; */
+    background-image: url(http://www.themoderndaypirates.com/pirates/wp-content/uploads/2010/10/questblock.gif);
+}
+
+div#testbuttonD2 {
+    height: 150px;
+    width: 150px;
+    background-color: red;
+    /* border: black; */
+    /* border-width: 5px; */
+    /* border-style: solid; */
+    background-image: url(http://www.themoderndaypirates.com/pirates/wp-content/uploads/2010/10/questblock.gif);
+}
+
+div#testbuttonD3 {
+    height: 100px;
+    width: 100px;
+    background-color: red;
+}
+
+div#testbuttonD3 {
+    height: 150px;
+    width: 150px;
+    background-color: red;
+    /* border: black; */
+    /* border-width: 5px; */
+    background-image: url(http://www.themoderndaypirates.com/pirates/wp-content/uploads/2010/10/questblock.gif);
+    /* border-style: solid; */
+}
+
+div#testbuttonD4 {
+    height: 150px;
+    width: 150px;
+    background-color: red;
+    /* border: black; */
+    /* border-width: 5px; */
+    /* border-style: solid; */
+    background-image: url(http://www.themoderndaypirates.com/pirates/wp-content/uploads/2010/10/questblock.gif);
+}
+
+div#testbuttonB5 {
+    height: 150px;
+    width: 150px;
+    background-color: red;
+    /* border: black; */
+    /* border-width: 5px; */
+    background-image: url(http://www.themoderndaypirates.com/pirates/wp-content/uploads/2010/10/questblock.gif);
+    /* border-style: solid; */
+}
+
+div#testbuttonD5 {
+    height: 150px;
+    width: 150px;
+    background-color: red;
+    /* border: black; */
+    /* border-width: 5px; */
+    /* border-style: solid; */
+    background-image: url(http://www.themoderndaypirates.com/pirates/wp-content/uploads/2010/10/questblock.gif);
+}
+
+.section {
+    height: 620px;
+    width: 300px;
+    background-color: black;
+    color: #ff9900;
+    position: absolute;
+    top: 0px;
+    left: 860px;
+    border-left: 5px;
+    border-left-style: solid;
+    border-left-width: inherit;
+    border-left-color: black;
+    font-opacity: 0.5;
+}
+h3.section-title {
+    text-align: center;
+    /* border-bottom: black; */
+    /* border-bottom-style: solid; */
+    padding-bottom: 100px;
+    font-family: 'Press Start 2P', cursive;
+}
