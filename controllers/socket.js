@@ -145,37 +145,54 @@ function nextQuestion (nextQuestionThis, data) {
 	var player1Questions = [];
 	var player2Questions = [];
 	console.log(data.question.id)
-	if (data.player === 'player1') {
-		player1Questions.push({id: nextQuestionThis.id, questionId: data.question.id});
-		// console.log(player1Questions);
-	} else if (data.player === 'player2') {
-		player2Questions.push({id: nextQuestionThis.id, questionId: data.question.id});
-		console.log(player2Questions);
-	}
 	sendQuestion = randomQuestion(questionsArray);
-	for (var i = 0; i < player1Questions.length; i++) {
-		if (sendQuestion.id === player1Questions[i].id) {
-			sendQuestion = randomQuestion(questionsArray);
-		} else {
-			console.log(sendQuestion);
-			models.triviaResponse.findAll({
-				where: {
-					triviaQuestionId: sendQuestion.id
-				}
-			}).then(function (choices) {
-				var questionChoices = [];
-				for (var i = 0; i < choices.length; i++) {
-					questionChoices.push(choices[i].choice);
-					if (choices[i].status) {
-						sendQuestion.answer = choices[i].choice;
-					}
-				}
-				sendQuestion.choices = questionChoices;
-				nextQuestionThis.emit('sendQuestions', { question:sendQuestion, room: data.room});
-				console.log(sendQuestion);
-			})
+	models.triviaResponse.findAll({
+		where: {
+			triviaQuestionId: sendQuestion.id
 		}
-	}
+	}).then(function (choices) {
+		var questionChoices = [];
+		for (var i = 0; i < choices.length; i++) {
+			questionChoices.push(choices[i].choice);
+			if (choices[i].status) {
+				sendQuestion.answer = choices[i].choice;
+			}
+		}
+		sendQuestion.choices = questionChoices;
+		nextQuestionThis.emit('sendQuestions', { question:sendQuestion, room: data.room});
+	})
+	
+	// if (data.player === 'player1') {
+	// 	player1Questions.push({id: nextQuestionThis.id, questionId: data.question.id});
+	// 	// console.log(player1Questions);
+	// } else if (data.player === 'player2') {
+	// 	player2Questions.push({id: nextQuestionThis.id, questionId: data.question.id});
+	// 	console.log(player2Questions);
+	// }
+	// sendQuestion = randomQuestion(questionsArray);
+	// console.log(sendQuestion)
+	// for (var i = 0; i < player1Questions.length; i++) {
+	// 	if (sendQuestion.id === player1Questions[i].id) {
+	// 		sendQuestion = randomQuestion(questionsArray);
+	// 	} else {
+	// 		models.triviaResponse.findAll({
+	// 			where: {
+	// 				triviaQuestionId: sendQuestion.id
+	// 			}
+	// 		}).then(function (choices) {
+	// 			var questionChoices = [];
+	// 			for (var i = 0; i < choices.length; i++) {
+	// 				questionChoices.push(choices[i].choice);
+	// 				if (choices[i].status) {
+	// 					sendQuestion.answer = choices[i].choice;
+	// 				}
+	// 			}
+	// 			sendQuestion.choices = questionChoices;
+				
+	// 			console.log(sendQuestion);
+	// 		})
+	// 	}
+	// }
 }
 
 function increaseScore (data) {
@@ -194,10 +211,10 @@ function increaseScore (data) {
 					player_num: data.player
 				}
 			}).then(function (player) {
-				console.log('updated ' + data.player + ' score')
+				nextQuestion(passThis, data);
 			})
 		})
-	nextQuestion(passThis, data);
+	
 	// var nextQuestionData = {
 	// 	question: sendQuestion,
 	// 	room: data.room
