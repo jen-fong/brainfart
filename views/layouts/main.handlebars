@@ -164,6 +164,7 @@ when choice is selected, text will display whether or not the user got the answe
               <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;  </button>
                 <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+                <div id="countdown2"></div>
               </div>
               <div class="modal-body" id="questionDisplay">
                 ...
@@ -183,144 +184,150 @@ when choice is selected, text will display whether or not the user got the answe
 
     <div id="game_window">
         <div class="game_screen">
-            <div class="row">
-                <div class="col-md-1">
-                </div>
-                <div class="col-md-2">
-                    <div id="testbuttonA1" data-box="#testbuttonA1" data-x="0" data-y="0" class="trivBox hvr-bob">
-                    </div>
-                </div>
-                <div class="col-md-2">
-                    <div id="testbuttonA2" data-box="#testbuttonA2" data-x="1" data-y="0" class="trivBox hvr-bob">
-                    </div>
-                </div>
-                <div class="col-md-2">
-                    <div id="testbuttonA3" data-box="#testbuttonA3" data-x="2" data-y="0" class="trivBox hvr-bob">
-                    </div>
-                </div>
-                <div class="col-md-2">
-                    <div id="testbuttonA4" data-box="#testbuttonA4" data-x="3" data-y="0" class="trivBox hvr-bob">
-                    </div>
-                </div>
-                <div class="col-md-2">
-                    <div id="testbuttonA5" data-box="#testbuttonA5" data-x="4" data-y="0" class="trivBox hvr-bob">
-                    </div>
-                </div>
-            </div>
+	        <div class="col-md-9">
+	            <div class="row">
+	                <div class="col-md-1">
+	                </div>
+	                <div class="col-md-2">
+	                    <div id="testbuttonA1" data-box="#testbuttonA1" data-x="0" data-y="0" class="trivBox hvr-bob">
+	                    </div>
+	                </div>
+	                <div class="col-md-2">
+	                    <div id="testbuttonA2" data-box="#testbuttonA2" data-x="1" data-y="0" class="trivBox hvr-bob">
+	                    </div>
+	                </div>
+	                <div class="col-md-2">
+	                    <div id="testbuttonA3" data-box="#testbuttonA3" data-x="2" data-y="0" class="trivBox hvr-bob">
+	                    </div>
+	                </div>
+	                <div class="col-md-2">
+	                    <div id="testbuttonA4" data-box="#testbuttonA4" data-x="3" data-y="0" class="trivBox hvr-bob">
+	                    </div>
+	                </div>
+	                <div class="col-md-2">
+	                    <div id="testbuttonA5" data-box="#testbuttonA5" data-x="4" data-y="0" class="trivBox hvr-bob">
+	                    </div>
+	                </div>
+	            </div>
 
-            <div class="space">
-            </div>
+	            <div class="space">
+	            </div>
 
-            <div class="row">
-                <div class="col-md-1">
-                </div>
-                <div class="col-md-2">
-                    <div id="testbuttonB1" data-box="#testbuttonB1" data-x="0" data-y="1" class="trivBox hvr-bob">
-                    </div>
-                </div>
-                <div class="col-md-2">
-                    <div id="testbuttonB2" data-box="#testbuttonB2" data-x="1" data-y="1" class="trivBox hvr-bob">
-                    </div>
-                </div>
-                <div class="col-md-2">
-                    <div id="testbuttonB3" data-box="#testbuttonB3" data-x="2" data-y="1" class="trivBox hvr-bob">
-                    </div>
-                </div>
-                <div class="col-md-2">
-                    <div id="testbuttonB4" data-box="#testbuttonB4" data-x="3" data-y="1" class="trivBox hvr-bob">
-                    </div>
-                </div>
-                <div class="col-md-2">
-                    <div id="testbuttonB5" data-box="#testbuttonB5" data-x="4" data-y="1" class="trivBox hvr-bob">
-                    </div>
-                </div>
-            </div>
+	            <div class="row">
+	                <div class="col-md-1">
+	                </div>
+	                <div class="col-md-2">
+	                    <div id="testbuttonB1" data-box="#testbuttonB1" data-x="0" data-y="1" class="trivBox hvr-bob">
+	                    </div>
+	                </div>
+	                <div class="col-md-2">
+	                    <div id="testbuttonB2" data-box="#testbuttonB2" data-x="1" data-y="1" class="trivBox hvr-bob">
+	                    </div>
+	                </div>
+	                <div class="col-md-2">
+	                    <div id="testbuttonB3" data-box="#testbuttonB3" data-x="2" data-y="1" class="trivBox hvr-bob">
+	                    </div>
+	                </div>
+	                <div class="col-md-2">
+	                    <div id="testbuttonB4" data-box="#testbuttonB4" data-x="3" data-y="1" class="trivBox hvr-bob">
+	                    </div>
+	                </div>
+	                <div class="col-md-2">
+	                    <div id="testbuttonB5" data-box="#testbuttonB5" data-x="4" data-y="1" class="trivBox hvr-bob">
+	                    </div>
+	                </div>
+	            </div>
 
-            <div class="space">
-            </div>
+	            <div class="space">
+	            </div>
 
-            <div class="row">
-                <div class="col-md-1">
-                </div>
-                <div class="col-md-2">
-                    <div id="testbuttonC1" data-box="#testbuttonC1" data-x="0" data-y="2" class="trivBox hvr-bob">
-                    </div>
-                </div>
-                <div class="col-md-2">
-                    <div id="testbuttonC2" data-box="#testbuttonC2" data-x="1" data-y="2" class="trivBox hvr-bob">
-                    </div>
-                </div>
-                <div class="col-md-2">
-                    <div id="testbuttonC3" data-box="#testbuttonC3" data-x="2" data-y="2" class="trivBox hvr-bob">
-                    </div>
-                </div>
-                <div class="col-md-2">
-                    <div id="testbuttonC4" data-box="#testbuttonC4" data-x="3" data-y="2" class="trivBox hvr-bob">
-                    </div>
-                </div>
-                <div class="col-md-2">
-                    <div id="testbuttonC5" data-box="#testbuttonC5" data-x="4" data-y="2" class="trivBox hvr-bob">
-                    </div>
-                </div>
-            </div>
+	            <div class="row">
+	                <div class="col-md-1">
+	                </div>
+	                <div class="col-md-2">
+	                    <div id="testbuttonC1" data-box="#testbuttonC1" data-x="0" data-y="2" class="trivBox hvr-bob">
+	                    </div>
+	                </div>
+	                <div class="col-md-2">
+	                    <div id="testbuttonC2" data-box="#testbuttonC2" data-x="1" data-y="2" class="trivBox hvr-bob">
+	                    </div>
+	                </div>
+	                <div class="col-md-2">
+	                    <div id="testbuttonC3" data-box="#testbuttonC3" data-x="2" data-y="2" class="trivBox hvr-bob">
+	                    </div>
+	                </div>
+	                <div class="col-md-2">
+	                    <div id="testbuttonC4" data-box="#testbuttonC4" data-x="3" data-y="2" class="trivBox hvr-bob">
+	                    </div>
+	                </div>
+	                <div class="col-md-2">
+	                    <div id="testbuttonC5" data-box="#testbuttonC5" data-x="4" data-y="2" class="trivBox hvr-bob">
+	                    </div>
+	                </div>
+	            </div>
 
-            <div class="space">
-            </div>
+	            <div class="space">
+	            </div>
 
-            <div class="row">
-                <div class="col-md-1">
-                </div>
-                <div class="col-md-2">
-                    <div id="testbuttonD1" data-box="#testbuttonD1" data-x="0" data-y="3" class="trivBox hvr-bob">
+	            <div class="row">
+	                <div class="col-md-1">
+	                </div>
+	                <div class="col-md-2">
+	                    <div id="testbuttonD1" data-box="#testbuttonD1" data-x="0" data-y="3" class="trivBox hvr-bob">
+	                    </div>
+	                </div>
+	                <div class="col-md-2">
+	                    <div id="testbuttonD2" data-box="#testbuttonD2" data-x="1" data-y="3" class="trivBox hvr-bob">
+	                    </div>
+	                </div>
+	                <div class="col-md-2">
+	                    <div id="testbuttonD3" data-box="#testbuttonD3" data-x="2" data-y="3" class="trivBox hvr-bob">
+	                    </div>
+	                </div>
+	                <div class="col-md-2">
+	                    <div id="testbuttonD4" data-box="#testbuttonD4" data-x="3" data-y="3" class="trivBox hvr-bob">
+	                    </div>
+	                </div>
+	                <div class="col-md-2">
+	                    <div id="testbuttonD5" data-box="#testbuttonD5" data-x="4" data-y="3" class="trivBox hvr-bob">
+	                    </div>
+	                </div>
+	            </div>
+
+	            <div class="space">
+	            </div>
+	        </div>
+
+            <div class="col-md-3" id="section-background">
+                <div class="section">
+                      <div class="section-header">
+                        <h3 class="section-title">SCORE </h3>
+                      </div>
+                      <div class="section-body"> </div>
+                      <div class="section-footer"> </div>
+
+                      <div class="section-header"> 
+                        <h3 class="section-title"> TIME REMAINING</h3>
+                        <div id="countdown"></div>
+                      </div>
+                    <div class="section-body"> </div>
+                    <div class="section-footer"> </div>
+
+                    <div class="section-header">
+                      <h3 class="section-title"> BOMBS REMAINING </h3>
                     </div>
-                </div>
-                <div class="col-md-2">
-                    <div id="testbuttonD2" data-box="#testbuttonD2" data-x="1" data-y="3" class="trivBox hvr-bob">
+                    <div class="section-header">
+                      <h3 class="section-title"> LIVES </h3>
                     </div>
+
+                    <div class="section-body"></div>
+                    <div class="section-body"></div>
+
+                    <div class="section-footer"></div>
+                    <div class="section-footer"></div>
                 </div>
-                <div class="col-md-2">
-                    <div id="testbuttonD3" data-box="#testbuttonD3" data-x="2" data-y="3" class="trivBox hvr-bob">
-                    </div>
-                </div>
-                <div class="col-md-2">
-                    <div id="testbuttonD4" data-box="#testbuttonD4" data-x="3" data-y="3" class="trivBox hvr-bob">
-                    </div>
-                </div>
-                <div class="col-md-2">
-                    <div id="testbuttonD5" data-box="#testbuttonD5" data-x="4" data-y="3" class="trivBox hvr-bob">
-                    </div>
-                </div>
-            </div>
+            </div>    
 
-            <div class="space">
-            </div>
-
-            <div class="section">
-            	<div class="section-header">
-            		<h3 class="section-title">SCORE </h3>
-            	</div>
-            	<div class="section-body"> </div>
-            	<div class="section-footer"> </div>
-
-				<div class="section-header"> 
-					<h3 class="section-title"> DECADES</h3>
-				</div>
-				<div class="section-body"> </div>
-                <div class="section-footer"> </div>
-				
-				<div class="section-header">
-					<h3 class="section-title"> BOMBS REMAINING </h3>
-				</div>
-				<div class="section-header">
-					<h3 class="section-title"> SHARE </h3>
-				</div>
-
-				<div class="section-body"></div>
-				<div class="section-body"></div>
-
-				<div class="section-footer"></div>
-				<div class="section-footer"></div>
-			</div>
 		</div>
 	</div>
 
@@ -463,6 +470,35 @@ $(document).ready(function() {
 			var choiceThis = this;
 			checkAnswer(data, choiceThis, clicked_X, clicked_Y);
 		});
+				//doug added this timer
+				 function countdown( elementName, minutes, seconds )
+		        {
+		            var element, endTime, hours, mins, msLeft, time;
+		            function twoDigits( n )
+		            {
+		                return (n <= 9 ? "0" + n : n);
+		            }
+
+		            function updateTimer()
+		            {
+		                msLeft = endTime - (+new Date);
+		                if ( msLeft < 1000 ) {
+		                    element.innerHTML = "Times Up!";
+		                } else {
+		                    time = new Date( msLeft );
+		                    hours = time.getUTCHours();
+		                    mins = time.getUTCMinutes();
+		                    element.innerHTML = (hours ? hours + ':' + twoDigits( mins ) : mins) + ':' + twoDigits( time.getUTCSeconds() );
+		                    setTimeout( updateTimer, time.getUTCMilliseconds() + 500 );
+		                }
+		            }
+		            element = document.getElementById( elementName );
+		            endTime = (+new Date) + 1000 * (60*minutes + seconds) + 500;
+		            updateTimer();
+		        }
+
+		        countdown( "countdown", 0,10);
+		        countdown( "countdown2", 0, 30 );
 	}
 	function runTimer(data){
 		timer = setInterval(function () {

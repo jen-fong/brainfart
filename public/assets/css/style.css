@@ -132,6 +132,21 @@ a.btn.btn-default {
     top: 1050px;
     left: 40px;
 }
+h3.section-title {
+    text-align: center;
+    /* border-bottom: black; */
+    /* border-bottom-style: solid; */
+    padding-bottom: 40px;
+    font-family: 'Press Start 2P', cursive;
+}
+
+div#countdown {
+    text-align: center;
+    font-family: 'Press Start 2P', cursive;
+    margin-bottom: 20px;
+    font-size: 20px;
+    color: red;
+}
 
 .box{
 	 height: 300px;
@@ -376,15 +391,16 @@ div#testbuttonD5 {
 
 .section {
     height: 620px;
-    width: 300px;
-    background-color: yellow;
-    position: absolute;
-    top: 0px;
-    left: 860px;
+    width: 100%;
+   /* background-color: yellow;*/
     border-left: 5px;
     border-left-style: solid;
     border-left-width: inherit;
     border-left-color: black;
+    /*float: right;*/
+}
+#section-background{
+    background-color: yellow;
 }
 h3.section-title {
     text-align: center;
