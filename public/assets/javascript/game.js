@@ -9,7 +9,8 @@ $(document).ready(function() {
 	var lives = 3;
 	var clicked_Y;
 	var clicked_X;
-	
+	   var laugh = new Audio('assets/sounds/skullkid.mp3');
+
 
 	var allBoxes = [
 			'#testbuttonA1', '#testbuttonA2', '#testbuttonA3', '#testbuttonA4', '#testbuttonA5', 
