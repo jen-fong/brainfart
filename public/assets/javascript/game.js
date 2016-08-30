@@ -197,121 +197,122 @@ $(document).ready(function() {
 	}
 
 
-var bombs = [];
+	var bombs = [];
 
 		// Fisher-Yates Shuffle Algorithm:
-		Array.prototype.shuffle = function() {
-			var i = this.length, j, temp;
-			while(--i > 0) {
-				j = Math.floor(Math.random() * (i+1));
-				temp = this[j];
-				this[j] = this[i];
-				this[i] = temp;
-			}
-			return this;
+	Array.prototype.shuffle = function() {
+		var i = this.length, j, temp;
+		while(--i > 0) {
+			j = Math.floor(Math.random() * (i+1));
+			temp = this[j];
+			this[j] = this[i];
+			this[i] = temp;
 		}
-		var shuffledBoxes = allBoxes.shuffle();
+		return this;
+	}
+	var shuffledBoxes = allBoxes.shuffle();
 
 
-		// Chooses which boxes will be bombs:
-		for (var i = 0; i < 5; i++) {
-			bombs[i] = shuffledBoxes[i];
-		}
-		console.log("The bombs are: " + bombs);
+	// Chooses which boxes will be bombs:
+	for (var i = 0; i < 5; i++) {
+		bombs[i] = shuffledBoxes[i];
+	}
+	console.log("The bombs are: " + bombs);
 
 
-		var surroundingBoxes = [
-			[-1,-1],
-			[0,-1],
-			[1,-1],
-			[-1,0],
-			[1,0],
-			[-1,1],
-			[0,1],
-			[1,1]
-		];
+	var surroundingBoxes = [
+		[-1,-1],
+		[0,-1],
+		[1,-1],
+		[-1,0],
+		[1,0],
+		[-1,1],
+		[0,1],
+		[1,1]
+	];
 
+	var boxesClicked = 0;
 
+	$('.trivBox').on('click', function() {
+		if (!gameStarted) {
+			$(this).off('click');
+		} else {
+			if (boxesClicked === 20) {
+				socket.emit('gameOver', questionData);
+			} else {
+				clicked_X = $(this).data('x');
+				clicked_Y = $(this).data('y');
+				boxesClicked++;
+				var clickedBomb = false;
+				var surroundingBombs = 0;
 
-$('.trivBox').on('click', function() {
-	if (!gameStarted) {
-		$(this).off('click');
-	} else {
-		clicked_X = $(this).data('x');
-		clicked_Y = $(this).data('y');
-		var clickedBomb = false;
-		var surroundingBombs = 0;
-
-		for (var i = 0; i < bombs.length; i++) {
-			if (clicked_X === $(bombs[i]).data('x') && clicked_Y === $(bombs[i]).data('y')) {
-				clickedBomb = true;
-				$(this).empty().removeClass().append('<img src="assets/images/skull.gif">');
-				laugh.play();
-				bombBox();
-			}
-		}
-		if (!clickedBomb) {
-			console.log(theQuestion, 'test');
-			triviaBox();
-			for (var i = 0; i < surroundingBoxes.length; i++) {
-				// var surroundingBox_X = ;
-				// var surroundingBox_Y = ;
-				if ((clicked_X + surroundingBoxes[i][0]) >= 0 && (clicked_X + surroundingBoxes[i][0]) <= 4 && 
-					(clicked_Y + surroundingBoxes[i][1]) >= 0 && (clicked_Y + surroundingBoxes[i][1]) <= 3) {
-					for (var j = 0; j < bombs.length; j++) {
-						if ((clicked_X + surroundingBoxes[i][0]) === $(bombs[j]).data('x') && 
-							(clicked_Y + surroundingBoxes[i][1]) === $(bombs[j]).data('y')) {
-							surroundingBombs++;
-						}
+				for (var i = 0; i < bombs.length; i++) {
+					if (clicked_X === $(bombs[i]).data('x') && clicked_Y === $(bombs[i]).data('y')) {
+						clickedBomb = true;
+						$(this).empty().removeClass().append('<img src="assets/images/skull.gif">');
+						laugh.play();
+						bombBox();
 					}
 				}
+				if (!clickedBomb) {
+					console.log(theQuestion, 'test');
+					triviaBox();
+					for (var i = 0; i < surroundingBoxes.length; i++) {
+						// var surroundingBox_X = ;
+						// var surroundingBox_Y = ;
+						if ((clicked_X + surroundingBoxes[i][0]) >= 0 && (clicked_X + surroundingBoxes[i][0]) <= 4 && 
+							(clicked_Y + surroundingBoxes[i][1]) >= 0 && (clicked_Y + surroundingBoxes[i][1]) <= 3) {
+							for (var j = 0; j < bombs.length; j++) {
+								if ((clicked_X + surroundingBoxes[i][0]) === $(bombs[j]).data('x') && 
+									(clicked_Y + surroundingBoxes[i][1]) === $(bombs[j]).data('y')) {
+									surroundingBombs++;
+								}
+							}
+						}
+					}
+				// bombCheck();
+			      	$(this).empty().removeClass().addClass('numberBox').append(surroundingBombs);
+					$(this).off('click');
+				}
 			}
-		// bombCheck();
-      $(this).empty().removeClass().addClass('numberBox').append(surroundingBombs);
-		$(this).off('click');
-	}
-}
-
-
-});
+		}
+	});
 
 	function triviaBox() {
 		$("#questionModal").modal({backdrop: 'static', keyboard: false});	
 	}
 
-$('#choices').on('click', 'button', function () {
-	console.log(questionData)
-	var userAnswer = $(this).val();
-	console.log(userAnswer);
-	questionData.player = role;
-	questionData.x = clicked_X;
-	questionData.y = clicked_Y;
-	questionData.lives = lives;
-	if (userAnswer === questionData.question.answer) {
-		score++;
-		console.log('correct!');
-		$('.score_number').html(score);
-		questionData.score = score;
-		socket.emit('answeredCorrectly', questionData);
-	} else {
-		console.log('wrong', lives);
-		lives--;
-		$('#game_lives').html(lives);
-		if (lives === 0) {
-			$('#game_lives').html('0');
-			socket.emit('gameOver', questionData);
+	$('#choices').on('click', 'button', function () {
+		console.log(questionData)
+		var userAnswer = $(this).val();
+		console.log(userAnswer);
+		questionData.player = role;
+		questionData.x = clicked_X;
+		questionData.y = clicked_Y;
+		questionData.lives = lives;
+		if (userAnswer === questionData.question.answer) {
+			score++;
+			console.log('correct!');
+			$('.score_number').html(score);
+			questionData.score = score;
+			socket.emit('answeredCorrectly', questionData);
 		} else {
-			socket.emit('answeredWrong', questionData);
+			console.log('wrong', lives);
+			lives--;
+			$('#game_lives').html(lives);
+			if (lives === 0) {
+				$('#game_lives').html('0');
+				socket.emit('gameOver', questionData);
+			} else {
+				socket.emit('answeredWrong', questionData);
+			}
 		}
-	}
 		$(this).off('click');
-})
+	})
 
-
-
-function displayFinal(data) {
-	var gameFinishedMsg = data.message + " Your score is " + score + ". Come and play again!";
-	$('#winner').html(gameFinishedMsg);
-	$('#scoreModal').modal('show');
-}
+	function displayFinal(data) {
+		var gameFinishedMsg = data.message + " Your score is " + score + ". Come and play again!";
+		$('#winner').html(gameFinishedMsg);
+		$('#scoreModal').modal('show');
+	}
 })
