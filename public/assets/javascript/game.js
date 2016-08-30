@@ -9,6 +9,8 @@ $(document).ready(function() {
 	var lives = 3;
 	var clicked_Y;
 	var clicked_X;
+	var laugh = new Audio('assets/sounds/skullkid.mp3');
+
 
 	var allBoxes = [
 			'#testbuttonA1', '#testbuttonA2', '#testbuttonA3', '#testbuttonA4', '#testbuttonA5', 
@@ -242,7 +244,7 @@ $(document).ready(function() {
 			} else {
 				clicked_X = $(this).data('x');
 				clicked_Y = $(this).data('y');
-				boxesClicked++;
+				
 				var clickedBomb = false;
 				var surroundingBombs = 0;
 
@@ -265,7 +267,6 @@ $(document).ready(function() {
 							for (var j = 0; j < bombs.length; j++) {
 								if ((clicked_X + surroundingBoxes[i][0]) === $(bombs[j]).data('x') && 
 									(clicked_Y + surroundingBoxes[i][1]) === $(bombs[j]).data('y')) {
-									surroundingBombs++;
 								}
 							}
 						}
