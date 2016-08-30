@@ -307,10 +307,11 @@ $('#choices').on('click', 'button', function () {
 		$(this).off('click');
 })
 
-})
+
 
 function displayFinal(data) {
 	var gameFinishedMsg = data.message + " Your score is " + score + ". Come and play again!";
 	$('#winner').html(gameFinishedMsg);
 	$('#scoreModal').modal('show');
 }
+})
