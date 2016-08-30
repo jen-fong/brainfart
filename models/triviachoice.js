@@ -1,7 +1,7 @@
 'use strict';
 module.exports = function(sequelize, DataTypes) {
   var triviaChoice = sequelize.define('triviaChoice', {
-    choice: DataTypes.TEXT
+    choice: DataTypes.TEXT,
     status: {
       type: DataTypes.BOOLEAN,
       defaultValue: false
