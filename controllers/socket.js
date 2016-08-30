@@ -16,25 +16,29 @@ var sendQuestion;
 var testSocket = function (sio, client) {
 	gameSocket = client;
 	io = sio;
-	// gameSocket.on('displayRooms', showRooms);
+	gameSocket.on('displayRooms', showRooms);
 	gameSocket.on('createRoom', createRoom);
 	gameSocket.on('player2Connected', playerJoin);
 	gameSocket.on('countdownFinished', startGame);
 	gameSocket.on('answeredCorrectly', increaseScore);
-	gameSocket.on('answeredWrong', moveToNextQuestion);
+	gameSocket.on('answeredWrong', decreaseLives);
+	gameSocket.on('gameOver', gameOver);
 	gameSocket.on('disconnect', removeRoom);
 }
 
 module.exports = testSocket;
-// function showRooms() {
-// 	var rooms = gameSocket.adapter.rooms;
-// 	console.log(rooms);
 
-// 	if (rooms = undefined) {
-// 		console.log('does not exist')
-// 	}
-// 	this.emit('showAllRooms', {allRooms: rooms });
-// }
+function showRooms() {
+	model.Room.findAll({
+		where: {
+			status: true
+		}
+	}).then(function (room) {
+		console.log(room);
+		this.emit('showAllRooms', {allRooms: rooms });
+	})
+}
+
 function createRoom () {
 	console.log('client connected');
 	gameRoomId = ( Math.random() * 100000 ) | 0;
@@ -140,11 +144,18 @@ function startGame(data) {
 	var socketThis = this;
 	socketThis.emit('sendQuestions', { question: sendQuestion, room: data});
 }
-
-function nextQuestion (nextQuestionThis, data) {
 	var player1Questions = [];
 	var player2Questions = [];
-	console.log(data.question.id)
+function nextQuestion (nextQuestionThis, data) {
+	console.log(data.question.id);
+	if (data.player === 'player1') {
+		player1Questions.push({id: nextQuestionThis.id, questionId: data.question.id});
+		// console.log(player1Questions);
+	} else if (data.player === 'player2') {
+		player2Questions.push({id: nextQuestionThis.id, questionId: data.question.id});
+		console.log(player2Questions);
+	}
+
 	sendQuestion = randomQuestion(questionsArray);
 	models.triviaResponse.findAll({
 		where: {
@@ -162,13 +173,7 @@ function nextQuestion (nextQuestionThis, data) {
 		nextQuestionThis.emit('sendQuestions', { question:sendQuestion, room: data.room});
 	})
 	
-	// if (data.player === 'player1') {
-	// 	player1Questions.push({id: nextQuestionThis.id, questionId: data.question.id});
-	// 	// console.log(player1Questions);
-	// } else if (data.player === 'player2') {
-	// 	player2Questions.push({id: nextQuestionThis.id, questionId: data.question.id});
-	// 	console.log(player2Questions);
-	// }
+
 	// sendQuestion = randomQuestion(questionsArray);
 	// console.log(sendQuestion)
 	// for (var i = 0; i < player1Questions.length; i++) {
@@ -193,6 +198,7 @@ function nextQuestion (nextQuestionThis, data) {
 	// 		})
 	// 	}
 	// }
+
 }
 
 function increaseScore (data) {
@@ -214,17 +220,58 @@ function increaseScore (data) {
 				nextQuestion(passThis, data);
 			})
 		})
-	
 	// var nextQuestionData = {
 	// 	question: sendQuestion,
 	// 	room: data.room
 	// };
 }
 
-function moveToNextQuestion(data) {
+function decreaseLives(data) {
 	// console.log(data);
 	var passThis = this;
-	nextQuestion(passThis, data);
+	if (data.lives === 0) {
+		gameOver(data);
+	}
+	models.Room.findAll({
+		where: {
+			room_num: data.room.playerRoom
+		}
+	}).then(function (room) {
+		models.Player.update({
+			lives: data.lives
+		}, {
+			where: {
+				roomId: room[0].id,
+				player_num: data.player
+			}
+		}).then(function (player) {
+			nextQuestion(passThis, data);
+		})
+	})
+	
+}
+
+function gameOver (data) {
+	models.Room.findAll({
+		where: {
+			room_num: data.room.playerRoom
+		}
+	}).then(function (room) {
+		models.Player.findAll({
+			where: {
+				roomId: room[0].id
+			}
+		}).then(function (player) {
+			for (var i = 0; i < player.length; i++) {
+				console.log(player[i].score);
+				if (player[0].score > player[1].score) {
+					io.sockets.in(data.room.playerRoom).emit('gameOver', {message: 'Player 1 Wins!'});
+				} else {
+					io.sockets.in(data.room.playerRoom).emit('gameOver', {message: 'Player 2 Wins!'});
+				}
+			}
+		})
+	})
 }
 
 function removeRoom(data) {
