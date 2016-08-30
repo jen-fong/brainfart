@@ -243,3 +243,7 @@ h2#game_lives {
     /*padding-bottom: 100px;
     font-family: 'Press Start 2P', cursive;
 }*/
+#gameRooms {
+    height: 300px;
+    position: absolute;
+}

@@ -27,18 +27,21 @@ var testSocket = function (sio, client) {
 }
 
 module.exports = testSocket;
-
 function showRooms() {
-	model.Room.findAll({
+	var roomThis = this;
+	models.Room.findAll({
 		where: {
 			status: true
 		}
-	}).then(function (room) {
-		console.log(room);
-		this.emit('showAllRooms', {allRooms: rooms });
+	}).then(function (availableRooms) {
+		var roomArray = [];
+		for (var i = 0; i < availableRooms.length; i++) {
+			console.log(availableRooms[i].room_num);
+			roomArray.push(availableRooms[i].room_num);
+		}
+		roomThis.emit('showAllRooms', roomArray);
 	})
 }
-
 function createRoom () {
 	console.log('client connected');
 	gameRoomId = ( Math.random() * 100000 ) | 0;
@@ -66,7 +69,7 @@ function createRoom () {
 
 function getQuestionFromDb () {
 	models.triviaQuestion.findAll({
-		limit: 25
+		limit: 36
 	}).then(function (questions) {
 		questions.forEach(function (questions) {
 			questionsArray.push({
@@ -262,13 +265,10 @@ function gameOver (data) {
 				roomId: room[0].id
 			}
 		}).then(function (player) {
-			for (var i = 0; i < player.length; i++) {
-				console.log(player[i].score);
-				if (player[0].score > player[1].score) {
-					io.sockets.in(data.room.playerRoom).emit('gameOver', {message: 'Player 1 Wins!'});
-				} else {
-					io.sockets.in(data.room.playerRoom).emit('gameOver', {message: 'Player 2 Wins!'});
-				}
+			if (player[0].score > player[1].score) {
+				io.sockets.in(data.room.playerRoom).emit('gameOver', {message: 'Player 1 Wins!'});
+			} else {
+				io.sockets.in(data.room.playerRoom).emit('gameOver', {message: 'Player 2 Wins!'});
 			}
 		})
 	})
@@ -278,16 +278,22 @@ function removeRoom(data) {
 	numOfPlayers--;
 	console.log('client disconnected', this.id);
 	if (numOfPlayers === 0) {
-		models.Room.destroy({
+		models.Player.findAll({
 			where: {
-				$or: [{
-					player1: this.id
-				}, {
-					player2:this.id
-				}]
+				socketId: this.id
 			}
-		}).then(function (room) {
-			console.log('room destroyed');
+		}).then(function (playerRoom) {
+			console.log(playerRoom[0].RoomId, 'testing disconnect');
+			models.Room.update({
+				status: false
+			},{
+				where: {
+					id: playerRoom[0].RoomId
+				}
+			}).then(function (room) {
+				console.log('success changed to false');
+			})
+
 		})
 	} else {
 		io.sockets.to(gameRoomId).emit('waitingForPlayer', { message: 'Waiting for player to join' });

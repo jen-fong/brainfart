@@ -114,7 +114,7 @@ when choice is selected, text will display whether or not the user got the answe
 
          <center>
           <p>
-            <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#modal-3">Play Now</button>
+            <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#modal-3" id="showTheRooms">Play Now</button>
            <div class="modal fade" id="modal-3">
                 <div class="modal-dialog">
                     <div class="modal-content">
@@ -127,7 +127,7 @@ when choice is selected, text will display whether or not the user got the answe
 								<form id="newScore">
 					    			{{!-- <input type="text" id="name" placeholder="Your name"><br>
 					    			<input type="text" id="score" placeholder="Your score"><br><br><br> --}}
-					      			<button id="test" type="submit"><span class="glyphicon glyphicon-pushpin"></span> Create Room</button>
+					      			<button id="test" type="submit">Create Room</button>
 					          	</form>
 					          	
 							</div> 
@@ -135,11 +135,12 @@ when choice is selected, text will display whether or not the user got the answe
                         </div>
                         <div class="modal-body">
                            <h3>Available rooms</h3>
-                           <form id="roomtest">
-					          		<input type="text" id="room">
-					          		<button id="testroom" type="submit"><span class="glyphicon glyphicon-pushpin"></span> Join Room</button>
-					          	</form>
-
+{{!--                            <form id="roomtest">
+				          		<input type="text" id="room">
+				          		<button id="testroom" type="submit">Join Room</button>
+				          	</form> --}}
+				          	<div id="displayRoom">
+				          	</div>
                         </div>
                         <div class="modal-footer">
                             <a href="" class="btn btn-default" data-dismiss="modal">Close</a>
@@ -148,15 +149,12 @@ when choice is selected, text will display whether or not the user got the answe
                 </div>
             </div>
             <div id="bodyarea">
+            	<div id="welcome">
+            	</div>
 
 			{{{ body }}}
 			</div>
             
-
-		<div id="gameRooms">
-			
-
-		</div>
           </p>
         </center>
     </div>
@@ -183,8 +181,29 @@ when choice is selected, text will display whether or not the user got the answe
             </div>
           </div>
     </div>
+    <div id="scoreModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+         <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel">Final</h4>
+              </div>
+              <div class="modal-body" id="winner">
+                ...
+              </div>
+              <div>
+              		<div id="score">
 
+					</div>
+              </div>
+              <div class="modal-footer">
+                {{!-- <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> --}}
+                {{!-- dont need this, we want users to answer the question  --}}
+              </div>
+            </div>
+          </div>
+    </div>
     <div id="game_window">
+
         <div class="game_screen">
 	        <div class="col-md-9">
 	            <div class="row">
@@ -304,7 +323,7 @@ when choice is selected, text will display whether or not the user got the answe
                 <div class="section">
                       <div class="section-header">
                         <h3 class="section-title-score">SCORE </h3>
-                        <h2 class="score_number">0</h2>
+                        <h2 class="score_number"></h2>
                       </div>
                       <div class="section-body"> </div>
                       <div class="section-footer"> </div>
@@ -321,7 +340,7 @@ when choice is selected, text will display whether or not the user got the answe
                     </div>
                     <div class="section-header">
                       <h3 class="section-title-playerLives"> LIVES </h3>
-                      <h2 id="game_lives">3</h2>
+                      <h2 id="game_lives"></h2>
                     </div>
 
                     <div class="section-body"></div>
@@ -333,10 +352,14 @@ when choice is selected, text will display whether or not the user got the answe
             </div>    
 
 		</div>
+		<div id="gameRooms">
+			test tesyt
+
+		</div>
 	</div>
 
-<script src="../assets/javascript/game.js"></script>
-<script src="../socket.io/socket.io.js"></script>
+<script src="assets/javascript/game.js"></script>
+<script src="socket.io/socket.io.js"></script>
 <script>
 $(document).ready(function() {
 	var role;
@@ -345,7 +368,7 @@ $(document).ready(function() {
 	var time = 10;
 	var gameStarted = false;
 	var theQuestion ="";
-	var score =0;
+	var score = 0;
 	var lives = 3;
 	var clicked_Y;
 	var clicked_X;
@@ -356,6 +379,9 @@ $(document).ready(function() {
 			'#testbuttonC1', '#testbuttonC2', '#testbuttonC3', '#testbuttonC4', '#testbuttonC5',
 			'#testbuttonD1', '#testbuttonD2', '#testbuttonD3', '#testbuttonD4', '#testbuttonD5'
 		];
+	$('#game_lives').html(lives);
+	$('#score_number').html(score);
+
 	$('a[href*=#]').click(function() {
         if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'')
             && location.hostname == this.hostname) {
@@ -368,12 +394,10 @@ $(document).ready(function() {
             }
         }
     });
-	$('#game').hide();
 	var socket = io.connect('http://localhost:3000');
-	// socket.emit('displayRooms', {data: 'test'})
-	// socket.on('showAllRooms', function (data) {
-	// 	showRooms(data);
-	// })
+	socket.on('showAllRooms', function (data) {
+		showRooms(data);
+	})
 	socket.on('waitingForPlayer', function (data) {
 		$('#gameRooms').html('<h2>' + data.message + '</h2>');
 	})
@@ -392,23 +416,59 @@ $(document).ready(function() {
 		$('#gameRooms').html('<h2>' + data.message + '</h2>');
 	});
 	socket.on('gameOver', function (data) {
-		alert(data.message)
+		displayFinal(data);
 	});
+	socket.on('addedRoom', function (data) {
+		addRoomToList(data);
+	})
+
+	$('#showTheRooms').on('click', function () {
+		socket.emit('displayRooms', { messsage: 'ready for rooms'});
+	});
+
 	function gameInit(data) {
 		gameId = data.gameId;
 		mySocketId = data.mySocketId;
 		role = 'player1';
 		numOfPlayers = 1;
-		console.log(gameId, role)
+		console.log(gameId, role);
+		$('#welcome').html('<h2>Welcome Player 1</h2>');
 	}
-	// function showRooms (data) {
-	// 	console.log(data.allRooms);
-	// 	for (var i = 0; i < data; i++) {
-	// 		console.log(data)
-	// 		// $('#gameRooms').append(data[i]);
-	// 	}
+
+	function showRooms (data) {
+		console.log(data);
+		var roomDiv = $('<div>', {
+			class: 'oneRoom',
+		});
+		for (var i = 0; i < data.length; i++) {
+			var joinButton = $('<button>', {
+				id: 'testroom',
+				type: 'button',
+				text: 'Join Room',
+				value: data[i]
+			});
+			var pRoom = $('<p>'); // lol p room
+			pRoom.append(data[i], joinButton);
+			roomDiv.append(pRoom);
+		}
+		$('#displayRoom').html(roomDiv);
 		
-	// }
+	}
+	function addRoomToList (data) {
+		var roomDiv = $('<div>', {
+			class: 'oneRoom',
+		});
+		var joinButton = $('<button>', {
+			id: 'testroom',
+			type: 'button',
+			text: 'Join Room',
+			value: data
+		});
+		var pRoom = $('<p>'); // lol p room
+		pRoom.append(data, joinButton);
+		roomDiv.append(pRoom);
+		$('#displayRoom').append(roomDiv);
+	}
 
 	// socket.on('newGameCreated', function (data) {
 	// 	console.log(data)
@@ -435,14 +495,16 @@ $(document).ready(function() {
 
 		// })
 	})
-	$('#testroom').on('click', function(e) {
+	$('#displayRoom').on('click', 'button', function(e) {
 		e.preventDefault();
-		var room = $('#room').val();
+		var room = $(this).attr('value');
+		console.log(room)
 		role = 'player2'
 		numOfPlayers = 2;
 		console.log(role)
 		updateNumOfPlayers(room);
 		$('#room').val('');
+		$('#welcome').html('<h2>Welcome Player 2</h2>');
 	})
 
 	function updateNumOfPlayers (room) {
@@ -455,6 +517,7 @@ $(document).ready(function() {
 		alert('test')
 	})
 	function initQuestions(data) {
+		gameStarted = true;
 		console.log(data.question, data.question.answer)
 		theQuestion = data.question;
 		theAnswer = data.question.answer;
@@ -531,11 +594,13 @@ var bombs = [];
 			[1,1]
 		];
 
-if (!gameStarted) {
-	$('.trivBox').off('click');
-}
+
+
 $('.trivBox').on('click', function() {
-	clicked_X = $(this).data('x');
+	if (!gameStarted) {
+	$(this).off('click');
+} else {
+		clicked_X = $(this).data('x');
 	clicked_Y = $(this).data('y');
 	var clickedBomb = false;
 	var surroundingBombs = 0;
@@ -568,16 +633,16 @@ $('.trivBox').on('click', function() {
       $(this).empty().removeClass().addClass('numberBox').append(surroundingBombs);
 		$(this).off('click');
 	}
+}
+
+
 });
 
 	function triviaBox() {
-		$("#questionModal").modal('show');
-		
+		$("#questionModal").modal({backdrop: 'static', keyboard: false});	
 	}
-var lives = 3;
 
 $('#choices').on('click', 'button', function () {
-	$('#game_lives').html(lives);
 	console.log(questionData)
 	var userAnswer = $(this).val();
 	console.log(userAnswer);
@@ -588,21 +653,30 @@ $('#choices').on('click', 'button', function () {
 	if (userAnswer === questionData.question.answer) {
 		score++;
 		console.log('correct!');
+		$('#score_number').html(score);
 		questionData.score = score;
 		socket.emit('answeredCorrectly', questionData);
 	} else {
-		console.log('wrong');
+		console.log('wrong', lives);
 		lives--;
-		// if (lives === 0) {
-		// 	socket.emit('gameOver', questionData);
-		// } else {
+		$('#game_lives').html(lives);
+		if (lives === 0) {
+			$('#game_lives').html('0');
+			socket.emit('gameOver', questionData);
+		} else {
 			socket.emit('answeredWrong', questionData);
-		// }
+		}
 	}
 		$(this).off('click');
 })
 
 })
+
+function displayFinal(data) {
+	var gameFinishedMsg = data.message + " Your score is " + score + ". Come and play again!";
+	$('#winner').html(gameFinishedMsg);
+	$('#scoreModal').modal('show');
+}
 
 
 </script>
