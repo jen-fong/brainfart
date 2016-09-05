@@ -9,7 +9,7 @@ var models = require('./models');
 models.sequelize.sync().then(function() {
 	console.log('successfully synced model!');
 });
-// create express app and set it to use handlebars
+// create server and set socket to listen
 var app = express();
 var server = require('http').createServer(app);
 var io = require('socket.io').listen(server);
