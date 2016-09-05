@@ -51,10 +51,6 @@ $(document).ready(function() {
 	socket.on('sendQuestions', function(data) {
 		initQuestions(data);
 	});
-	socket.on('roomDoesNotExist', function (data) {
-		console.log(data)
-		$('#gameRooms').html('<h2>' + data.message + '</h2>');
-	});
 	socket.on('gameOver', function (data) {
 		displayFinal(data);
 	});
@@ -345,7 +341,7 @@ $(document).ready(function() {
 			if (lives === 0) {
 				// if player dies, tells server the game is over
 				$('#game_lives').html('0');
-				socket.emit('gameOver', questionData);
+				socket.emit('playerLost', questionData);
 			} else {
 				// otherwise, tells server to send next question and to decrease lives in db
 				socket.emit('answeredWrong', questionData);

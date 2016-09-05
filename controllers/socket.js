@@ -5,7 +5,8 @@ var gameSocket;
 var gameRoomId;
 // var room;
 var numOfPlayers;
-var questionsArray = [];
+var player1Questions = [];
+var player2Questions = [];
 function randomQuestion (array) {
 	var theRandomQuestion = array[Math.floor(Math.random() * array.length)];
 	return theRandomQuestion;
@@ -23,7 +24,7 @@ var testSocket = function (sio, client) {
 	gameSocket.on('countdownFinished', startGame);
 	gameSocket.on('answeredCorrectly', increaseScore);
 	gameSocket.on('answeredWrong', decreaseLives);
-	gameSocket.on('gameOver', gameOver);
+	gameSocket.on('playerLost', gameOver);
 	gameSocket.on('disconnect', removeRoom);
 }
 
@@ -78,8 +79,6 @@ function createRoom () {
 }
 
 // grabs all the questions from db and places into an array
-// may change this part to get a random number between 1 and 36 to query the db for a question
-// need to make it not repeat numbers
 // function is called when there are two users in the room
 // will return the same first question to both users
 function getQuestionFromDb () {
@@ -87,12 +86,16 @@ function getQuestionFromDb () {
 		limit: 36
 	}).then(function (questions) {
 		questions.forEach(function (questions) {
-			questionsArray.push({
+			player1Questions.push({
+				question: questions.question,
+				id: questions.id
+			});
+			player2Questions.push({
 				question: questions.question,
 				id: questions.id
 			});
 		})
-		console.log(questionsArray);
+		console.log('player 1 array', player1Questions, 'player 2 array', player2Questions);
 		firstQuestion();
 	})
 }
@@ -101,8 +104,14 @@ function getQuestionFromDb () {
 // choices all correspond to the question id. The one that is true will be the correct answer
 // assigns the true choice as the answer
 function firstQuestion () {
-	sendQuestion = randomQuestion(questionsArray);
-	console.log(sendQuestion);
+	// does not matter which array we select from since its first ques
+	// both arrays will be the same
+	// will splice the question from both arrays to prevent repeat questions
+	sendQuestion = randomQuestion(player1Questions);
+	var questionIndex = player1Questions.indexOf(sendQuestion);
+	player1Questions.splice(questionIndex, 1);
+	player2Questions.splice(questionIndex, 1);
+	console.log('testing indexof', player1Questions, player2Questions);
 	models.triviaResponse.findAll({
 		where: {
 			triviaQuestionId: sendQuestion.id
@@ -115,11 +124,12 @@ function firstQuestion () {
 				sendQuestion.answer = choices[i].choice;
 			}
 		}
-		sendQuestion.choices = questionChoices;
+		sendQuestion.choices = questionChoices;	
 	})
 }
 
 // second user clicks join room
+// data contains the room
 function playerJoin(data) {
 	console.log('player 2 connected', data);
 	var room = gameSocket.adapter.rooms[data.playerRoom];
@@ -127,71 +137,59 @@ function playerJoin(data) {
 	console.log(room);
 	// reference to the socket io object
 	var playerSocket = this;
-	// attach socket id to the data obj
+	// attach socket id to the data obj, now contains room and socket id
 	data.playerSocketId = playerSocket.id;
 	player2SocketId = this.id;
+	getQuestionFromDb();
 	// if the room exists, join the room as player 2
-	if(room != undefined) {
-		getQuestionFromDb();
-		console.log('room exists', playerSocket.id, data.playerRoom);
-		playerSocket.join(data.playerRoom);
-		//update the room table with the player info
-		models.Room.findAll({
-			where:{
-				room_num: data.playerRoom
-			}
-		}).then(function (room) {
-			console.log(room[0], 'testing 2nd room');
-			addPlayer2 = room[0];
-			addPlayer2.createPlayer({
-				player_num: 'player2',
-				socketId: player2SocketId,
-				lives: 3,
-				score: 0
-			}).then(function (player) {
-				console.log('successfully added player 2');
-				// tells clients that the game is ready
-				io.sockets.in(data.playerRoom).emit('alertPlayers', data);
-			})
-			
+	console.log('room exists', playerSocket.id, data.playerRoom);
+	playerSocket.join(data.playerRoom);
+	//update the room table with the player info
+	models.Room.findAll({
+		where:{
+			room_num: data.playerRoom
+		}
+	}).then(function (room) {
+		console.log(room[0], 'testing 2nd room');
+		addPlayer2 = room[0];
+		addPlayer2.createPlayer({
+			player_num: 'player2',
+			socketId: player2SocketId,
+			lives: 3,
+			score: 0
+		}).then(function (player) {
+			console.log('successfully added player 2');
+			// tells clients that the game is ready
+			io.sockets.in(data.playerRoom).emit('alertPlayers', data);
 		})
+		
+	})
 
-	} else {
-		// room should exist only because we are displaying the rooms that are available from db
-		// so if else statement not really needed
-		 console.log('room does not exist', data);
-		 var roomError = "Room does not exist";
-		 this.emit('roomDoesNotExist', { message: roomError });
-	}
 }
 
 // countdown has finished
-// sends the first question to the clients
+// sends the same first question to the clients
+// data contains room and second user's socket id
 function startGame(data) {
 	console.log('success', data);
-	var socketThis = this;
-	socketThis.emit('sendQuestions', { question: sendQuestion, room: data});
+	this.emit('sendQuestions', { question: sendQuestion, room: data});
 }
-
-// need to remove these arrays when I change game design
-	var player1Questions = [];
-	var player2Questions = [];
 
 // user has answered question
 // client has sent the response back
-// data contains the question, question id, answer, room, and user socket id
+// data contains the question, question id, answer, choices, room, user socket id, x, y of box, lives and score
 function nextQuestion (nextQuestionThis, data) {
-	console.log(data.question.id);
+	console.log('data after answer question',data.question.id);
 	// I was trying to track the questions each user already received
 	if (data.player === 'player1') {
-		player1Questions.push({id: nextQuestionThis.id, questionId: data.question.id});
-		// console.log(player1Questions);
+		sendQuestion = randomQuestion(player1Questions);
+		var questionIndex = player1Questions.indexOf(sendQuestion);
+		player1Questions.splice(questionIndex, 1);
 	} else if (data.player === 'player2') {
-		player2Questions.push({id: nextQuestionThis.id, questionId: data.question.id});
-		console.log(player2Questions);
+		sendQuestion = randomQuestion(player1Questions);
+		var questionIndex = player2Questions.indexOf(sendQuestion);
+		player2Questions.splice(questionIndex, 1);
 	}
-
-	sendQuestion = randomQuestion(questionsArray);
 	models.triviaResponse.findAll({
 		where: {
 			triviaQuestionId: sendQuestion.id
@@ -207,33 +205,6 @@ function nextQuestion (nextQuestionThis, data) {
 		sendQuestion.choices = questionChoices;
 		nextQuestionThis.emit('sendQuestions', { question:sendQuestion, room: data.room});
 	})
-	
-
-	// sendQuestion = randomQuestion(questionsArray);
-	// console.log(sendQuestion)
-	// for (var i = 0; i < player1Questions.length; i++) {
-	// 	if (sendQuestion.id === player1Questions[i].id) {
-	// 		sendQuestion = randomQuestion(questionsArray);
-	// 	} else {
-	// 		models.triviaResponse.findAll({
-	// 			where: {
-	// 				triviaQuestionId: sendQuestion.id
-	// 			}
-	// 		}).then(function (choices) {
-	// 			var questionChoices = [];
-	// 			for (var i = 0; i < choices.length; i++) {
-	// 				questionChoices.push(choices[i].choice);
-	// 				if (choices[i].status) {
-	// 					sendQuestion.answer = choices[i].choice;
-	// 				}
-	// 			}
-	// 			sendQuestion.choices = questionChoices;
-				
-	// 			console.log(sendQuestion);
-	// 		})
-	// 	}
-	// }
-
 }
 
 // user selected answer, client determines whether the answer is correct or not
@@ -244,27 +215,23 @@ function increaseScore (data) {
 	// need to keep reference to socket
 	var passThis = this;
 	console.log('testing room and player score update', data.room.playerRoom);
-		models.Room.findAll({
+	models.Room.findAll({
+		where: {
+			room_num: data.room.playerRoom
+		}
+	}).then(function (room) {
+		models.Player.update({
+			score: data.score
+		}, {
 			where: {
-				room_num: data.room.playerRoom
+				roomId: room[0].id,
+				player_num: data.player
 			}
-		}).then(function (room) {
-			models.Player.update({
-				score: data.score
-			}, {
-				where: {
-					roomId: room[0].id,
-					player_num: data.player
-				}
-			}).then(function (player) {
-				// once database is updatedd, will call function to get another question
-				nextQuestion(passThis, data);
-			})
+		}).then(function (player) {
+			// once database is updatedd, will call function to get another question
+			nextQuestion(passThis, data);
 		})
-	// var nextQuestionData = {
-	// 	question: sendQuestion,
-	// 	room: data.room
-	// };
+	})
 }
 
 // user clicked choice and client determined it was wrong
@@ -273,9 +240,6 @@ function increaseScore (data) {
 function decreaseLives(data) {
 	// console.log(data);
 	var passThis = this;
-	if (data.lives === 0) {
-		gameOver(data);
-	}
 	models.Room.findAll({
 		where: {
 			room_num: data.room.playerRoom
@@ -299,6 +263,7 @@ function decreaseLives(data) {
 // alerts users who won the game by comparing the points of each user
 // I need to fix this, if user has more points but no lives, they need to lose
 function gameOver (data) {
+	console.log(data, 'testing lives');
 	models.Room.findAll({
 		where: {
 			room_num: data.room.playerRoom
@@ -309,9 +274,9 @@ function gameOver (data) {
 				roomId: room[0].id
 			}
 		}).then(function (player) {
-			if (player[0].score > player[1].score) {
+			if (player[0].score > player[1].score && player[0].lives !== 0) {
 				io.sockets.in(data.room.playerRoom).emit('gameOver', {message: 'Player 1 Wins!'});
-			} else {
+			} else if (player[1].score > player[0].score && player[1].lives !== 0) {
 				io.sockets.in(data.room.playerRoom).emit('gameOver', {message: 'Player 2 Wins!'});
 			}
 		})
