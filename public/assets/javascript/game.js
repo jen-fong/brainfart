@@ -271,7 +271,6 @@ $(document).ready(function() {
 			// grabs the x and y values of the clicked box
 			clicked_X = $(this).data('x');
 			clicked_Y = $(this).data('y');
-			boxesClicked++;
 			var clickedBomb = false;
 			var surroundingBombs = 0;
 			// if its a bomb, will show bomb laughing
