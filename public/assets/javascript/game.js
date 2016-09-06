@@ -36,6 +36,7 @@ $(document).ready(function() {
     });
     // connects the client socket io to the server socket io
 	var socket = io.connect();
+	//test socket
 	socket.on('showAllRooms', function (data) {
 		showRooms(data);
 	})
