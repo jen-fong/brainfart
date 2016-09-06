@@ -53,28 +53,33 @@ function showRooms() {
 // adds room into rooms table in db
 // data emitted back to client is room # and their socket id
 function createRoom () {
+	var newRoom = [];
 	console.log('client connected');
 	gameRoomId = ( Math.random() * 100000 ) | 0;
 	numOfPlayers = 1; // this part is not needed, need to put on client side
+	var createRoomThis = this;
 	player1SocketId = this.id;
-	this.emit('newGameCreated', { gameId: gameRoomId, socketId: this.id})
+	this.emit('newGameCreated', { gameId: gameRoomId, socketId: this.id});
 	console.log(this.id)
 	this.join(gameRoomId.toString());
 	models.Room.create({
 		room_num: gameRoomId,
 		status: true
-	}).then(function(room) {
-		console.log('created room');
+	}).then(function(addedRoom) {
+		console.log('created room', addedRoom);
+		newRoom.push(addedRoom.room_num);
 		// will need to insert this onto the page on connection
-		var roomNumber = room;
+		var roomNumber = addedRoom;
 		roomNumber.createPlayer({
 			player_num: 'player1',
 			socketId: player1SocketId,
 			lives: 3,
 			score: 0
-		})
-
-	}).then(function (player) { console.log(player)})
+		});
+	}).then(function (player) {
+		createRoomThis.emit('showAllRooms', newRoom);
+		createRoomThis.broadcast.emit('showAllRooms', newRoom);
+	})
 }
 
 // grabs all the questions from db and places into an array

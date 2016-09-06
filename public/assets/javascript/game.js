@@ -94,7 +94,7 @@ $(document).ready(function() {
 			pRoom.append(data[i], joinButton);
 			roomDiv.append(pRoom);
 		}
-		$('#displayRoom').html(roomDiv);
+		$('#displayRoom').append(roomDiv);
 		
 	}
 
@@ -127,21 +127,9 @@ $(document).ready(function() {
 	// })
 
 	// testing for leaderboard, not yet functional
-	$('#test').on('click', function(e) {
+	$('#createNewRoom').on('click', function(e) {
 		e.preventDefault()
-		var name = $('#name').val();
-		var addScore = {
-			name: $('#name').val(),
-			score: parseInt($('#score').val())
-		}
-		console.log(addScore);
-		socket.emit('createRoom', addScore);
-
-		// $.post('/game/score', addScore).done(function (response) {
-			
-		// 	console.log(response);
-
-		// })
+		socket.emit('createRoom', {message: "created room"});
 	})
 
 	// player 2 clicks joins an available room
