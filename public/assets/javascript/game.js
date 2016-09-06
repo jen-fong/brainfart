@@ -9,7 +9,7 @@ $(document).ready(function() {
 	var lives = 3;
 	var clicked_Y;
 	var clicked_X;
-	   var laugh = new Audio('assets/sounds/skullkid.mp3');
+	var laugh = new Audio('assets/sounds/skullkid.mp3');
 
 
 	var allBoxes = [
@@ -256,7 +256,6 @@ $(document).ready(function() {
 			clicked_X = $(this).data('x');
 			clicked_Y = $(this).data('y');
 			var clickedBomb = false;
-			var surroundingBombs = 0;
 			// if its a bomb, will show bomb laughing
 			// need to update this to make it so clicking on a bomb will decrease time you have to answer question
 			for (var i = 0; i < bombs.length; i++) {
@@ -268,24 +267,9 @@ $(document).ready(function() {
 				}
 			}
 			if (!clickedBomb) {
+				var trivBoxThis = this;
 				triviaBox();
-				// minesweeper portion
-				// counts the surrounding bombs and displays num of bombs in box
-				for (var i = 0; i < surroundingBoxes.length; i++) {
-					// var surroundingBox_X = ;
-					// var surroundingBox_Y = ;
-					if ((clicked_X + surroundingBoxes[i][0]) >= 0 && (clicked_X + surroundingBoxes[i][0]) <= 4 && 
-						(clicked_Y + surroundingBoxes[i][1]) >= 0 && (clicked_Y + surroundingBoxes[i][1]) <= 3) {
-						for (var j = 0; j < bombs.length; j++) {
-							if ((clicked_X + surroundingBoxes[i][0]) === $(bombs[j]).data('x') && 
-								(clicked_Y + surroundingBoxes[i][1]) === $(bombs[j]).data('y')) {
-								surroundingBombs++;
-							}
-						}
-					}
-				}
-			// bombCheck();
-		      	$(this).empty().removeClass().addClass('numberBox').append(surroundingBombs);
+				bombCheck(trivBoxThis);
 				$(this).off('click');
 			}
 		}
@@ -297,9 +281,31 @@ $(document).ready(function() {
 	function triviaBox() {
 		$("#questionModal").modal({backdrop: 'static', keyboard: false});	
 	}
+	// minesweeper portion
+	// counts the surrounding bombs and displays num of bombs in box
+	function bombCheck(trivBoxThis) {
+		var surroundingBombs = 0;
+		for (var i = 0; i < surroundingBoxes.length; i++) {
+			// var surroundingBox_X = ;
+			// var surroundingBox_Y = ;
+			if ((clicked_X + surroundingBoxes[i][0]) >= 0 && (clicked_X + surroundingBoxes[i][0]) <= 4 && 
+				(clicked_Y + surroundingBoxes[i][1]) >= 0 && (clicked_Y + surroundingBoxes[i][1]) <= 3) {
+				for (var j = 0; j < bombs.length; j++) {
+					if ((clicked_X + surroundingBoxes[i][0]) === $(bombs[j]).data('x') && 
+						(clicked_Y + surroundingBoxes[i][1]) === $(bombs[j]).data('y')) {
+						surroundingBombs++;
+					}
+				}
+			}
+		}
+		$(trivBoxThis).empty().removeClass().addClass('numberBox').append(surroundingBombs);
+	}
 
 	// user clicks on their answer
 	$('#choices').on('click', 'button', function () {
+		if(!document.getElementsByClassName('trivBox').length) {
+			questionData.gameFinished = true;
+		}
 		var userAnswer = $(this).val();
 		console.log(userAnswer);
 		// assign role, x, y to the data object that will be sent back to the server

@@ -110,9 +110,9 @@ function getQuestionFromDb () {
 function firstQuestion () {
 	// does not matter which array we select from since its first ques
 	// both arrays will be the same
-	// will splice the question from both arrays to prevent repeat questions
 	sendQuestion = randomQuestion(player1Questions);
 	var questionIndex = player1Questions.indexOf(sendQuestion);
+	// will splice the question from both arrays to prevent repeat questions
 	player1Questions.splice(questionIndex, 1);
 	player2Questions.splice(questionIndex, 1);
 	console.log('testing indexof', player1Questions, player2Questions);
@@ -189,6 +189,7 @@ function nextQuestion (nextQuestionThis, data) {
 		sendQuestion = randomQuestion(player1Questions);
 		var questionIndex = player1Questions.indexOf(sendQuestion);
 		player1Questions.splice(questionIndex, 1);
+		console.log(player1Questions);
 	} else if (data.player === 'player2') {
 		sendQuestion = randomQuestion(player1Questions);
 		var questionIndex = player2Questions.indexOf(sendQuestion);
@@ -212,7 +213,7 @@ function nextQuestion (nextQuestionThis, data) {
 }
 
 // user selected answer, client determines whether the answer is correct or not
-// we had sent the question, question id, and the answer in the data every time we send a question
+// data containsquestion, question id, the answer, and whether gameFinished is true or not
 // client will determine whether it is the right or wrong answer and emit the proper response
 // if client sees answer is correct, will increase the score and update the database
 function increaseScore (data) {
@@ -232,8 +233,12 @@ function increaseScore (data) {
 				player_num: data.player
 			}
 		}).then(function (player) {
-			// once database is updatedd, will call function to get another question
-			nextQuestion(passThis, data);
+			// once database is updated, will call function to get another question
+			if (data.gameFinished) {
+				gameOver(data);
+			} else {
+				nextQuestion(passThis, data);
+			}
 		})
 	})
 }
