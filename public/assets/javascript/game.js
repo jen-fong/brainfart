@@ -21,6 +21,7 @@ $(document).ready(function() {
 	$('#game_lives').html(lives);
 	$('.score_number').html(score);
 
+	// this is for the slide down when new game starts
 	$('a[href*=#]').click(function() {
         if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'')
             && location.hostname == this.hostname) {
@@ -34,7 +35,7 @@ $(document).ready(function() {
         }
     });
     // connects the client socket io to the server socket io
-	var socket = io.connect('http://localhost:3000');
+	var socket = io.connect();
 	socket.on('showAllRooms', function (data) {
 		showRooms(data);
 	})

@@ -1,7 +1,7 @@
 {
   "development": {
     "username": "root",
-    "password": "j9191015",
+    "password": "",
     "database": "trivia_db",
     "host": "127.0.0.1",
     "dialect": "mysql"
@@ -14,10 +14,10 @@
     "dialect": "mysql"
   },
   "production": {
-    "username": "root",
-    "password": null,
-    "database": "database_production",
-    "host": "127.0.0.1",
+    "username": "z3xb2wv6zr21xqen",
+    "password": "tmautx8tgcvdjnn3",
+    "database": "trivia_db",
+    "host": "d6q8diwwdmy5c9k9.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",
     "dialect": "mysql"
   }
 }
