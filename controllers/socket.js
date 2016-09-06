@@ -24,7 +24,6 @@ var testSocket = function (sio, client) {
 	gameSocket.on('countdownFinished', startGame);
 	gameSocket.on('answeredCorrectly', increaseScore);
 	gameSocket.on('answeredWrong', decreaseLives);
-	gameSocket.on('playerLost', gameOver);
 	gameSocket.on('disconnect', removeRoom);
 }
 
@@ -237,6 +236,7 @@ function increaseScore (data) {
 // user clicked choice and client determined it was wrong
 // client emits the response to decrease lives of the user
 // updates the database with the numb of lives and then calls the next question
+// data contains all question data (choices, id), room id, socket id, player id, box x, y coords, lives and score
 function decreaseLives(data) {
 	// console.log(data);
 	var passThis = this;
@@ -253,17 +253,19 @@ function decreaseLives(data) {
 				player_num: data.player
 			}
 		}).then(function (player) {
-			nextQuestion(passThis, data);
+			if (data.lives === 0) {
+				gameOver(data);
+			} else {
+				nextQuestion(passThis, data);
+			}
 		})
-	})
-	
+	})	
 }
 
 // Game over, client determines num of lives has hit 0
 // alerts users who won the game by comparing the points of each user
 // I need to fix this, if user has more points but no lives, they need to lose
 function gameOver (data) {
-	console.log(data, 'testing lives');
 	models.Room.findAll({
 		where: {
 			room_num: data.room.playerRoom
@@ -274,9 +276,16 @@ function gameOver (data) {
 				roomId: room[0].id
 			}
 		}).then(function (player) {
-			if (player[0].score > player[1].score && player[0].lives !== 0) {
+			// win conditions, the other player hits 0 lives
+			// or player has higher score
+			// need to update this on frontend
+			if (player[0].lives === 0) {
+				io.sockets.in(data.room.playerRoom).emit('gameOver', {message: 'Player 2 Wins!'});
+			} else if (player[1].lives === 0) {
 				io.sockets.in(data.room.playerRoom).emit('gameOver', {message: 'Player 1 Wins!'});
-			} else if (player[1].score > player[0].score && player[1].lives !== 0) {
+			} else if (player[0].score > player[1].score) {
+				io.sockets.in(data.room.playerRoom).emit('gameOver', {message: 'Player 1 Wins!'});
+			} else if (player[1].score > player[0].score) {
 				io.sockets.in(data.room.playerRoom).emit('gameOver', {message: 'Player 2 Wins!'});
 			}
 		})

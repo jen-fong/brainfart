@@ -280,7 +280,6 @@ $(document).ready(function() {
 				}
 			}
 			if (!clickedBomb) {
-				console.log(theQuestion, 'test');
 				triviaBox();
 				// minesweeper portion
 				// counts the surrounding bombs and displays num of bombs in box
@@ -313,7 +312,6 @@ $(document).ready(function() {
 
 	// user clicks on their answer
 	$('#choices').on('click', 'button', function () {
-		console.log(questionData);
 		var userAnswer = $(this).val();
 		console.log(userAnswer);
 		// assign role, x, y to the data object that will be sent back to the server
@@ -331,21 +329,14 @@ $(document).ready(function() {
 			questionData.lives = lives;
 			socket.emit('answeredCorrectly', questionData);
 		} else {
-			console.log('wrong', lives);
 			// decrease lives if answer was wrong
 			lives--;
 			$('#game_lives').html(lives);
+			console.log('wrong', lives);
 			//attaches score and lives to data var and send all data back to server
 			questionData.score = score;
 			questionData.lives = lives;
-			if (lives === 0) {
-				// if player dies, tells server the game is over
-				$('#game_lives').html('0');
-				socket.emit('playerLost', questionData);
-			} else {
-				// otherwise, tells server to send next question and to decrease lives in db
-				socket.emit('answeredWrong', questionData);
-			}
+			socket.emit('answeredWrong', questionData);
 		}
 		// prevents user from clicking on same box
 		$(this).off('click');
