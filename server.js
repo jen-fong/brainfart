@@ -33,8 +33,6 @@ io.on('connection', function (socket) {
 	socketController(io, socket)	
 });
 
-app.use('/', gameRoute);
-
 
 server.listen(PORT, function() {
 	console.log('connected on port ' + PORT);

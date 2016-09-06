@@ -3,6 +3,7 @@ $(document).ready(function() {
 	var mySocketId;
 	var questionData;
 	var time = 10;
+	var questionTime = 20;
 	var gameStarted = false;
 	var theQuestion ="";
 	var score = 0;
@@ -10,31 +11,24 @@ $(document).ready(function() {
 	var clicked_Y;
 	var clicked_X;
 	var laugh = new Audio('assets/sounds/skullkid.mp3');
-
-
 	var allBoxes = [
 			'#testbuttonA1', '#testbuttonA2', '#testbuttonA3', '#testbuttonA4', '#testbuttonA5', 
 			'#testbuttonB1', '#testbuttonB2', '#testbuttonB3', '#testbuttonB4', '#testbuttonB5',
 			'#testbuttonC1', '#testbuttonC2', '#testbuttonC3', '#testbuttonC4', '#testbuttonC5',
 			'#testbuttonD1', '#testbuttonD2', '#testbuttonD3', '#testbuttonD4', '#testbuttonD5'
 		];
-	$('#game_lives').html(lives);
-	$('.score_number').html(score);
+	var surroundingBoxes = [
+		[-1,-1],
+		[0,-1],
+		[1,-1],
+		[-1,0],
+		[1,0],
+		[-1,1],
+		[0,1],
+		[1,1]
+	];
 
-	// this is for the slide down when new game starts
-	$('a[href*=#]').click(function() {
-        if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'')
-            && location.hostname == this.hostname) {
-                var $target = $(this.hash);
-                $target = $target.length && $target || $('[name=' + this.hash.slice(1) +']');
-            if ($target.length) {
-                var targetOffset = $target.offset().top;
-                $('html,body').animate({scrollTop: targetOffset}, 1000);
-                return false;
-            }
-        }
-    });
-    // connects the client socket io to the server socket io
+	    // connects the client socket io to the server socket io
 	var socket = io.connect();
 	//test socket
 	socket.on('showAllRooms', function (data) {
@@ -58,26 +52,52 @@ $(document).ready(function() {
 	});
 	socket.on('addedRoom', function (data) {
 		addRoomToList(data);
-	})
+	});
+
+	$('#game_lives').html(lives);
+	$('.score_number').html(score);
+
+	// this is for the parallex slide down when new game starts
+	$('a[href*=#]').click(function() {
+        if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'')
+            && location.hostname == this.hostname) {
+                var $target = $(this.hash);
+                $target = $target.length && $target || $('[name=' + this.hash.slice(1) +']');
+            if ($target.length) {
+                var targetOffset = $target.offset().top;
+                $('html,body').animate({scrollTop: targetOffset}, 1000);
+                return false;
+            }
+        }
+    });
+
+	var bombs = [];
+
+	// Fisher-Yates Shuffle Algorithm:
+	Array.prototype.shuffle = function() {
+		var i = this.length, j, temp;
+		while(--i > 0) {
+			j = Math.floor(Math.random() * (i+1));
+			temp = this[j];
+			this[j] = this[i];
+			this[i] = temp;
+		}
+		return this;
+	}
+	var shuffledBoxes = allBoxes.shuffle();
+
+
+	// Chooses which boxes will be bombs:
+	for (var i = 0; i < 5; i++) {
+		bombs[i] = shuffledBoxes[i];
+	}
+	console.log("The bombs are: " + bombs);
 
 	// start game button is clicked
 	// asks server to send list of open rooms from database
 	$('#showTheRooms').on('click', function () {
 		socket.emit('displayRooms', { messsage: 'ready for rooms'});
 	});
-
-	// create room is clicked, new game room is initiated
-	function gameInit(data) {
-		// obtains the game room and user socket id from the data
-		gameId = data.gameId;
-		mySocketId = data.mySocketId;
-		// assigns the role as player 1 *important for keeping track of players
-		// and updating db
-		role = 'player1';
-		numOfPlayers = 1;
-		console.log(gameId, role);
-		$('#welcome').html('<h2>Welcome Player 1</h2>');
-	}
 
 	// receive all rooms in data from server and appends it to the available rooms list
 	function showRooms (data) {
@@ -96,10 +116,9 @@ $(document).ready(function() {
 			pRoom.append(data[i], joinButton);
 			roomDiv.append(pRoom);
 		}
-		$('#displayRoom').append(roomDiv);
-		
+		$('#displayRoom').append(roomDiv);	
 	}
-
+	
 	// appends a new room that is added
 	// need to fix this so there is not two functions for same thing
 	function addRoomToList (data) {
@@ -118,21 +137,24 @@ $(document).ready(function() {
 		$('#displayRoom').append(roomDiv);
 	}
 
-	// socket.on('newGameCreated', function (data) {
-	// 	console.log(data)
-	// })
-	// socket.on('score', function (data) {
-	// 	if ($('.test').children().length === 10) {
-	// 		$('.test').html('');
-	// 	}
-	// 	$('.test').append('<div>' + data.name + '</div><br>')
-	// })
-
 	// testing for leaderboard, not yet functional
 	$('#createNewRoom').on('click', function(e) {
 		e.preventDefault()
 		socket.emit('createRoom', {message: "created room"});
-	})
+	});
+
+	// create room is clicked, new game room is initiated
+	function gameInit(data) {
+		// obtains the game room and user socket id from the data
+		gameId = data.gameId;
+		mySocketId = data.mySocketId;
+		// assigns the role as player 1 *important for keeping track of players
+		// and updating db
+		role = 'player1';
+		numOfPlayers = 1;
+		console.log(gameId, role);
+		$('#welcome').html('<h2>Welcome Player 1</h2>');
+	}
 
 	// player 2 clicks joins an available room
 	$('#displayRoom').on('click', 'button', function(e) {
@@ -147,7 +169,7 @@ $(document).ready(function() {
 		updateNumOfPlayers(room);
 		$('#room').val('');
 		$('#welcome').html('<h2>Welcome Player 2</h2>');
-	})
+	});
 
 	// two players connected to one game room
 	// will tell server that game is ready to start
@@ -160,8 +182,30 @@ $(document).ready(function() {
 
 	// was testing something
 	$('.question').on('click', function () {
-		alert('test')
-	})
+		alert('test');
+	});
+
+	// timer for game start, 10 secs
+	function onStartCountdownTimer (data) {
+		console.log(data);
+		runTimer(data);
+	}
+
+	function runTimer(data){
+		timer = setInterval(function () {
+			decreaseTime(data);
+		}, 1000);
+    }
+
+    function decreaseTime(data){
+    	time--;
+    	$('#gameRooms').html('<h2>Get Ready! Time to begin: ' + time + '</h2>'); 
+    	if (time === 0) {
+    		clearInterval(timer);
+    		$('#gameRooms').html('');
+    		socket.emit('countdownFinished', data);
+    	}
+    }
 
 	// received question with answer and question id from server
 	function initQuestions(data) {
@@ -191,62 +235,6 @@ $(document).ready(function() {
 		}
 	}
 
-	// timer for game start, 10 secs
-	function runTimer(data){
-		timer = setInterval(function () {
-			decreaseTime(data);
-		}, 1000);
-    };
-    function decreaseTime(data){
-    	time--;
-    	$('#gameRooms').html('<h2>Get Ready! Time to begin: ' + time + '</h2>'); 
-    	if (time === 0) {
-    		clearInterval(timer);
-    		$('#gameRooms').html('');
-    		socket.emit('countdownFinished', data)
-    	}
-    };
-
-	function onStartCountdownTimer (data) {
-		console.log(data)
-		runTimer(data);
-	}
-
-
-	var bombs = [];
-
-	// Fisher-Yates Shuffle Algorithm:
-	Array.prototype.shuffle = function() {
-		var i = this.length, j, temp;
-		while(--i > 0) {
-			j = Math.floor(Math.random() * (i+1));
-			temp = this[j];
-			this[j] = this[i];
-			this[i] = temp;
-		}
-		return this;
-	}
-	var shuffledBoxes = allBoxes.shuffle();
-
-
-	// Chooses which boxes will be bombs:
-	for (var i = 0; i < 5; i++) {
-		bombs[i] = shuffledBoxes[i];
-	}
-	console.log("The bombs are: " + bombs);
-
-
-	var surroundingBoxes = [
-		[-1,-1],
-		[0,-1],
-		[1,-1],
-		[-1,0],
-		[1,0],
-		[-1,1],
-		[0,1],
-		[1,1]
-	];
-
 	// player selects a box
 	$('.trivBox').on('click', function() {
 		// checks if game has started, if not, boxes will not be clickable
@@ -265,17 +253,32 @@ $(document).ready(function() {
 					clickedBomb = true;
 					$(this).empty().removeClass().append('<img src="assets/images/skull.gif">');
 					laugh.play();
-					bombBox();
+					questionTime = 10;
+					questionTimer = setInterval(questionCountdown, 1000);
+					triviaBox();
 				}
 			}
 			if (!clickedBomb) {
 				var trivBoxThis = this;
+				questionTimer = setInterval(questionCountdown, 1000);
 				triviaBox();
 				bombCheck(trivBoxThis);
 				$(this).off('click');
 			}
 		}
 	});
+
+	function questionCountdown () {
+		questionTime--;
+		$('#countdown2').text(questionTime);
+		if (questionTime === 0) {
+			clearInterval(questionTimer);
+			questionTime = 20;
+			// pull out function for decreasing lives and call here
+			$('#questionModal').modal('hide');
+			decreaseScore();
+		}
+	}
 
 	// display question in modal after the box is selected
 	// prevents user from clicking away from the modal
@@ -308,6 +311,8 @@ $(document).ready(function() {
 		if(!document.getElementsByClassName('trivBox').length) {
 			questionData.gameFinished = true;
 		}
+		clearInterval(questionTimer);
+		questionTime = 20;
 		var userAnswer = $(this).val();
 		console.log(userAnswer);
 		// assign role, x, y to the data object that will be sent back to the server
@@ -326,23 +331,33 @@ $(document).ready(function() {
 			socket.emit('answeredCorrectly', questionData);
 		} else {
 			// decrease lives if answer was wrong
-			lives--;
-			$('#game_lives').html(lives);
-			console.log('wrong', lives);
-			//attaches score and lives to data var and send all data back to server
-			questionData.score = score;
-			questionData.lives = lives;
-			socket.emit('answeredWrong', questionData);
+			// have to close modal when not answered
+			decreaseScore();
 		}
 		// prevents user from clicking on same box
 		$(this).off('click');
-	})
+	});
+
+	function decreaseScore () {
+		lives--;
+		$('#game_lives').html(lives);
+		console.log('wrong', lives);
+		//attaches score and lives to data var and send all data back to server
+		questionData.score = score;
+		questionData.lives = lives;
+		socket.emit('answeredWrong', questionData);
+	}
 
 	// displays the final msg to both players when one player loses or when one player wins
+	// would like to display big game over
 	function displayFinal(data) {
 		var gameFinishedMsg = data.message + " Your score is " + score + ". Come and play again!";
 		$('#winner').html(gameFinishedMsg);
 		$('#scoreModal').modal('show');
 		gameStarted = false;
 	}
-})
+
+
+	// need one more timer for id countdown for the time between selecting questions
+	// make timers reuseable by pulling out if statements
+});
