@@ -275,7 +275,9 @@ $(document).ready(function() {
 			clearInterval(questionTimer);
 			questionTime = 20;
 			// pull out function for decreasing lives and call here
+			// need to fix modal
 			$('#questionModal').modal('hide');
+			questionData.player = role;
 			decreaseScore();
 		}
 	}
